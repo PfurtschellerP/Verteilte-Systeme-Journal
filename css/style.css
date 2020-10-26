@@ -275,3 +275,19 @@ div#contentWrapper > footer > p {
 div#contentWrapper > footer > p > a > img {
     vertical-align: middle;
 }
+
+/* mobile */
+
+@media screen and (max-width: 600px) {
+    body{
+        grid-template-columns: 5vw 90vw 5vw;
+    }
+
+    div#contentWrapper{
+        grid-template-columns: 5vw 80vw 5vw;
+    }
+
+    div#contentWrapper > main{
+        grid-template-columns: 80vw;
+    }
+}
