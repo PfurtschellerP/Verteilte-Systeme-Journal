@@ -43,27 +43,10 @@ ol{
 /* Code */
 
 code{
-    display: block;
     margin: 0.5vh 1vw 0.5vh;
-    padding: 0.5vw;
     background-color: #252525;
     border-radius: 10px;
-}
-
-code ol{
-    padding-left: 1.5vw;
-}
-
-code li{
-    color: white;
-    font-family: Consolas, sans-serif;
-    list-style: none;
-    counter-increment: zeile;
-}
-
-code li::before{
-    content: counter(zeile)"   ";
-    color: rgb(202, 202, 202);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 /* Forms und Buttons */
@@ -229,8 +212,8 @@ main#blog > section > header > h2{
 }
 
 .calenderIcon{
-    height: 12pt;
-    width: auto;
+    height: 12pt !important;
+    width: auto !important;
 }
 
 div#contentWrapper > main > article{
@@ -257,6 +240,11 @@ div#contentWrapper > main > article > a > div {
     justify-content: end;
 }
 
+div#contentWrapper > main#blog img{
+    width:100%;
+    height: auto;
+}
+
 div#contentWrapper > footer {
     grid-area: footer;
 
@@ -274,6 +262,7 @@ div#contentWrapper > footer > p {
 
 div#contentWrapper > footer > p > a > img {
     vertical-align: middle;
+    height: 1em;
 }
 
 /* mobile */
@@ -289,5 +278,9 @@ div#contentWrapper > footer > p > a > img {
 
     div#contentWrapper > main{
         grid-template-columns: 80vw;
+    }
+
+    main#blog {
+        grid-template-columns: 80vw !important;
     }
 }

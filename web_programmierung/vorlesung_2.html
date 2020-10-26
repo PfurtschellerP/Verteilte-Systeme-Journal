@@ -5,6 +5,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1">
         <link rel="stylesheet" href="../css/style.css">
+        <script src="vorlesung_2/vorlesung_2.js"></script>
+        <link rel="stylesheet"
+      href="https://pagecdn.io/lib/highlight/10.1.2/styles/vs2015.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <div id="contentWrapper">
@@ -13,87 +18,136 @@
                 <h1>Web-Programmierung</h1>
             </header>
             <section id="breadcrumbs">
-                <p><a href="../index.html">Home</a> > <a href="index">Web-Programmierung</a> > Vorlesung 2</p>
+                <p><a href="../index.html">Home</a> > <a href="index.html">Web-Programmierung</a> > Vorlesung 2</p>
             </section>
             <main id="blog">
                 <section>
                     <header>
-                        <h2>Vorlesung 2 - Einführung HTML</h2>
+                        <h2>Vorlesung 2 - Einführung HTML, CSS, Javascript</h2>
                         <p><img class="calenderIcon" src="../img/icons/calender.png"/> 26.10.2020</p>
                     </header>
                     <main>
                         <p>
-                            Heute hatten wir unsere erste Stunde in der Vorlesung Web-Programmierung. 
-                            Wir begannen mit einer kurzen Vorstellungsrunde. Daraufhin wurden uns die zu erbringenden Prüfungsleistungen vorgestellt. Diese Website ist ein Teil eben dieser.<br>
-                            Dann sind wir auch schon direkt in das Thema gesprungen.
+                            Diese Stunde begannen wir mir einer kurzen Einführung in HTML und CSS. Dazu haben wir eine kleine Testsite geschrieben an der uns
+                            die grundlegenden Konzepte beider Sprachen erläutert wurden.
+                            <i>eventuell Bild aus dem Script einbetten (Sternback Kaffee)</i>
                         </p>
-                        <h3>Motivation zum Schreiben einer Web Anwendung</h3>
+                        <h3>Grundlegende Konzepte von Javascript</h3>
                         <p>
-                            Wir begannen damit, darüber zu sprechen welche Vor- und Nachteile das Verteilen von Software als Web Anwendung hat. Dazu haben wir über die Art der Verteilung (Deployment) für verschiedene Ansätze gesprochen.
-                            Als erstes sprachen wir über das klassische Herunterladen und Installieren einer Desktopanwendung.<br>
-                            <i>noch mehr blabla eifügen, wenn die Folien da sind</i>
-                        </p>
-                        <h3>Vorstellung der Architektur von Webanwendungen</h3>
-                        <p>
-                            Nun, haben wir uns verschiedene Architekturen zum Implementieren von Web Anwendung angeschaut.<br>
-                            <i>Auch hier noch blabla einfügen, wenn die Folien da sind</i>
-                        </p>
-                        <h3>Was ist eine Skriptsprache?</h3>
-                        <p>
-                            Wir brauchen also Javascript - eine Scriptsprache. Aber was ist das überhaupt. Um das zu verstehen haben wir die drei großen "Sprachkategorien" mal aufgelistet:
+                            Daraufhin haben wir uns mit einigen Disziplinen zum Thema JavaScript auseinandergesetzt. Diese waren:
                         </p>
                         <ul>
-                            <li>Programmiersprachen (z.B. Java, C#, etc.)</li>
-                            <li>Auszeichnungssprachen (z.B. HTML, XML, etc.)</li>
-                            <li>Scriptsprachen (z.B. Javascript, Typescript, etc.)</li>
+                            <li>Einbinden von JS in HTML</li>
+                            <li>Variablen</li>
+                            <li>if/else</li>
+                            <li>For Schleifen</li>
+                            <li>DOM Modell</li>
                         </ul>
+                        <h4>Einbinden von JS in HTML</h4>
                         <p>
-                            Dabei unterscheiden sich die Vertreter dieser Kategorien im Umfang ihrer Möglichkeiten wie auch der Anwendung in der Praxis. Während Programmiersprachen wie Java mit Compilern kompiliert werden und zu
-                             ausführbaren Anwendungen mit (optional) User Interface werden, können Auszeichnungssprachen wie HTML beispielsweise nur Anwendungen modelieren (ohne Logik).<br>
-                             Skriptsprachen widerum zeichnen sich vor allem durch zwei Dinge aus.
-                        </p>    
-                        <ol>
-                            <li>Sie werden nicht kompiliert sondern interpretiert. Das heißt während der Laufzeit wird der Code von einem Interpreter durchlaufen und Zeile für Zeile umgesetzt.</li>
-                            <li><i>Glaube noch late binding, aber muss das nochmal in den Folien nachschauen, wenn die da sind</i></li>
-                        </ol>
-                        <p>
-                            <i>Noch mehr blablabla...</i>
+                            Um JavaScript Code in HTML einzubinden gibt es analog zu CSS mehrere Möglichkeiten. Die zwei gebräuchlichsten sind 
+                            das Einfügen eines <i>script</i>-Tags mit JavaScript Code im HTML Dokument selbst und das EInfügen eines <i>script</i>-Tags 
+                            aber mit gleichzeitigem Auslagern des Quellcodes wie hier demonstriert:
                         </p>
-                        <h3>Praxis</h3>
+                        <pre>
+                            <code>
+    &lt;script src="script.js">&lt;/script>
+                            </code>
+                        </pre>
+                        <h3>Variablen</h3>
                         <p>
-                            Nun aber genug der langweiligen Theorie und auf zur Praxis. Gegen Ende der Vorlesung habe wur uns auch mal erste Implementierungen von Javascript angeschaut (und natürlich erste Grundlagen
-                            in HTML, die ich mir an dieser Stelle spare, da es ja mein Journal ist [für Referenzen siehe diese Website])<br>
-                            Wir haben uns dazu als erstes den <i>script</i> Tag in HTML angeschaut. Dort haben wir einen <i>alert</i> Befehl eingesetzt, der uns bei jedem Laden der Website eine Meldung ausgibt.
+                            Nun wurde bereits in dr ersten Vorlesung angesprochen, dass JavaScript mit dynamischer Typenprüfung arbeitet. Was das genau bedeutet wurde 
+                            und an einem Beispiel erklärt.
                         </p>
-                        <code>
-                            <ol>
-                                <li><span style="color: #808080;">&lt;</span><span style="color: #579dd6;">script</span> <span style="color:#72a1ba;">type</span>=<span style="color: #cb8f76;">"text/javascript"</span><span style="color: #808080;">&gt</span></li>
-                                <li>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #989875;">alert</span><span style="color: #9b9b9b">(</span><span style="color: #cb8f76;">'Hallo Welt'</span><span style="color: #9b9b9b">)</span><span style="color: #808080;">;</span></li>
-                                <li><span style="color: #808080;">&lt;/</span><span style="color: #579dd6;">script</span><span style="color: #808080;">&gt</span></li>
-                            </ol>                                                    
-                        </code>
+                        <pre>
+                            <code>
+    var x = "5";
+    var y = 15;
+    alert(x+y);
+                            </code>
+                        </pre>
                         <p>
-                            Da das aber noch relativ langweilig ist (und vor allem unkontrolliert abläuft) haben wir daraufhin noch ein HTML Formular gebaut und den <i>alert</i> Befehl über einen <i>button</i> ausführbar gemacht.
-                            Den Code dazu sieht man hier runter:
+                            Denn das Ergebnis hier ist nicht (wie man vermuten würde) 20, sondern 515. Das hängt damit zusammen, dass JavaScript 
+                            entscheidet, um welchen Variablentyp es sich hier handelt. In diesem Fall wird <i>String</i> vermutet. Somit wird die Variable 
+                            <i>y</i> auch in <i>String</i> konvertiert und die beiden Variablen (nun Zeichenfolgen) werden verkettet.
                         </p>
-                        <code>
-                            <ol>
-                                <li><span style="color: #808080;">&lt;</span><span style="color: #579dd6;">form</span><span style="color: #808080;">&gt</span></li>
-                                <li>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #808080;">&lt;</span><span style="color:  #579dd6;">input</span> <span style="color:#72a1ba;">type</span>=<span style="color: #cb8f76;">"button"</span> <span style="color:#72a1ba;">value</span>=<span style="color: #cb8f76;">"Test"</span> <span style="color:#72a1ba;">onclick</span>=<span style="color: #cb8f76;">"<span style="color: #989875;">alert</span>('Hallo Welt');"</span><span style="color: #808080;">&gt</span>
-                                <li><span style="color: #808080;">&lt;/</span><span style="color: #579dd6;">form</span><span style="color: #808080;">&gt</span></li>
-                            </ol>                                                    
-                        </code>
+                        <h3>If/Else</h3>
                         <p>
-                            Wenn man diesen Code nun praktisch umsetzt ergibt sich der folgende Button:
+                            Zu diesem Thema fasse ich mich kurz, gilt es doch lediglich zu sagen, dass auch JavaScript über <i>if</i> und <i>else</i> Statements 
+                            verfügt (analog zu Java, C#, etc.).
+                        </p>
+                        <h3>For Schleifen</h3>
+                        <p>
+                            Auch <i>for</i>-Schleifen gibt es in gleicher Form auch in Java. Allerdings haben wir hier ein kleines Beispiel bearbeitet:
                         </p>
                         <form>
-                            <input type="button" value="Test" onclick="alert('Hallo Welt');">
+                            <input type="button" value="For Schleife" onclick="schleifenTest()">
                         </form>
+                        <p id="ausgabe"></p>
+                        <pre>
+                            <code>
+    function schleifenTest(){
+        var ausgabebereich = document.getElementById('ausgabe');
+        for (var i = 0; i<10; i++){
+            ausgabebereich.innerHTML += "Schleifentest: " + i +"&lt;br>";
+        }
+    }
+                            </code>
+                        </pre>
+                        <h3>DOM Modell</h3>
+                        <p>
+                            Wie der letzte Abschnitt bereits demonstriert hat lässt sich mit JavaScript der Inhalt einer HTML Site verändern. Möglich macht dies 
+                            das <b>D</b>ocument <b>O</b>bject <b>M</b>odel, kurz DOM. Man kann sich dieses wie ein umgedrehtes Baum Diagramm vorstellen 
+                            in welchem dich die einzelnen Elemente der Website nach unten hin verzweigen. Mit Javascript können wir diese "Zweige" ansprechen 
+                            (sogar noch besser, wenn wir ihnen ID's geben). So konnten wir im Beispiel oben weitere Zeilen generieren und zum HTML Element hinzufügen.<br>
+                            Wie dies konkret funktioniert ist im Code dargestellt.
+                        </p>
+                        <h2>Zahlen raten</h2>
+                        <p>
+                            Abschließend haben wir noch ein kleines Spiel in JavaScript programmiert. Ziel des Spieles ist es, die zufällig generierte Zahl zu erraten. 
+                            Dazu bekommt der Spieler nach Abgabe eines Tipps Hinweise (ob er zu hoch oder zu niedrig getippt hat).
+                        </p>
+                        <form>
+                            <input type="button" value="Zahlen raten" onclick="zahlenRaten()">
+                        </form>
+                        <p id="zahlenRatenAusgabe"></p>
+                        <pre>
+                            <code>
+    function zahlenRaten(){
+        var zahl = Math.round(Math.random()*100 +0.5);
+        var fehler = 0;
+        var fertig = false;
+
+        while (!fertig){
+            eingabe = prompt("Bitte erraten Sie die Zahl:","");
+            if (!eingabe){
+                fertig = true; //Abbruch durch Anwender
+            } else{
+                if (eingabe == zahl){
+                    alert('Gewonnen!');
+                    alert('Es wurden ' + fehler + " gemacht")
+                    fertig = true; //Zahl wurde erraten
+                } else{
+                    fehler++;
+                    if (eingabe &lt; zahl){
+                        alert('Geratene Zahl zu klein!\nGemachte Fehler: ' + fehler);
+                    } else {
+                        alert('Geratene Zahl zu groß!\nGemachte Fehler: ' + fehler);
+                    }
+                }
+            }
+        }
+        var ausgabe = document.getElementById('zahlenRatenAusgabe');
+        ausgabe.innerHTML = "Spielende!";
+    }
+                                
+                            </code>
+                        </pre>
                     </main>
                 </section>
             </main>
             <footer>
-                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 100% selbst erstellt.</p>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
                 <p>&copy2020 Patrick Pfurtscheller</p>
             </footer>
         </div>
