@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 1</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <div id="contentWrapper">
+            <a id="goBack" href="../web_programmierung.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Web-Programmierung</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="../web_programmierung.html">Web-Programmierung</a> > Vorlesung 1</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 1 - Einführung</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 20.10.2020</p>
+                    </header>
+                    <main>
+                        <p>
+                            Heute hatten wir unsere erste Stunde in der Vorlesung Web-Programmierung. 
+                            Wir begannen mit einer kurzen Vorstellungsrunde. Daraufhin wurden uns die zu erbringenden Prüfungsleistungen vorgestellt. Diese Website ist ein Teil eben dieser.<br>
+                            Dann sind wir auch schon direkt in das Thema gesprungen.
+                        </p>
+                        <h3>Motivation zum Schreiben einer Web Anwendung</h3>
+                        <p>
+                            Wir begannen damit, darüber zu sprechen welche Vor- und Nachteile das Verteilen von Software als Web Anwendung hat. Dazu haben wir über die Art der Verteilung (Deployment) für verschiedene Ansätze gesprochen.
+                            Als erstes sprachen wir über das klassische Herunterladen und Installieren einer Desktopanwendung.<br>
+                            <i>noch mehr blabla eifügen, wenn die Folien da sind</i>
+                        </p>
+                        <h3>Vorstellung der Architektur von Webanwendungen</h3>
+                        <p>
+                            Nun, haben wir uns verschiedene Architekturen zum Implementieren von Web Anwendung angeschaut.<br>
+                            <i>Auch hier noch blabla einfügen, wenn die Folien da sind</i>
+                        </p>
+                        <h3>Was ist eine Skriptsprache?</h3>
+                        <p>
+                            Wir brauchen also Javascript - eine Scriptsprache. Aber was ist das überhaupt. Um das zu verstehen haben wir die drei großen "Sprachkategorien" mal aufgelistet:
+                        </p>
+                        <ul>
+                            <li>Programmiersprachen (z.B. Java, C#, etc.)</li>
+                            <li>Auszeichnungssprachen (z.B. HTML, XML, etc.)</li>
+                            <li>Scriptsprachen (z.B. Javascript, Typescript, etc.)</li>
+                        </ul>
+                        <p>
+                            Dabei unterscheiden sich die Vertreter dieser Kategorien im Umfang ihrer Möglichkeiten wie auch der Anwendung in der Praxis. Während Programmiersprachen wie Java mit Compilern kompiliert werden und zu
+                             ausführbaren Anwendungen mit (optional) User Interface werden, können Auszeichnungssprachen wie HTML beispielsweise nur Anwendungen modelieren (ohne Logik).<br>
+                             Skriptsprachen widerum zeichnen sich vor allem durch zwei Dinge aus.
+                        </p>    
+                        <ol>
+                            <li>Sie werden nicht kompiliert sondern interpretiert. Das heißt während der Laufzeit wird der Code von einem Interpreter durchlaufen und Zeile für Zeile umgesetzt.</li>
+                            <li><i>Glaube noch late binding, aber muss das nochmal in den Folien nachschauen, wenn die da sind</i></li>
+                        </ol>
+                        <p>
+                            <i>Noch mehr blablabla...</i>
+                        </p>
+                        <h3>Praxis</h3>
+                        <p>
+                            Nun aber genug der langweiligen Theorie und auf zur Praxis. Gegen Ende der Vorlesung habe wur uns auch mal erste Implementierungen von Javascript angeschaut (und natürlich erste Grundlagen
+                            in HTML, die ich mir an dieser Stelle spare, da es ja mein Journal ist [für Referenzen siehe diese Website])<br>
+                            Wir haben uns dazu als erstes den <i>script</i> Tag in HTML angeschaut. Dort haben wir einen <i>alert</i> Befehl eingesetzt, der uns bei jedem Laden der Website eine Meldung ausgibt.
+                        </p>
+                        <code>
+                            <ol>
+                                <li><span style="color: #808080;">&lt;</span><span style="color: #579dd6;">script</span> <span style="color:#72a1ba;">type</span>=<span style="color: #cb8f76;">"text/javascript"</span><span style="color: #808080;">&gt</span></li>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #989875;">alert</span><span style="color: #9b9b9b">(</span><span style="color: #cb8f76;">'Hallo Welt'</span><span style="color: #9b9b9b">)</span><span style="color: #808080;">;</span></li>
+                                <li><span style="color: #808080;">&lt;/</span><span style="color: #579dd6;">script</span><span style="color: #808080;">&gt</span></li>
+                            </ol>                                                    
+                        </code>
+                        <p>
+                            Da das aber noch relativ langweilig ist (und vor allem unkontrolliert abläuft) haben wir daraufhin noch ein HTML Formular gebaut und den <i>alert</i> Befehl über einen <i>button</i> ausführbar gemacht.
+                            Den Code dazu sieht man hier runter:
+                        </p>
+                        <code>
+                            <ol>
+                                <li><span style="color: #808080;">&lt;</span><span style="color: #579dd6;">form</span><span style="color: #808080;">&gt</span></li>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #808080;">&lt;</span><span style="color:  #579dd6;">input</span> <span style="color:#72a1ba;">type</span>=<span style="color: #cb8f76;">"button"</span> <span style="color:#72a1ba;">value</span>=<span style="color: #cb8f76;">"Test"</span> <span style="color:#72a1ba;">onclick</span>=<span style="color: #cb8f76;">"<span style="color: #989875;">alert</span>('Hallo Welt');"</span><span style="color: #808080;">&gt</span>
+                                <li><span style="color: #808080;">&lt;/</span><span style="color: #579dd6;">form</span><span style="color: #808080;">&gt</span></li>
+                            </ol>                                                    
+                        </code>
+                        <p>
+                            Wenn man diesen Code nun praktisch umsetzt ergibt sich der folgende Button:
+                        </p>
+                        <form>
+                            <input type="button" value="Test" onclick="alert('Hallo Welt');">
+                        </form>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 100% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
