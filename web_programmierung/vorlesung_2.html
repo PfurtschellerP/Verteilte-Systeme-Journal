@@ -143,6 +143,73 @@
                                 
                             </code>
                         </pre>
+                        <h3>Hausaufgaben</h3>
+                        <p>
+                            Am Ende dieser Vorlesung haben wir auch zwei kleine Hausaufgaben bekommen. Diese finden sich hier runter:
+                        </p>
+                        <h4>Dreieck</h4>
+                        <p>
+                            Schreiben Sie ein Programm, das mit Hilfe geschachtelter Schleifen ein aus *-Zeichen zusammengesetztes Dreieck auf der Konsole ausgibt.
+                             Der Benutzer soll vorher nach der Anzahl der Zeilen gefragt werden.
+                        </p>
+                        <form>
+                            <input type="button" value="Dreieck" onclick="dreieck()">
+                        </form>
+                        <p id="dreieckAusgabe"></p>
+                        <p>
+                            Der Quellcode dafür sieht dann folgendermaßen aus:
+                        </p>
+                        <pre>
+                            <code>
+    function dreieck(){
+        var dreieckAusgabe = document.getElementById('dreieckAusgabe');
+        var anzahl = prompt("Bitte Anzahl angeben:","");
+    
+        for(var i = 1; i &lt;= anzahl; i++){
+            for(var j = 1; j &lt;= i; j++){
+                console.log("*");
+                dreieckAusgabe.innerHTML += "*";
+            }
+            dreieckAusgabe.innerHTML += "&lt;br>";
+        }
+    } 
+                            </code>
+                        </pre>
+                        <h4>Das kleine 1 mal 1</h4>
+                        <p>
+                            In der nächsten Aufgabe soll das kleine 1 mal 1 als Tabelle ausgegeben werden.
+                        </p>
+                        <form>
+                            <input type="button" value="1 mal 1" onclick="einMalEins()">
+                        </form>
+                        <div id="einMalEinsAusgabe"></div>
+                        <p>
+                            Der Code hierfür ist etwas komplexer also breche ich ihn kurz in seine Einzelteile herunter. Wir starten damit, dass wir unser <i>div</i> Element im HTML 
+                            auswählen. Danach bearbeiten wir das DOM Model indem wie ein Child item, in diesem Fall ein <i>table</i>-Element anhängen.<br>
+                            Nun kommen die <i>for</i>-Schleifen zum Einsatz. Wir durchlaufen hier de erste Schleife zehn mal. Dadurch das wir nun aber auch die zweite Schleife jeweils 
+                            zehn mal durchlaufen ergeben sich insgesamt hundert Schleifendurchläufe. Das einmal eins ergibt sich dabei aus der Multiplikation der jeweiligen Laufvariablen.
+                            Der Kniff war hier letztendlich die Struktur der Tabelle weiter zu pflegen, also in diesem Fall die Referenz auf das aktuelle Reihen-Element <i>reihe</i> 
+                            in die innere Schleife weiterzugeben um dort weitere Spalten erstellen zu können.
+                        </p>
+                        <pre>
+                            <code>
+    function einMalEins(){
+        var einMalEinsAusgabe = document.getElementById('einMalEinsAusgabe');
+        // Tabelle erschaffen
+        var tabelle = einMalEinsAusgabe.appendChild(document.createElement("table"));
+    
+        for(var i = 1; i &lt;= 10; i++){
+            // Reihe hinzufügen
+            var reihe = tabelle.appendChild(document.createElement("tr"));
+            for(var j = 1; j &lt;= 10; j++){
+                // Spalte hinzufügen
+                spalte = reihe.appendChild(document.createElement("td"))
+                spalte.innerHTML = i*j;
+            }
+        }
+    }
+                            </code>
+                        </pre>
                     </main>
                 </section>
             </main>

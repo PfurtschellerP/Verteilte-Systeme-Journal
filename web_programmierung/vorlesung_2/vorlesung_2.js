@@ -34,3 +34,32 @@ function zahlenRaten(){
     var ausgabe = document.getElementById('zahlenRatenAusgabe');
     ausgabe.innerHTML = "Spielende!";
 }
+
+function dreieck(){
+    var dreieckAusgabe = document.getElementById('dreieckAusgabe');
+    var anzahl = prompt("Bitte Anzahl angeben:","");
+
+    for(var i = 1; i <= anzahl; i++){
+        for(var j = 1; j <= i; j++){
+            console.log("*");
+            dreieckAusgabe.innerHTML += "*";
+        }
+        dreieckAusgabe.innerHTML += "<br>";
+    }
+}
+
+function einMalEins(){
+    var einMalEinsAusgabe = document.getElementById('einMalEinsAusgabe');
+    // Tabelle erschaffen
+    var tabelle = einMalEinsAusgabe.appendChild(document.createElement("table"));
+
+    for(var i = 1; i <= 10; i++){
+        // Reihe hinzufügen
+        var reihe = tabelle.appendChild(document.createElement("tr"));
+        for(var j = 1; j <= 10; j++){
+            // Spalte hinzufügen
+            spalte = reihe.appendChild(document.createElement("td"))
+            spalte.innerHTML = i*j;
+        }
+    }
+}
