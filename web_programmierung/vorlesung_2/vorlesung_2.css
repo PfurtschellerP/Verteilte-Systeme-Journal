@@ -1,0 +1,94 @@
+/* ein mal eins Tabelle */
+
+#einMalEinsAusgabe table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#einMalEinsAusgabe table td{
+    text-align: center;
+    border: none;
+    color: black;
+}
+
+#einMalEinsAusgabe table td:nth-child(1){
+    background-color: rgba(94, 94, 94, 0.05);
+}
+
+#einMalEinsAusgabe table td:nth-child(2){
+    background-color: rgba(94,94,94,0.1);
+}
+
+#einMalEinsAusgabe table td:nth-child(3){
+    background-color: rgba(94,94,94,0.15);
+}
+
+#einMalEinsAusgabe table td:nth-child(4){
+    background-color: rgba(94,94,94,0.2);
+}
+
+#einMalEinsAusgabe table td:nth-child(5){
+    background-color: rgba(94,94,94,0.25);
+}
+
+#einMalEinsAusgabe table td:nth-child(6){
+    background-color: rgba(94,94,94,0.3);
+}
+
+#einMalEinsAusgabe table td:nth-child(7){
+    background-color: rgba(94,94,94,0.35);
+}
+
+#einMalEinsAusgabe table td:nth-child(8){
+    background-color: rgba(94,94,94,0.4);
+}
+
+#einMalEinsAusgabe table td:nth-child(9){
+    background-color: rgba(94,94,94,0.45);
+}
+
+#einMalEinsAusgabe table td:nth-child(10){
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* tr */
+
+#einMalEinsAusgabe table tr:nth-child(1){
+    background-color: rgba(94, 94, 94, 0.05);
+}
+
+#einMalEinsAusgabe table tr:nth-child(2){
+    background-color: rgba(94,94,94,0.1);
+}
+
+#einMalEinsAusgabe table tr:nth-child(3){
+    background-color: rgba(94,94,94,0.15);
+}
+
+#einMalEinsAusgabe table tr:nth-child(4){
+    background-color: rgba(94,94,94,0.2);
+}
+
+#einMalEinsAusgabe table tr:nth-child(5){
+    background-color: rgba(94,94,94,0.25);
+}
+
+#einMalEinsAusgabe table tr:nth-child(6){
+    background-color: rgba(94,94,94,0.3);
+}
+
+#einMalEinsAusgabe table tr:nth-child(7){
+    background-color: rgba(94,94,94,0.35);
+}
+
+#einMalEinsAusgabe table tr:nth-child(8){
+    background-color: rgba(94,94,94,0.4);
+}
+
+#einMalEinsAusgabe table tr:nth-child(9){
+    background-color: rgba(94,94,94,0.45);
+}
+
+#einMalEinsAusgabe table tr:nth-child(10){
+    background-color: rgba(0,0,0,0.5);
+}
