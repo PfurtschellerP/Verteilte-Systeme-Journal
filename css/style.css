@@ -213,9 +213,14 @@ main#blog > section > header > h2{
     flex-basis: 100%;
 }
 
+main#blog > section > h2,h3 {
+    margin-top: 0.8rem;
+}
+
 .calenderIcon{
     height: 12pt !important;
     width: auto !important;
+    margin: 0 !important;
 }
 
 div#contentWrapper > main > article{
@@ -243,8 +248,9 @@ div#contentWrapper > main > article > a > div {
 }
 
 div#contentWrapper > main#blog img{
-    width:100%;
+    width:80%;
     height: auto;
+    margin: 0 10% 0;
 }
 
 div#contentWrapper > footer {

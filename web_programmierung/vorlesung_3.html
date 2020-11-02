@@ -28,25 +28,95 @@
                     </header>
                     <main>
                         <p>
-                            Wie auch die letzte Vorlesung begann auch diese mit einem kurzen Teil zu <i>HTML</i>. Dieses mal ging es um Hyperlinks, die sogenannte <i>a</i>-Tags.
+                            Wie auch die letzte Vorlesung begann auch diese mit einem kurzen Teil zu <i>HTML</i>. Dieses mal ging es um Hyperlinks, die sogenannte <i>a</i>-Tags (anchor).
                             Grob zusammengefasst haben wir uns lediglich damit auseinander gesetzt wie Verlinkungen innerhalb Websites funktionieren.
+                        </p>
+                        <pre>
+                            <code>
+    &lt;a href="link adresse">Linktext&lt;/a>
+                            </code>
+                        </pre>
+                        <p>
+                            Nicht behandelt haben wir jedoch weitere zur Verfügung stehende Argumente des <i>a</i>-Tags. Eines dieser Argumente, dass auch im Kontext dieser Seite 
+                            sehr oft Anwedung findet ist das <i>target</i>-Argument. Dieses bestimmt wie der Link geöffnet werden soll. So ist es beispielsweise gängige Praxis 
+                            Links zu fremden Inhalten folgendermaßen zu verlinken:
+                        </p>
+                        <pre>
+                            <code>
+    &lt;a href="google.de" target="_blank">Google&lt;/a>
+                            </code>
+                        </pre>
+                        <p>
+                            Hier wird beispielsweise auf Google verlinkt und zu diesem Zweck das Target <i>_blank</i> eingesetzt, welches den Link in einem neuen Tab öffnet.
                         </p>
                         <h3>Seiten strukturieren</h3>
                         <p>
                             Da wir nun gelernt hatten wie man zwischen Seiten verlinkt, ging es nun darum eine Website mit Ordnern zu strukturieren.
                             Getestet haben wir all dies an einem kleinen Testprojekt in welchem es um eine Bar ging, die Getränke und Elexire anbietet.
-                            Die details dieses Testprojektes spare ich mir an dieser Stelle.                          
+                            Die fertige Ordner Struktur sah anschließend so aus:
+                        </p>
+                        <img src="vorlesung_3/barWebsite.PNG">
+                        <p>
+
                         </p>
                         <p>
                             <b>Bild aus dem Skript mit der Seitenstruktur (ca. bei Folie 40)</b>
                         </p>
+                        <h3>Der interessante Teil</h3>
+                        <p>
+                            Nun ging es aber zum interessanten Teil -  JavaScript.<br>
+                            Das Thema heute waren vor allem die Ähnlichkeiten und Unterschiede zu Java. Das ergibt durchaus Sinn, da wir uns in den ersten beiden Semestern iim Rahmen 
+                            der Module Progrmmierung I und Programmierung II bereits intensiv mit Java auseinandergesetzt haben. Den Anfang davon haben wir schon in den ersten beiden Vorlesungen 
+                            gesehen. Es geht um Functions.
+                        </p>
                         <pre>
                             <code>
-    &lt;script type="text/javascript">
-        alert('Hallo Welt');
-    &lt;/script>
+    function meineFunktion(meinParameter){
+        alert(meinParameter);
+    }
                             </code>
                         </pre>
+                        <p>
+                            Diese umfassen das Schlüsselwort <i>function</i>, den Namen der Funktion und eine in Klammern angegebene Liste an Parametern. Hier muss beispielsweise beim 
+                            Aufruf der Funktion ein Parameter mitgegeben werden, der anschließend mit Hilfe des <i>alert</i>-Befehls wieder ausgegeben wird. Hier trat auch der erste gravierende Unteschied 
+                            zu Java auf. Und zwar muss man in JavaScript nicht zwingend jeden mitgegebenen Parameter definieren, sondern mit diesen "dynamisch arbeiten". Was das konkret bedeutet würde ich 
+                            gerne an einem Beipiel zeigen.
+                        </p>
+                        <pre>
+                            <code>
+    function addieren(){
+        var summe = 0;
+        for (var i = 0; i &lt; addieren.arguments.length; i++){
+            summe += addieren.arguments[i];
+        }
+        alert(summe);
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Diese Funktion kann mit beliebig vielen Parametern aufgerufen werden. Die übergebenen Parameter stehen uns anschließend als Array mit dem Namen <i>arguments</i> 
+                            zur Verfügung über welches anschließend mit einer <i>for</i>-Schleife iteriert werden kann. In Java musste man dafür mehrere Varianten der gleichen Methode anlegen.<br>
+                            Sonst allerdings war für mich zumindest nicht viel Neues dabei, da sich der Rest überwiegend mit Java deckt. Lediglich eine andere Eigenheit von JavaScript war noch für mich neu.
+                            Und zwar war, dass die Definition globaler Variablen auch innerhalb von Funktionen erfolgen kann. Das kannte ich bis jetzt aus keiner anderen Sprache (weder Java, noch C# oder Pascal).
+                        </p>
+                        <pre>
+                            <code>
+    // globale Variable
+    var x = 0;
+    
+    function meineFunktion(){
+        // lokale Variable
+        var y = 1;
+        // weitere globale Variable
+        z = 5;
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Hier sieht man ein Beispiel des oben beschriebenen. Augenmerk soll hier auf das Innere der Funktion gelegt werden. Variablen gelten hier als lokal (also nur im Kontext der Funktion gültig) 
+                            wenn  ihnen das <i>var</i>-Schlüsselwort vorangestellt ist. Variablen ohne dieses Schlüsselwort sind globale Variablen.<br>
+                            Der genaue Sinn dieser Tatsache wurde uns jedoch, zumindest für heute, noch nicht erleutert. Das wird Teil der nächsten Vorlesung.
+                        </p>
                     </main>
                 </section>
             </main>
