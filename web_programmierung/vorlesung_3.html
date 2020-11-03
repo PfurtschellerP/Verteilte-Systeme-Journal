@@ -59,10 +59,7 @@
                         <p>
 
                         </p>
-                        <p>
-                            <b>Bild aus dem Skript mit der Seitenstruktur (ca. bei Folie 40)</b>
-                        </p>
-                        <h3>Der interessante Teil</h3>
+                        <h3>Der interessantere Teil</h3>
                         <p>
                             Nun ging es aber zum interessanten Teil -  JavaScript.<br>
                             Das Thema heute waren vor allem die Ähnlichkeiten und Unterschiede zu Java. Das ergibt durchaus Sinn, da wir uns in den ersten beiden Semestern iim Rahmen 
@@ -70,7 +67,7 @@
                             gesehen. Es geht um Functions.
                         </p>
                         <pre>
-                            <code>
+                            <code class="JavaScript">
     function meineFunktion(meinParameter){
         alert(meinParameter);
     }
@@ -83,7 +80,7 @@
                             gerne an einem Beipiel zeigen.
                         </p>
                         <pre>
-                            <code>
+                            <code class="JavaScript">
     function addieren(){
         var summe = 0;
         for (var i = 0; i &lt; addieren.arguments.length; i++){
@@ -100,7 +97,7 @@
                             Und zwar war, dass die Definition globaler Variablen auch innerhalb von Funktionen erfolgen kann. Das kannte ich bis jetzt aus keiner anderen Sprache (weder Java, noch C# oder Pascal).
                         </p>
                         <pre>
-                            <code>
+                            <code class="JavaScript">
     // globale Variable
     var x = 0;
     
@@ -117,6 +114,149 @@
                             wenn  ihnen das <i>var</i>-Schlüsselwort vorangestellt ist. Variablen ohne dieses Schlüsselwort sind globale Variablen.<br>
                             Der genaue Sinn dieser Tatsache wurde uns jedoch, zumindest für heute, noch nicht erleutert. Das wird Teil der nächsten Vorlesung.
                         </p>
+                        <h3>Kurzer Rückgriff auf HTML</h3>
+                        <p>
+                            Nachdem wir uns nun verschieden JavaScript Funktionen und Eigenheiten des Syntax angeschaut hatten haben wir gegen Ende der Vorlesung noch mein einen Sprung zurück zu HTML gemacht.
+                            Dabei ging es um den <i>form</i>-Tag und seine Bestandteile. Der Form Tag bietet, wie der Name schon suggeriert, die Möglichkeit Formulare in Websites umzusetzen und somit 
+                            auch einen komfortablen Weg unter Anderem Userdaten abzufragen und anschließend mit JavaScript zu verarbeiten.<br>
+                            Nun stellte sich dabei die Frage, wie man im JS Code an die Referenz für das Formular bekommt und da gibt es im Groben und Ganzen drei Wege:
+                        </p>
+                        <ol>
+                            <li>Man setzt im <i>form</i>-Tag ein <i>name</i>-Attribut und ruft es im JS-Code über <i>document.meinFormular</i> oder <i>document.forms["meinFormular"]</i> auf.</li>
+                            <li>Man setzt ein <i>id</i>-Attribut im <i>form</i>-Tag und erreicht es über <i>document.getElementById("meinFormular")</i></li>
+                            <li>Man erreicht das Formular über das automatisch vom Browser angelegte <i>forms</i>-Array und den Index des Formulars (beispielsweise <i>document.forms[0]</i>)</li>
+                        </ol>
+                        <p>
+                            Einen "besten" Weg gibt es unter den dreien allerdings nicht und so kommt es auf die individuellen Anforderungen an. Ich persönlich bin ein Fan der zweiten Variante, da ich für das stylen mit CSS 
+                            onehin fast jedem "wichtigen" Element eine eigene <i>id</i> oder <i>class</i> zuweise.
+                        </p>
+                        <p>
+                            Hat man nun eine Referenz auf das Form Element erhalten kann man über den Punkt Operator die "Kinder-Elemente" eben jenes ansprechen. Ein Beispiel sieht man hier:
+                        </p>
+                        <pre>
+                            <code class="JavaScript">
+    var benutzername = document.meinFormular.eingabe1.value;
+                            </code>
+                        </pre>
+                        <p>
+                            Hier wird ein Wert eines Eingabefeldes in eine Variable <i>benutzername</i> gespeichert. Aber was sind überhaupt diese Eingabefelder? Und wie viele davon gibt es überhaupt?<br>
+                            Das war das Thema des letzten Abschnittes dieser Vorlesung. Aus Gründen der Übersichtlichkeit habe ich Elemente welche laut Herrn Noll ohnehin nicht mehr allzu gebräuchlich sind weggelassen (<i>tpye hidden und type reset</i>).
+                        </p>
+                        <h4>Der <i>input</i>-Tag</h4>
+                            <p>
+                                Der <i>input</i>-Tag an sich ist schnell erklärt. Es ist schlichtweg ein Tag der Eingabemöglichenkeiten bereitstellt. Welche genau und wie diese angezeigt wird bestimmt das <i>type</i>-Attribut.
+                            </p>
+                            <h5>Type Text</h5>
+                                <p>
+                                    Der <i>input type text</i> stellt ein normales einzeiliges Textfeld dar.
+                                </p>
+                                <form>
+                                    <input type="text" name="eingabe" size="50" value="Standardtext">
+                                </form>
+                                <pre>
+                                    <code class="html">
+    &lt;input type="text" name="eingabe" size="50" value="Standardtext">
+                                    </code>
+                                </pre>
+                            <h5>Type Password</h5>
+                                <p>
+                                    Der <i>input type password</i> ist lediglich ein einzeiliges Textfeld, wie <i>type text</i> jedoch erscheinen Eingaben als Sterne (*).
+                                    Also wie man es von einem Passwortfeld erwartet.
+                                </p>
+                                <input type="password" name="eingabe" size="50" value="Standardtext">
+                            <h5>Type Button</h5>
+                                <p>
+                                    Der <i>type button</i> ist der einzige Typ den ich bisher in diesem Journal verwendet habe. Es handelt sich hier um die Buttons welche sich mit der Maus anklicken lassen.
+                                    So lassen sich Aktionen auslösen, beispielsweise um den Nutzer um Bestätigung von Eingaben zu bitten oder um anderweitige Funktionen auszulösen. Ein beispiel dafür sieht man hier:
+                                </p>
+                                <form>
+                                    <input type="button" value="Klick mich!" onclick="alert('Hat geklappt!')">
+                                </form>
+                                <pre>
+                                    <code class="html">
+    &lt;input type="button" value="Klick mich!" onclick="alert('Hat geklappt!')">
+                                    </code>
+                                </pre>
+                                <p>
+                                    Hier wird beim klicken der Eventhandler <i>onclick</i> mit der Funktion <i>alert</i> aufgerufen.
+                                </p>
+                            <h5>Type Submit</h5>
+                                <p>
+                                    <i>Type submit</i> ist <i>type button</i> sehr ähnlich mit der Unterscheidung, dass submit eine festgelegte Bestimmung hat - und zwar ein Formular abzuschicken.
+                                </p>
+                            <h5>Type Checkbox</h5>
+                                <p>
+                                    Der <i>type checkbox</i> ist uns auf anderen Websites definitiv schon mal begegnet. Es handelt sich hier um eine Auswahlbox, die der nutzer "anhaken" kann um, beispielsweise im Kontext eines Formulars, 
+                                    bestimmte Dinge aus- oder abzuwählen (wie den nächsten nervigen E-mail Newsletter oder neu seit diesem Jahr - Coockies). Ausshen tun diese wie folgt:
+                                </p>
+                                <form>
+                                    <input type="checkbox">Auswahlbox</input>
+                                </form>
+                                <pre>
+                                    <code class="html">
+    &lt;input type="checkbox">Auswahlbox</input>
+                                    </code>
+                                </pre>
+                            <h5>Type Radio</h5>
+                                <p>
+                                    <i>Type radio</i> bietet dem Nutzer euch eine Möglichkeit Dinge auszuwählen, jedoch innerhalb einer Gruppe dieser <i>inputs</i> immer nur eines zur selben Zeit.
+                                    So kann man, wenn man allen Elementen der Radio Gruppe das gleiche <i>name</i>-Attribut gibt, diese "zusammenschalten".<br>
+                                    Interessanterweiese bedeutet das auch dass sie dann in JavaScript als das Array <i>radioGruppe</i> mit ihrem entsprehchendem Index adressiert werden können.
+                                </p>
+                                <form>
+                                    <input type="radio" name="radioGruppe">Auswahl A</input>
+                                    <input type="radio" name="radioGruppe">Auswahl B</input>
+                                    <input type="radio" name="radioGruppe">Auswahl C</input>
+                                    <input type="radio" name="radioGruppe">Auswahl D</input>
+                                </form>
+                                <pre>
+                                    <code class="html">
+    &lt;input type="radio" name="radioGruppe">Auswahl A</input>
+    &lt;input type="radio" name="radioGruppe">Auswahl B</input>
+    &lt;input type="radio" name="radioGruppe">Auswahl C</input>
+    &lt;input type="radio" name="radioGruppe">Auswahl D</input>
+                                    </code>
+                                </pre>
+                        <h4>Der <i>textarea</i>-Tag</h4>
+                                <p>
+                                    Der <i>textarea</i>-Tag lässt sich als mehrere übereinandergestapelte <i>text</i>-Inputs beschreiben. Simpel ausgedrückt ist es lediglich eine mehrzeilige Texteingabe.
+                                </p>
+                                <form>
+                                    <textarea cols="30" rows="5">
+                                        Standardtext
+                                    </textarea>
+                                </form>
+                                <pre>
+                                    <code class="html">
+    &lt;textarea cols="30" rows="5">
+        Standardtext
+    &lt;/textarea>
+                                    </code>
+                                </pre>
+                        <h4>Der <i>select</i>-Tag</h4>
+                        <p>
+                            Der <i>select</i>-Tag war auch mir neu, aber sein Output nicht.<br>
+                            Es handelt sich hierbei um eine Combobox, bei der man zwischenverschiedenen Optionen wählen kann. Die Optionen werden dabei mit Hilfe von <i>option</i>-Tags 
+                            realisiert.
+                        </p>
+                        <form>
+                            <select>
+                                <option selected="selected">Standardoption</option>
+                                <option>Option B</option>
+                                <option>Option C</option>
+                                <option>Option D</option>
+                            </select>
+                        </form>
+                        <pre>
+                            <code>
+    &lt;select>
+        &lt;option selected="selected">Standardoption&lt;/option>
+        &lt;option>Option B&lt;/option>
+        &lt;option>Option C&lt;/option>
+        &lt;option>Option D&lt;/option>
+    &lt;/select>
+                            </code>
+                        </pre>
                     </main>
                 </section>
             </main>
