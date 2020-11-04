@@ -1,0 +1,28 @@
+form{
+    width: 20vw;
+    margin: 2vh 25vw 0;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.5);
+    padding: 1%;
+
+    display: flex;
+    flex-flow: row wrap;
+}
+
+form > h2{
+    flex-basis: 100%;
+    padding: 0 10% 1vh;
+}
+
+#eingabe{
+    flex-basis: 100%;
+    padding: 0 10% 1vh;
+}
+
+#umrechenAuswahl{
+    flex-basis: 100%;
+    padding: 0 10% 1vh;
+}
+
+#umrechnenButton{
+    margin: 0 5vw 0;
+}
