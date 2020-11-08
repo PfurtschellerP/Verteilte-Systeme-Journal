@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 /* Variablen */
 :root {
     --font-color: #2f3640;
