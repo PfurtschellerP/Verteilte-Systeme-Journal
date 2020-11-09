@@ -204,7 +204,7 @@ main#web-programmierung{
 }
 
 main#blog {
-    grid-template-columns: auto !important;
+    grid-template-columns: 70vw !important;
     grid-template-rows: auto;
 }
 
@@ -279,6 +279,12 @@ div#contentWrapper > footer > p > a > img {
 }
 
 /* mobile */
+
+@media screen and (max-width: 900px){
+    address{
+        grid-template-columns: auto auto;
+    }
+}
 
 @media screen and (max-width: 600px) {
     body{

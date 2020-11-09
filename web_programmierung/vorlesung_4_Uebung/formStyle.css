@@ -26,3 +26,17 @@ form > h2{
 #umrechnenButton{
     margin: 0 5vw 0;
 }
+
+@media screen and (max-width: 1350px) {
+    form{
+        margin: 2vh 15vw 0;
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width: 900px){
+    form{
+        margin: 2vh 5vw 0;
+        width: 60vw;
+    }
+}
