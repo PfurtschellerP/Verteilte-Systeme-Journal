@@ -278,6 +278,57 @@ div#contentWrapper > footer > p > a > img {
     height: 1em;
 }
 
+/* GoToTop Button */
+
+#goToTopButton {
+    display: none;
+    position: fixed;
+    bottom: 5vh;
+    right: 5vh;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #3a3a3a; /*#e4082a;*/
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    padding: 1.1rem 0.8rem 0.8rem;
+    box-shadow: 0 5px 5px 5px rgba(0,0,0,0.5);
+    transition: all ease-in-out 0.1s;
+}
+
+#goToTopButton:before,
+#goToTopButton:after {
+ content: '';
+ position: absolute;
+ top: 20%;
+ height: 8%;
+ width: 40%;
+ background: white;
+}
+
+#goToTopButton:before {
+    left: 10%;
+    transform: skewY(-30deg);
+}
+   
+#goToTopButton:after {
+    right: 10%;
+    transform: skewY(30deg);
+}
+
+#goToTopButton:hover:before,
+#goToTopButton:hover:after{
+    height: 10%;
+    background: #4686c0;
+}
+  
+#goToTopButton:hover {
+    background-color: #1e1e1e;
+    color: #c2866f;
+}
+
 /* mobile */
 
 @media screen and (max-width: 900px){
