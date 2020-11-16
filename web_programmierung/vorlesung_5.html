@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 5</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_5/vorlesung_5.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Web-Programmierung</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Web-Programmierung</a> > Vorlesung 5</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 5 - Thema</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 16.11.2020</p>
+                    </header>
+                    <main>
+                        <h2>Übungsaufgabe</h2>
+                        <h3>Registrierung</h3>
+                        <form name="userForm">
+                            <label>
+                                Vorname:
+                                <input type="text" name="vorname">
+                            </label>
+                            <label>
+                                Nachname:
+                                <input type="text" name="nachname">
+                            </label><br>
+                            <label>
+                                Alter:
+                                <input type="number" name="alter">
+                            </label><br>
+                            <label>
+                                Geschlecht:
+                                <label>
+                                    Männlich
+                                    <input type="radio" name="geschlecht" checked ="checked">
+                                </label>
+                                <label>
+                                    Weiblich
+                                    <input type="radio" name="geschlecht">
+                                </label>
+                            </label><br>
+                            <label>
+                                Username:
+                                <input type="text" name ="userName">
+                            </label>
+                            <label>
+                                Passwort:
+                                <input type="password" name="passwort">
+                            </label><br>
+                            <input type="button" value="Absenden" name="absenden" onclick="eintragHinzufuegen();">
+                        </form>
+                        <h3>User-"Datenbank"</h3>
+                        <div id="ausgabe">leer</div>
+                        <h3>Login</h3>
+                        <p>
+                            Hier kann sich mit den bekannten Nutzern angemeldet werden.
+                        </p>
+                        <form name="userLogin">
+                            <label>
+                                Username:
+                                <input type="text" name="userName">
+                            </label>
+                            <label>
+                                Passwort:
+                                <input type="password" name="passwort">
+                            </label><br>
+                            <input type="button" value="Login" onclick="loginCheck();">
+                        </form>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
