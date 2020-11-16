@@ -122,21 +122,24 @@ function printOutUsers(){
     userList.forEach(printOutUser);
 }
 
+// die Eigenschaften jedes Users in die entsprechende Spalte einsortieren
 function printOutUser(item, index){
+    // Reihe erstellen
     var row = table.appendChild(document.createElement("tr"));
-    // ID
+    // Spalten erstellen
+    //  ID
     var spalte = row.appendChild(document.createElement("td"));
     spalte.innerHTML = index+1;
-    // Name
+    //  Name
     var spalte = row.appendChild(document.createElement("td"));
     spalte.innerHTML = item.getName();
-    // Alter
+    //  Alter
     var spalte = row.appendChild(document.createElement("td"));
     spalte.innerHTML = item.getAlter();
-    // Geschlecht
+    //  Geschlecht
     var spalte = row.appendChild(document.createElement("td"));
     spalte.innerHTML = item.getGeschlecht();
-    // Username
+    //  Username
     var spalte = row.appendChild(document.createElement("td"));
     spalte.innerHTML = item.getUserName();
 
