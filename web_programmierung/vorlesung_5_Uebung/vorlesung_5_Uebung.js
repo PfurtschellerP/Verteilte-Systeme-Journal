@@ -1,4 +1,6 @@
+// Anzahl registrieter Nutzer (hilft auch zum bestimmen des Array Indexes :D)
 var userCount = 0;
+// Array mit allen angelegten Nutzern
 userList = new Array();
 
 function eintragHinzufuegen(){
