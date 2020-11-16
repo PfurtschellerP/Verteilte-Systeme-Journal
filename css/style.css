@@ -199,8 +199,8 @@ main#startseite {
     grid-template-rows: repeat(2, 1fr);
 }
 
-main#web-programmierung{
-    grid-template-rows: repeat(5, 1fr);
+main#Web-Programmierung{
+    grid-template-rows: repeat(6, 1fr);
 }
 
 main#blog {

@@ -27,14 +27,6 @@ function eintragHinzufuegen(){
     userList[userCount] = newUser;
     // User Anzahl erhöhen
     userCount++;
-    // Tabelle für die Ausgabe bereitstellen
-    table = document.getElementById("ausgabe").appendChild(document.createElement("table"));
-    var kopfzeile = table.appendChild(document.createElement("tr"));
-    kopfzeile.appendChild(document.createElement("th")).innerHTML = "ID";
-    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Name";
-    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Alter";
-    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Geschlecht";
-    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Username";
     // neue Liste Ausgeben
     printOutUsers();
     // Formular resetten
@@ -73,6 +65,10 @@ function User(vorname,nachname,alter,geschlecht,username,passwort){
             return false;
         }
     }
+
+    this.setNachname = function(neuerNachname){
+        nachname = neuerNachname;
+    }
 }
 
 // Überprüfen der Zugangsdaten
@@ -104,9 +100,23 @@ function searchUser(user){
     return -1;
 }
 
+// Tabelle für die Ausgabe vorbereiten
+function tabelleAnlegen(){
+    table = document.getElementById("ausgabe").appendChild(document.createElement("table"));
+    var kopfzeile = table.appendChild(document.createElement("tr"));
+    kopfzeile.appendChild(document.createElement("th")).innerHTML = "ID";
+    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Name";
+    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Alter";
+    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Geschlecht";
+    kopfzeile.appendChild(document.createElement("th")).innerHTML = "Username";
+}
+
 
 // Alle User ausgeben
 function printOutUsers(){
+    // Tabelle erstellen
+    tabelleAnlegen();
+    // Über die User iterieren und ihnen ihren Platz zuweisen
     userList.forEach(printOutUser);
 }
 
@@ -135,4 +145,23 @@ function printOutUser(item, index){
 // Die Ausgabe clearen
 function clearScreen(){
     document.getElementById("ausgabe").innerHTML = "";
+}
+
+// Fehler testen
+function direkterZugriffTest(){
+    alert(userList[0].name);
+}
+
+// Nachname überschreiben
+function nachnameUeberschreiben(){
+    var user = prompt("Username des Nutzers dessen Nachname überschrieben werden soll:","");
+    var userID = searchUser(user);
+    if (userID < 0){
+        alert("User nicht gefunden!");
+    }else{
+        userList[userID].setNachname(prompt("Neuer Nachname:",""));
+        alert("Hat funktioniert")
+    }
+    clearScreen();
+    printOutUsers();
 }
