@@ -3,6 +3,9 @@ var userCount = 0;
 // Array mit allen angelegten Nutzern
 userList = new Array();
 
+// Version number
+var version = 1.0;
+
 function eintragHinzufuegen(){
     // Ausgabe clearen
     clearScreen();
@@ -71,6 +74,17 @@ function User(vorname,nachname,alter,geschlecht,username,passwort){
     this.setNachname = function(neuerNachname){
         nachname = neuerNachname;
     }
+
+    this.toJSON = function(){
+        return {
+            "vorname" : vorname,
+            "nachname" : nachname,
+            "alter" : alter,
+            "geschlecht" : geschlecht,
+            "username" : username,
+            "passwort" : passwort
+        }
+    }
 }
 
 // Überprüfen der Zugangsdaten
@@ -120,6 +134,7 @@ function printOutUsers(){
     tabelleAnlegen();
     // Über die User iterieren und ihnen ihren Platz zuweisen
     userList.forEach(printOutUser);
+    table.innerHTML += "Anzahl der Einträge: " + userCount;
 }
 
 // die Eigenschaften jedes Users in die entsprechende Spalte einsortieren
@@ -149,7 +164,7 @@ function printOutUser(item, index){
 
 // Die Ausgabe clearen
 function clearScreen(){
-    document.getElementById("ausgabe").innerHTML = "";
+    document.getElementById("ausgabe").innerHTML = "leer";
 }
 
 // Fehler testen
@@ -169,4 +184,78 @@ function nachnameUeberschreiben(){
     }
     clearScreen();
     printOutUsers();
+}
+
+// Config herunterladen
+function downloadConfig(){
+
+    var config = {
+        "version" : version,
+        "user count" : userCount,
+        "users" : {}
+    }
+
+    for(var i = 0; i < userList.length;i++){
+        config.users[i] = userList[i].toJSON();
+    }
+
+    downloadObject(config,"config");
+}
+
+function downloadObject(obj, filename){
+    var blob = new Blob([JSON.stringify(obj, null, 2)], {type: "application/json;charset=utf-8"});
+    var url = URL.createObjectURL(blob);
+    var elem = document.createElement("a");
+    elem.href = url;
+    elem.download = filename;
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  }
+
+// Config laden
+function configFileLaden(){
+    var inputFile = document.datenbankVerwaltung.configFile;
+
+    const reader = new FileReader();
+    reader.onload = function() {
+        // Config als JSON parsen und in die lade Config function übergeben
+        ladeConfig(JSON.parse(reader.result));
+    }
+    if(!inputFile){
+        alert("Bitte erst eine config Datei auswählen");
+    } else if (!inputFile.files) {
+        alert("Dieser Browser unterstützt wohl das files Argument nicht");
+    } else if (!inputFile.files[0]) {
+        alert("Bitte erst eine config Datei auswählen");
+    } else {
+        reader.readAsText(inputFile.files[0]);
+    }   
+}
+
+function ladeConfig(config){
+    if(config.version != version){
+        return alert("Die Config Version ist nicht kompatibel mit der aktuellen Website Version");
+    }
+    clearDatabase();
+    try{
+        // Vorhande Datenbank löschen
+        // userCount übernehmen
+        userCount = config["user count"];
+        // User erzeugen und eintragen
+        for(var i = 0; i < userCount; i++){
+            // User erstellen
+            userList[i] = new User(config.users[i].vorname,config.users[i].nachname,config.users[i].alter,config.users[i].geschlecht,config.users[i].username,config.users[i].passwort);
+        }
+        // Liste ausgeben
+        printOutUsers();
+    } catch{
+        alert("irgendwas ist schief gelaufen");
+    }
+}
+
+function clearDatabase(){
+    userList = [];
+    userCount = 0;
+    clearScreen();
 }

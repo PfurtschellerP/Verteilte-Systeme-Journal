@@ -30,85 +30,98 @@
                     </header>
                     <main>
                         <h2>Übungsaufgabe</h2>
-                        <p>
-                            In einer Übungsaufgabe sollten wir nun folgendes tun:
-                        </p>
-                        <img src="vorlesung_5_Uebung/aufgabe.PNG">
+                            <p>
+                                In einer Übungsaufgabe sollten wir nun folgendes tun:
+                            </p>
+                            <img src="vorlesung_5_Uebung/aufgabe.PNG">
                         <h3>Registrierung</h3>
-                        <form name="userForm">
-                            <label>
-                                Vorname:
-                                <input type="text" name="vorname">
-                            </label>
-                            <label>
-                                Nachname:
-                                <input type="text" name="nachname">
-                            </label><br>
-                            <label>
-                                Alter:
-                                <input type="number" name="alter">
-                            </label><br>
-                            <label>
-                                Geschlecht:
+                            <form name="userForm">
                                 <label>
-                                    Männlich
-                                    <input type="radio" name="geschlecht" checked ="checked">
+                                    Vorname:
+                                    <input type="text" name="vorname">
                                 </label>
                                 <label>
-                                    Weiblich
-                                    <input type="radio" name="geschlecht">
+                                    Nachname:
+                                    <input type="text" name="nachname">
+                                </label><br>
+                                <label>
+                                    Alter:
+                                    <input type="number" name="alter">
+                                </label><br>
+                                <label>
+                                    Geschlecht:
+                                    <label>
+                                        Männlich
+                                        <input type="radio" name="geschlecht" checked ="checked">
+                                    </label>
+                                    <label>
+                                        Weiblich
+                                        <input type="radio" name="geschlecht">
+                                    </label>
+                                </label><br>
+                                <label>
+                                    Username:
+                                    <input type="text" name ="userName">
                                 </label>
-                            </label><br>
-                            <label>
-                                Username:
-                                <input type="text" name ="userName">
-                            </label>
-                            <label>
-                                Passwort:
-                                <input type="password" name="passwort">
-                            </label><br>
-                            <input type="button" value="Absenden" name="absenden" onclick="eintragHinzufuegen();">
-                        </form>
-                        <h3>User-"Datenbank"</h3>
-                        <div id="ausgabe">leer</div>
+                                <label>
+                                    Passwort:
+                                    <input type="password" name="passwort">
+                                </label><br>
+                                <input type="button" value="Absenden" name="absenden" onclick="eintragHinzufuegen();">
+                            </form>
                         <h3>Login</h3>
-                        <p>
-                            Hier können sich bekannte Nutzer anmelden.
-                        </p>
-                        <form name="userLogin">
-                            <label>
-                                Username:
-                                <input type="text" name="userName">
-                            </label>
-                            <label>
-                                Passwort:
-                                <input type="password" name="passwort">
-                            </label><br>
-                            <input type="button" value="Login" onclick="loginCheck();">
-                        </form>
-                        <h3>"Admin Konsole"</h3>
-                        <form>
-                            <input type="button" value="Nachname überschreiben" onclick="nachnameUeberschreiben();">
-                        </form>
+                            <p>
+                                Hier können sich bekannte Nutzer anmelden.
+                            </p>
+                            <form name="userLogin">
+                                <label>
+                                    Username:
+                                    <input type="text" name="userName">
+                                </label>
+                                <label>
+                                    Passwort:
+                                    <input type="password" name="passwort">
+                                </label><br>
+                                <input type="button" value="Login" onclick="loginCheck();">
+                            </form>
+                            <h3>"Admin Konsole"</h3>
+                            <form>
+                                <input type="button" value="Nachname überschreiben" onclick="nachnameUeberschreiben();">
+                            </form>
+                        <h3>User-"Datenbank"</h3>
+                            <div id="ausgabe">leer</div>
+                        <h3>"Datenbank"-Verwaltung</h3>
+                            <form name="datenbankVerwaltung">
+                                <input type="button" value="Config Speichern" name="configSpeichern" onclick="downloadConfig();"><br>
+                                <label>
+                                    Config laden
+                                    <input type="file" name="configFile">
+                                    <input type="button" name="loadConfig" value="Config Laden" onclick="configFileLaden();">
+                                </label><br>
+                                <label>
+                                    Datenbank leeren
+                                    <input type="button" name="deleteDatabase" value="Datenbank löschen" onclick="clearDatabase();">
+                                </label>
+                            </form>
                         <h3>Test</h3>
-                        <p>
-                            Hier sind noch ein Test, den das Programm bestehen muss. Wir versuchen einen direkten Zugriff auf die <i>name</i>-Variable des Users.<br>
-                            Hierzu muss vorher mindestens ein User vorhanden sein.
-                        </p>
-                        <pre>
-                            <code class="javascript">
-// Fehler testen
-function direkterZugriffTest(){
-    alert(userList[0].name);
-}
-                            </code>
-                        </pre>
-                        <form>
-                            <input type="button" value="Name des ersten Users ausgeben" onclick="direkterZugriffTest()">
-                        </form>
-                        <p>
-                            <i>Tipp:</i> der Button gibt <i>undefined</i> aus, da ein Fehler geworfen wird. Wir dürfen ja nicht direkt auf die Eigenschaften der User zugreifen.
-                        </p>
+                            <p>
+                                Hier sind noch ein Test, den das Programm bestehen muss. Wir versuchen einen direkten Zugriff auf die <i>name</i>-Variable des Users.<br>
+                                Hierzu muss vorher mindestens ein User vorhanden sein.
+                            </p>
+                            <pre>
+                                <code class="javascript">
+    // Fehler testen
+    function direkterZugriffTest(){
+        alert(userList[0].name);
+    }
+                                </code>
+                            </pre>
+                            <form>
+                                <input type="button" value="Name des ersten Users ausgeben" onclick="direkterZugriffTest()">
+                            </form>
+                            <p>
+                                <i>Tipp:</i> der Button gibt <i>undefined</i> aus, da ein Fehler geworfen wird. Wir dürfen ja nicht direkt auf die Eigenschaften der User zugreifen.
+                            </p>
                     </main>
                 </section>
             </main>
