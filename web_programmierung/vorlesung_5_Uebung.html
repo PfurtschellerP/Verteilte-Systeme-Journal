@@ -6,6 +6,7 @@
         <meta name="viewport" content="initial-scale=1">
         <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
         <link rel="stylesheet" href="../css/style.css">
+        <!--<link rel="stylesheet" href="vorlesung_5_Uebung/vorlesung_5_Uebung.css">-->
         <script src="../js/site.js"></script>
         <script src="vorlesung_5_Uebung/vorlesung_5_Uebung.js"></script>
         <link rel="stylesheet" href="../css/vs2015.min.css">
@@ -36,6 +37,7 @@
                             <img src="vorlesung_5_Uebung/aufgabe.PNG">
                         <h3>Registrierung</h3>
                             <form name="userForm">
+                                <h4>User Registrierung</h4>
                                 <label>
                                     Vorname:
                                     <input type="text" name="vorname">
@@ -47,7 +49,7 @@
                                 <label>
                                     Alter:
                                     <input type="number" name="alter">
-                                </label><br>
+                                </label>
                                 <label>
                                     Geschlecht:
                                     <label>
@@ -58,7 +60,7 @@
                                         Weiblich
                                         <input type="radio" name="geschlecht">
                                     </label>
-                                </label><br>
+                                </label>
                                 <label>
                                     Username:
                                     <input type="text" name ="userName">
@@ -66,14 +68,15 @@
                                 <label>
                                     Passwort:
                                     <input type="password" name="passwort">
-                                </label><br>
-                                <input type="button" value="Absenden" name="absenden" onclick="eintragHinzufuegen();">
+                                </label>
+                                <input type="button" value="Registrieren" name="absenden" onclick="eintragHinzufuegen();">
                             </form>
                         <h3>Login</h3>
                             <p>
                                 Hier können sich bekannte Nutzer anmelden.
                             </p>
                             <form name="userLogin">
+                                <h4>User Login</h4>
                                 <label>
                                     Username:
                                     <input type="text" name="userName">
@@ -81,7 +84,7 @@
                                 <label>
                                     Passwort:
                                     <input type="password" name="passwort">
-                                </label><br>
+                                </label>
                                 <input type="button" value="Login" onclick="loginCheck();">
                             </form>
                             <h3>"Admin Konsole"</h3>
@@ -97,7 +100,7 @@
                                     Config laden
                                     <input type="file" name="configFile">
                                     <input type="button" name="loadConfig" value="Config Laden" onclick="configFileLaden();">
-                                </label><br>
+                                </label>
                                 <label>
                                     Datenbank leeren
                                     <input type="button" name="deleteDatabase" value="Datenbank löschen" onclick="clearDatabase();">

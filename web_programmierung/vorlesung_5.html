@@ -25,13 +25,101 @@
             <main id="blog">
                 <section>
                     <header>
-                        <h2>Vorlesung 5 - Thema</h2>
+                        <h2>Vorlesung 5 - CSS und weitere JS-Konzepte</h2>
                         <p><img class="calenderIcon" src="../img/icons/calender.png"/> 16.11.2020</p>
                     </header>
                     <main>
                         <p>
-
+                            Eine neue Woche, eine neue Vorlesung. Und wieder starten wir mit einem Teil über <i>HTML</i>. Dieses Mal geht es um <i>CSS</i>.
                         </p>
+                        <h2>CSS</h2>
+                            <p>
+                                Erst einmal ging es darum, was <i>CSS</i> eigentlich ist. Es ist die Kurzform für Cascading Style Sheets und bietet eine 
+                                Möglichkeit <i>HTML</i> Objekte zu designen - also ihr Aussehen und teilweise ihr Verhalten zu definieren.
+                            </p>
+                            <h3>Einbinden von CSS</h3>
+                            <p>
+                                Analog zu JS gibt es auch für <i>CSS</i> verschiedene Wege es in <i>HTML</i>-Code einzubinden. Dies sind wie folgt:<br>
+                                <b>Das direkte Einbinden in einen Tag</b>
+                            </p>
+                            <pre>
+                                <code class="html">
+    &lt;p style="color: green;">Grüner Text&lt;/p>
+                                </code>
+                            </pre>
+                            <p>
+                                <b>Das Einbinden in einen separaten <i>style</i>-Tag</b>
+                            </p>
+                            <pre>
+                                <code class="html">
+    &lt;head>
+        &lt;style>
+            p {
+                color: green;
+            }
+        &lt;/style>
+    &lt;/head>
+    &lt;body>
+        &lt;p>Grüner Text&lt;/p>
+    &lt;/body>
+                                </code>
+                            </pre>
+                            <p>
+                                <b>Das Auslagern in eine separate <i>CSS</i>-Datei</b><br>
+                                Hierbei ist der <i>CSS</i>-Code in einer seperaten Datei untergebracht.
+                            </p>
+                            <pre>
+                                <code class="html">
+    &lt;head>
+        &lt;link rel="stylesheet" href="style.css">
+    &lt;/head>
+    &lt;body>
+        &lt;p>Grüner Text&lt;/p>
+    &lt;/body>
+                                </code>
+                            </pre>
+                            <h3>Selektoren</h3>
+                            <p>
+                                Nun ging es um die Adressierung der <i>HTML</i>-Tags im <i>CSS</i>-Code.<br>
+                                Eine Variante haben wir oben schon gesehen. So lassen sich Tags mit dem jeweiligen Namen ansprechen.
+                                Allerdings gibt es noch drei weitere Varianten von Relevanz. So können <i>HTML</i>-Tags zusätzliche Attribute bekommen über die sie angesprochen werden können.
+                                Diese sind das <i>class</i>- und das <i>id</i>-Attribut. Letzteres haben wir im Rahmen der JS-Funktion <i>getElementById</i> schon kennengelernt.
+                            </p>
+                            <pre>
+                                <code class="html">
+    &lt;head>
+        &lt;style>
+            #meinText {
+                color: green;
+            }
+            .meinBild {
+                width: 100%;
+            }
+        &lt;/style>
+    &lt;/head>
+    &lt;body>
+        &lt;p id="meinText">Grüner Text&lt;/p>
+        &lt;img class="meinBild" src="lustigesBild.jpg"/>
+    &lt;/body>
+                                </code>
+                            </pre>
+                            <p>
+                                Neben den Attributen die einem Tag noch hinzugefügt werden können gibt es in <i>CSS</i> auch die Möglichkeit alle sich auf der Seite befindenden Elemente anzusprechen.
+                                Dies ist über den <i>*</i> möglich. Ich beispielsweise nutze ihn um margin (Außenabstand) und padding (Innenabstand) für jedes Element der Seite auf 0 zu setzen.
+                                So kann ich mit meinen Styles von Vorne anfangen und die vom jeweiligen Browser vorgegebenen Standardwerte überschreiben.
+                            </p>
+                            <pre>
+                                <code class="css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+                                </code>
+                            </pre>
+                        <h2>Javascript</h2>
+                            <p>
+                                Nun ging es weiter mit Javascript.
+                            </p>
                     </main>
                 </section>
             </main>

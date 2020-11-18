@@ -164,7 +164,7 @@ function printOutUser(item, index){
 
 // Die Ausgabe clearen
 function clearScreen(){
-    document.getElementById("ausgabe").innerHTML = "leer";
+    document.getElementById("ausgabe").innerHTML = "";
 }
 
 // Fehler testen

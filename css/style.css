@@ -17,7 +17,7 @@ h1{
     text-align: center;
 }
 
-h1,h2,h3,h4,h5,h6,p, li, td{
+h1,h2,h3,h4,h5,h6,p,li,td,label{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--font-color);
 }
@@ -57,7 +57,13 @@ code{
 /* Forms und Buttons */
 
 form{
-    margin: 0.5vh 1vw 0.5vh;
+    width: 40vw;
+    margin: 2vh 15vw 0;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.5);
+    padding: 1%;
+
+    display: flex;
+    flex-flow: row wrap;
 }
 
 input[type="button"]{
@@ -82,6 +88,20 @@ input[type="button"]:active{
     color: white;
 }
 
+form > label,form > h4,form > input[type="button"],form > input[type="button"]{
+    flex-basis: 80%;
+    margin: 1vh 10% 1vh;
+}
+
+form > label > input[type="button"],input[type="file"]{
+    width: 80%;
+    margin: 1vh 10% 1vh;
+}
+
+form > h4{
+    text-align: center;
+}
+
 /* Address Tag */
 
 address{
@@ -90,7 +110,33 @@ address{
     grid-template-rows: 2.5vh 2.5vh 8vh;
 }
 
+/* Tables */
+table{
+    width: 80%;
+    margin: 1vh 10% 1vh;
+    border-spacing: 0;
+}
+
+th{
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    border-right: 1px solid rgba(0,0,0,0.5);
+}
+
+th:nth-child(5){
+    border-right: none;
+}
+
+td{
+    border-right: 1px solid rgba(0,0,0,0.5);
+    padding: 0.2rem;
+}
+
+td:nth-child(5){
+    border-right: none;
+}
+
 /* Äußere Umgebung */
+
 *{
     margin: 0;
     padding: 0;
@@ -125,6 +171,7 @@ body{
 }
 
 /* Innere Umgebung */
+
 div#contentWrapper{
     grid-area: content;
     background-color: white;
@@ -331,7 +378,19 @@ div#contentWrapper > footer > p > a > img {
 
 /* mobile */
 
+@media screen and (max-width: 1350px) {
+    form{
+        margin: 2vh 5vw 0;
+        width: 60vw;
+    }
+}
+
 @media screen and (max-width: 900px){
+    form{
+        margin: 2vh 2vw 0;
+        width: 66vw;
+    }
+
     address{
         grid-template-columns: auto auto;
     }
