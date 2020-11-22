@@ -116,9 +116,116 @@
     }
                                 </code>
                             </pre>
-                        <h2>Javascript</h2>
+                        <h2>JavaScript</h2>
                             <p>
-                                Nun ging es weiter mit Javascript.
+                                Nun ging es weiter mit Javascript. Heute wurden uns weitere Konzepte und Datentypen aus JavaScript vorgestellt. Angesichts der Tatsache, dass der Foliensatz für heute 85 
+                                Folien umfasst und vieles bereits aus Java bekannt ist (z.B. Konzepte wie "Call by Reference vs. Call by Copy") werde ich mich dabei wie immer auf die mir neuen und interessanteren Inhalte 
+                                beschränken. Diese waren heute:
+                            </p>
+                            <ul>
+                                <li>Arrays</li>
+                                <li>Erstelung von Objekten mit dem <i>object</i> Konstruktor</li>
+                                <li>Kapselung</li>
+                            </ul>
+                            <h3>Arrays</h3>
+                            <p>
+                                Angefangen haben wir mit Arrays. Diese sind zwar ähnlich zu Java, aber trotzdem interessant für mich aus dem folgenden Grund. Sie sind zwar laut unserem Dozenten als Array Lists implementiert, lassen 
+                                sich aber trotzdem über den Index ansprechen. Der Grund warum das so interessant war ist, dass ich das bei linked Lists aus Java schlichtweg nicht kannte, denn wie man in der untenstehenden Abbildung 
+                                aus unserer Programmier Vorlseung sehen kann enthalten Linked Lists, zumindest in Java nur einen Verweis auf das nächste Element. So ließen sie sich nicht über den Index ansprechen.
+                            </p>
+                            <img src="vorlesung_5/linked-list.png">
+                            <p>
+                                Scheinbar geht dies aber in JavaScript. So kann man im nachfolgenden Beispiel ein Array deklarieren und initialisieren. Dann Werte an eine Stelle des Arrays schreiben und diese con dort auch wieder lesen.
+                            </p>
+                            <pre>
+                                <code class="Javascript">
+    // initialisieren ein Array mit 10 Stellen
+    var meinArray = new Array(10);
+    // schreibe einen Wert in das Array
+    meinArray[4] = "Test";
+    // lese den Wert von dort wieder aus
+    alert(meinArray[4]);
+                                </code>
+                            </pre>
+                            <h3>Erstelung von Objekten mit dem <i>object</i> Konstruktor</h3>
+                            <p>
+                                Aus Java kannte ich bereits Klassen. Mit Hilfe dieser Klassen konnte man dann Instanzen einer Klasse erzeugen, so genannte Objekte. JavaScript besitzt zwar seit ECMAScript 2015 auch Klassen, allerdings schien das unser 
+                                Dozent nicht zu wissen (um fair zu bleiben, ich musste auch erst mal googlen). Und so wurde uns etwas mir vollkommen Unbekanntes vorgestellt: der <i>obbject</i>-Constructor.<br>
+                                So hatte JavaScript zwar bis 2015 keine Klassen aber Objekte ließen sich mit diesem Konstruktor einfach erzeugen.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    // Objekt erzeugen
+    var meinObjekt = new Object();
+    //Eigenschaften setzen
+    meinObjekt.name = "Peter";
+    // Methode definieren
+    meinObjekt.nameAusgeben = function() {
+        alert("Mein Name ist " + this.name);
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Nun lassen sich diese Objekte nicht nur durch umständliches setzen von Eigenschaften und Methoden erstellen, sondern auch durch sogenannte Literale. In diesem Fall ist dies JSON (Java Script Object Notation). 
+                                So lassen sich die Befehle oben folgendermaßen zusammenfassen.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    var meinObjekt = {
+        name = "Peter",
+        this.nameAusgeben = function(){
+            alert("Mein Name ist " + this.name);
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                JSON ist vor allem als Austauschformat sehr hilfreich, wenn es darum geht kurz uns schnell Objekte hin und her zu schicken.<br>
+                                Jetzt haben wir schon mal konkrete Objekte erzeugt. Wie aber bekommen wir eine "Obektmassenproduktion à la Java hin"? Die Antwort hierauf ist ein eigener spezielisierter Konstruktor.
+                                Bis jetzt haben wir ja immer <i>new Object</i> geschrieben, wenn wir ein Objekt erstellen wollten. Wir können jedoch genauso gut hingehen und einen eigenen Konstruktor schreiben, der schon alle unsere "Einstellungen" enthält. 
+                                Das sieht dann so aus:
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    function User(n){
+        this.name = n;
+        this.nameAusgeben = function(){
+            alert("Mein Name ist " + this.name);
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Das sieht auf den ersten Blick zwar ähnlich aus wie oben aber bei genauerer Betrachtung fallen uns mehrere Dinge aus. 
+                                So können wir hier beispielsweise beliebig viele Instanzen dieses Objektes erzeugen oder diese "function" noch parameterisieren (hier das n) um den Namen individuell festlegen zu können etc. etc..
+                            </p>
+                            <h3>Kapselung</h3>
+                            <p>
+                                Nachdem wir uns das nun angeschaut hatten ging es weiter mit einem kurzem Exkurs zur <i>for ... in ...</i> Schleife (die über jedes Element eines Obkekte iteriert) und dem <i>instanceof</i> Operator 
+                                (mit dem man den Typ eines Objektes überprüfen kann) bevor wir schlussendlich zur Kapselung gelangten.<br>
+                                Die Kapselung beschreibt grob gesagt, wie bestimmte Teile von Objekten von der "Außenwelt" abgeschirmt werden können. Dies hat neben Sicherheitsaspekten auch den Vorteil, dass das eigene Objekt nur so genutzt 
+                                werden kann, wie es vorgesehen ist. Und zwar über festgelegte Schnittstellen in Form von öffentlichen Methoden.<br>
+                                Mit öffentlichen Attributen haben wir weiter oben schon gearbeitet. Sie trugen alle das Schlüsselwort <i>this</i> vor ihrem Namen. So konnte <i>this.name</i> nicht nur innerhalb des Objektes, sondern auch von 
+                                außerhalb erreicht werden. Um das zu verhindern, streichen wir dort einfach das <i>this</i> und ersetzen es durch ein <i>var</i>. Um dann außerhalb des Objektes darauf zugreifen zu können erstellen wir soganannte 
+                                Setter- und Getter-Methoden. Ein Besipiel dafür kann man hier sehen:
+                                
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    function User(n){
+        var name = n;
+        this.getName = function(){
+            return name;
+        }
+        this.setName = function(n){
+            this.name = n;
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Das hier Gezeigte bringt uns zwar noch nicht viel, aber das ist ja auch nur ein simples Beispiel.<br>
+                                Nachdem wir damit fertig waren, ging es auch schon zur heutigen größeren Übung. Zu finden ist diese im nächsten Eintrag.
                             </p>
                     </main>
                 </section>
