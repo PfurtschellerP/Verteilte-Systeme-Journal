@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 6</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Web-Programmierung</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Web-Programmierung</a> > Vorlesung 6</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 6 - CSS Vererbung und JS Prototyping</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 23.11.2020</p>
+                    </header>
+                    <main>
+                        <p>
+                            Wie immer starteten wir auch diese Woche mit einem Teil über <i>HTML</i> bzw. <i>CSS</i>. Diesen werde ich heute aber nur kurz zusammenfassen, da für mich persönlich nichts 
+                            Neues dabei war.
+                        </p>
+                        <h2>CSS</h2>
+                        <p>
+                            Die heutigen Themen im Punkto <i>CSS</i> waren die Vererbung und das Definieren und Ansprechen von <i>CSS</i>-Klassen.<br>
+                            Bei ersterem ging es lediglich darum, dass <i>HTML</i> Elemente die ineinander geschachtelt sind ihre Eigenschaften vom nächsthöheren Element bekommen können. 
+                            So kann man einen <i>em</i>-Tag beispielsweise in einem <i>p</i>-Tag verwenden und nur dem <i>p</i>-Tag die Eigenschaft <i>color: green;</i> geben.
+                        </p>
+                        <img src="vorlesung_6/vererbung.png">
+                        <p>
+                            Für den zweiten heute besprochenen Aspekt würde ich auf meinen Eintrag zu <a href="vorlesung_5.html">Vorlesung 5</a> verweisen. Dort hatte ich dazu schon etwas geschrieben 
+                            im Abschnitt Selektoren.
+                        </p>
+                        <h2>JavaScript</h2>
+                        <p>
+                            Nachdem wir das vorangegangene besprochen hatten (und es uns an einem Beispiel gezeigt wurde) ging es nun auf zum heutigen JavaScript Teil. Dazu setzten wir an dem an, wo wir 
+                            letzte Woche aufgehört hatten - bei Objekten.<br>
+                            Das heute behandelte Thema war das Prototyping. Grob umrissen lassen sich mit dem Prototyping nachträglich zu einem bereits vorhandenen Konstruktor weitere Methoden und Attribute hinzufügen. 
+                            Diese werden aber dann nicht nur zu anschließend erzeugten Objekten hinzugefügt, sondern auch zu bereits generierten. Eine passende Analogie aus Java ist hier die Superklasse. 
+                            So schreiben wir mit dem Prototyping eine "Superklasse", die ihre Methoden und Attribute an die dann "Subklasse" anfügt.<br>
+                            Das sieht dann am Ende folgendermaßen aus:
+                        </p>
+                        <pre>
+                            <code class="JavaScript">
+    // unser Konstruktor
+    function User(){
+        this.name = "Peter",
+    }
+
+    // Funktion die beispielsweise durch einen Button aufegrufen wird
+    function methodeHinzufuegen(){
+        // User erstellen
+        var ersterNutzer = new User();
+        // Methode hinzufügen
+        User.prototype.nameAusgeben = function(){
+            alert("Mein Name ist " + this.name);
+        }
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Wir haben also einen <i>User</i> Konstruktor mit dem Attribut <i>name</i>. Wir können also "Peters" erzeugen. Jetzt können mit mit <i>prototype</i> nachträglich noch die Funktion 
+                            <i>nameAusgeben</i> hinzufügen ohne, dass wir das bereits erstellte Objekt löschen und neu erstellen müssen.
+                        </p>
+                        <img src="vorlesung_6/prototyping.png">
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
