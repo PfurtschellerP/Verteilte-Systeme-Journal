@@ -1,0 +1,21 @@
+.streifenEffekt{
+    position: absolute;
+    width: 15rem;
+    display: block;
+    height: 36px;
+    background: url("gradient.png") ;
+}
+
+.pullquote{
+    float: right;
+    clear: right;
+    display: block;
+    width: 20vw;
+    border: 1px solid black;
+    padding: 1vh;
+    font-size: 1.2rem;
+    background-color: #FFC;
+    margin: 0.2rem 0 0.2rem;
+    font-style: italic;
+    color: #363;
+}

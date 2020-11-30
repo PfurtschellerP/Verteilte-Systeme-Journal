@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 7</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="../js/jquery-3.5.1.js"></script>
+        <script src="vorlesung_7/vorlesung_7.js"></script>
+        <link rel="stylesheet" href="vorlesung_7/vorlesung_7.css">
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Web-Programmierung</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Web-Programmierung</a> > Vorlesung 7</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 7 - Thema eintragen</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 30.11.2020</p>
+                    </header>
+                    <main>
+                        <p>
+                            
+                        </p>
+
+                        <h2>Kleine Übung in der Vorlesung</h2>
+                        <p>
+                            Nun haben wir eine kleine Übung gemacht. Wir sollten einen Streifen Effekt über Überschriften legen.<br>
+                            Ich hab das hier mal auf <i>h2</i> Überschriften angewendet:
+                        </p>
+                        <span id="uebung">
+                            <h2>Eine H2-Überschrift</h2>
+                            <h2>Noch eine</h2>
+                            <h2>Und noch eine</h2>
+                        </span>
+                        <p>
+                            Erreicht wird dies hier unter Verwendung von JQuery. Dabei wird zur Laufzeit ein <i>span</i>-Tag for jedes <i>h2</i>-Tag gesetzt, welches einen Strefen 
+                            Hintergrund besitzt. Den Code dazu sieht man hier:
+                        </p>
+                        <pre>
+                            <code class="css">
+    .streifenEffekt{
+        position: absolute;
+        width: 15rem;
+        display: block;
+        height: 36px;
+        background: url("gradient.png") ;
+    }
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="JavaScript">
+    $(document).ready( function(){
+        $("#uebung h2").prepend('&lt;span class="streifenEffekt"></span>')
+    })
+                            </code>
+                        </pre>
+                        <h2>Eine weitere Übung</h2>
+                        <p>
+                            In dieser Übung ging es darum die Erstellung sogenannter Pullquotes zu automatisieren. Dazu selektieren wir diese im Code mit einem <i>span</i>-Tag und einer Klasse. 
+                            Der JS Code soll dann diese <i>spans</i> finden, dublizieren und das dublizierte hervorheben.
+                        </p>
+                        <h3>Der Text</h3>
+                        <p id="pullquotes">
+                            Lorem ipsum dolor sit amet, <span class="pq">consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt</span> ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
+
+Ut wisi enim ad minim veniam, <span class="pq">quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip</span> ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
+
+Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
+                        </p>
+                        <p>
+                            Der Code dazu sieht folgendermaßen aus:
+                        </p>
+                        <pre>
+                            <code class="css">
+    .pullquote{
+        float: right;
+        clear: right;
+        display: block;
+        width: 20vw;
+        border: 1px solid black;
+        padding: 1vh;
+        font-size: 1.2rem;
+        background-color: #FFC;
+        margin: 0.2rem 0 0.2rem;
+        font-style: italic;
+        color: #363;
+    }
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="javascript">
+    $(document).ready( function(){
+        // für jedes span-Tag mit der Klasse pq
+        $("span.pq").each(function(){
+            // Element duplizieren
+            var quote = $(this).clone();
+            // CSS Klasse austauschen
+            quote.removeClass("pq");
+            quote.addClass("pullquote");
+            // dubliziertes Element in den HTML Code "pflanzen"
+            $(this).before(quote);
+        })
+    })
+                            </code>
+                        </pre>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
