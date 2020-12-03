@@ -27,14 +27,90 @@
             <main id="blog">
                 <section>
                     <header>
-                        <h2>Vorlesung 7 - Thema eintragen</h2>
+                        <h2>Vorlesung 7 - Frameworks</h2>
                         <p><img class="calenderIcon" src="../img/icons/calender.png"/> 30.11.2020</p>
                     </header>
                     <main>
                         <p>
-                            
+                            Auch in dieser Woche gab es natürlich eine Vorlesung zum Thema Web-Programmierung. Das Themen der heutigen Vorlesung waren die Wiederholung des JavaScript DOMs und die Einfühung 
+                            in die JS Frameworks am Beispiel von JQuery.
                         </p>
-
+                        <h2>Das JS DOM</h2>
+                        <p>
+                            Begonnen haben wir mit einer Wiederholung zum Thema DOM. Grob gesagt ist eine Website wie ein umgedrehter Baum aufgebaut. Der <i>html</i>-Tag stellt die Wurzel dieses Baumes dar 
+                            von welchem sich seine "Kind"-Knoten bis zu den abschließenden "Blatt"-Knoten weiterverzweigen. Wie sich unschwer erkennen lässt wird uns die Baum Metapher vermutlich noch öfter begegnen.
+                        </p>
+                        <img src="vorlesung_7/tree.PNG">
+                        <p>
+                            Ein solcher Baum stellt, wie gerade bereits angeteasert, verschiedene Beziehungen zwischen den Elementen dar. Diese sind nachfolgend abgebildet.
+                        </p>
+                        <img src="vorlesung_7/beziehungen.png">
+                        <p>
+                            In vorangegangenen Vorlesungen haben wir bereits behandelt, wie man auf einzelne Nodes im Baum mittels JavaScript zugreift (Stichwort getElementById() etc.). Als weitere Ergänzung dazu kennt JavaScript 
+                            mittlerweile auch die Methode <i>getElementByClassName()</i> welche den Zugriff auf Nodes mit Hilfe von Klassen erlaubt. Neu gelernt haben wir heute, 
+                            dass man von einem Knoten aus beispielsweise über <i>childNodes</i> eine Liste aller Kinderknoten erhalten kann. Gleichsam kann man auch über <i>parentNode</i> eine Referenz auf den Elternknoten und 
+                            über <i>nextSibling</i> oder <i>prevSibling</i> eine Referenz auf den vorherigen bzw. nachfolgenden Geschwisterknoten bekommen.
+                        </p>
+                        <h2>Bibliotheken/Frameworks</h2>
+                            <h3>Was ist das eigentlich?</h3>
+                            <p>
+                                Eine Sache haben wir wärend diesem Kurs oder beim Programmieren allgemein schon gemerkt. Wenn man immer von vorne anfängt ist das sehr zeitraubend. Dabei sind wir ja sicherlich nicht die einzigen, 
+                                die auf einen Knoten zugreifen wollen, oder Eigenschaften von Elemente manipulieren wollen.<br>
+                                Genau für solche sich immer wiederholenden Problemstellungen gibt es Bibliotheken. Eine davon ist JQuery und genau diese haben wir uns im Folgenden angeschaut.
+                            </p>
+                            <h3>JQuery</h3>
+                            <p>
+                                Zu Beginn haben wir uns erstmal die Vorteile von JQuery angeschaut. Dazu zählen:
+                            </p>
+                            <ul>
+                                <li>Kleine Dateigröße (ca. 30-55KByte je nach Komprimierungsstufe)</li>
+                                <li>Baut auf CSS-Wissen auf (wir sehen nachher inwiefern)</li>
+                                <li>Große Community (wird bereits von tausenden und abertausenden Websites eingesetzt)</li>
+                                <li>Wie Herr Noll in seinem Skript schrieb: Plug-ins, Plug-ins, Plug-ins</li>
+                            </ul>
+                            <p>
+                                Gerade der letzte Punkt macht JQuery sehr anpassungsfähig. So verzeichnetn allein die <a href="https://jquery.com" target="_blank">eigene Website</a> zum aktuellen Tag (03.12.2020) 2.694 Plug-ins.
+                                Also wie startet man nun mit Jquery? Eigentlich ist das alles ganz simpel. Man geht auf die <a href="https://jquery.com" target="_blank">JQuery Website</a> und lädt sich die Version der Wahl herunter.<br>
+                                Wählen kann man zwischen einer vollwertigen und einer Version mit reduzierten Features und dabei jeweils zwischen einer komprimierten und unkomprimierten Version. "By the Way", Komprimierung bezieht sich hier 
+                                im weitesten Sinne auf beispielsweise das Eliminieren von "White Space", also Leerzeichen, Tabulatorzeichen oder Zeilenumbrüchen. Das spart Speicherplatz, macht die Dateien aber nicht gerade einfach zu lesen 
+                                für einen Menschen.<br>
+                                Nachdem man JQuery nun heruntergeladen hat, kann man es wie jede andere JS Datei auch in die eigene Website einbinden.
+                            </p>
+                            <h3>Die Verwendung von JQuery</h3>
+                            <p>
+                                Die Verwendung von Jquery ist einfach. Zu Beginn steht meist eine <i>$(document).ready()</i> Funktion. Wir warten also bis die Seite vollständig geladen ist bevor wir mit der Ausführung des Codes 
+                                beginnen. An diese Funktion übergeben wir dann eine anonyme Funktion die unseren Code enthält.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    $(document).ready(function(){
+        alert('Hallo')
+    })
+                                </code>
+                            </pre>
+                            <p>
+                                Wir sehen also, wir haben erst einen sogenannten Selektorausdruck auf dem dann anschließend Methoden ausgeführt werden. <i>$(document)</i> ist dabei die primäre Collection. Collections kennen wir bereits ein 
+                                Weinig aus unseren Java Vorlesungen. Wenn wir nun weitere Methoden auf dieser primären Collection ausführen erhalten wir die sekundäre, tertiäre und weitere -äre Collections.<br>
+                                Aber nicht jede Mehode gibt auch eine Collection zurück. So gibt es drei Arten von JQuery Methoden:
+                            </p>
+                            <ol>
+                                <li><b>Transparente Methoden:</b> Geben eine Collection zurück die der Eingabe entspricht</li>
+                                <li><b>Destruktive Methoden:</b> Geben eine Collection zurück die nicht der Eingabe entspricht (z.B. reduziert, erweitert oder komplett anders)</li>
+                                <li><b>Terminierende Methoden:</b> Geben kein JQuery Objekt zurück zurück. Beispielsweise einen DOM-Knoten, einen String oder anderen Datentyp. Danach steht keine Collection mehr zur Verfügung und JQuery kann mit dem Rückgabewert erst einmal "nichts mehr anfangen".</li>
+                            </ol>
+                            <p>
+                                Wir können nun also Methoden auf selektierten Elementen ausführen aber wie selektiert man überhaupt? Nun, ein Punkt weiter oben war, dass JQuery auf CSS Wissen aufbaut. Wir selektieren nun nämlich analog zu CSS. 
+                                Das macht es vor allem Entwicklern die bereits CSS kennen (wie mir) besonders einfach mit JQuery zu beginnen. Demensprechend spare ich mir an dieser Stelle den Abschnitt über CSS Selektoren und gehe nur noch auf einen kleinen Unterschied 
+                                zwischen "normalem" JS und JQuery ein. Und zwar greift man auf den HTML Inhalt eines Objektes in JQuery nicht mit <i>innerHTML</i>, sondern mit <i>html()</i> zu.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    $("#banner").html("&lt;h1>Große Überschrift&lt;/h1>")
+                                </code>
+                            </pre>
+                            <p>
+                                Wir haben heute im Laufe der Vorlesung noch weitere einfache Konzepte von JQuery behandelt, allerdings haben wir all diese auch in den folgenden Übungen angewendet und ich finde es deutlich anschaulicher es dort zu sehen, als weiter Fließtext zu verfassen.
+                            </p>
                         <h2>Kleine Übung in der Vorlesung</h2>
                         <p>
                             Nun haben wir eine kleine Übung gemacht. Wir sollten einen Streifen Effekt über Überschriften legen.<br>
@@ -105,14 +181,15 @@ Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming 
                         <pre>
                             <code class="javascript">
     $(document).ready( function(){
-        // für jedes span-Tag mit der Klasse pq
+        // für jedes span-Tag mit der Klasse pq wird eine anonyme Funktion ausgeführt
         $("span.pq").each(function(){
-            // Element duplizieren
+            // Element duplizieren und in Variable ablegen
+            // $(this) ist hier das JQuery Äquivalent zum "normalen" this und bezieht sich nur auf JQuery Elemente (hier jedes einzelne selektierte span Tag mit der Klasse pq)
             var quote = $(this).clone();
             // CSS Klasse austauschen
             quote.removeClass("pq");
             quote.addClass("pullquote");
-            // dubliziertes Element in den HTML Code "pflanzen"
+            // dupliziertes Element in den HTML Code "pflanzen"
             $(this).before(quote);
         })
     })
