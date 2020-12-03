@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vertiefungsthema</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Web-Programmierung</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Web-Programmierung</a> > Vertiefungsthema</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vertiefungsthema</h2>
+                        <!--<p><img class="calenderIcon" src="../img/icons/calender.png"/> 30.11.2020</p>-->
+                    </header>
+                    <main>
+                        <p>
+                            Nun gut... ich soll ein Thema wählen, welches ich vertiefen möchte. Außerdem soll es einen Bezug zum Thema "Web-Programmierung" haben... verständlich. Aber was nimmt man 
+                            da am Besten. Die Auswahl ist ja nicht gerade klein.<br>
+                            Diese Frage hat mich nun eine Weile beschäftigt und ich kam zu dem Schluss, dass ich mir etwas anschauen möchte, dass mich schon länger interessiert.
+                        </p>
+                        <p>
+                            Und dieses ominöse Thema ist...
+                        </p>
+                        <img style="width: 40%; margin: 0 30% 0;" src="vertiefungsThema/drumroll.gif">
+                        <img src="vertiefungsThema/react.PNG">
+                        <p>
+                            Ja genau, wir schauen uns React an. Denn warum sollte man denn etwas Einfaches zum Erklären nehmen, wenn man auch einfach versuchen kann ein weiteres Framework zu erklären. 
+                            Und ja, React ist eine Bibliothek/ein Framework. Und ein/-e komplizierte/-s noch dazu. An dieser Stelle lasse ich auch das Wort Framework fallen und verwende von nun an nur noch 
+                            das Wort Bibliothek (wird sonst zu aufwendig).
+                        </p>
+                        <h2>Was bitte ist React und was macht das?</h2>
+                        <p>
+                            Die <a href="https://reactjs.org/" target="_blank">React Website</a> selbst beschreibt React als eine JavaScript Bibliothek zum Erstellen von komplexen User Interfaces. Es bietet aber noch viel mehr als das. So lassen sich komplette Web Anwendungen 
+                            darin schreiben und Websites in einzelne, isolierte und wiederverwendbare "Komponenten" unterteilen.
+                        </p>
+                        <pre>
+                            <code class="JavaScript">
+    class ShoppingList extends React.Component {
+        render() {
+            return (
+            &lt;div className="shopping-list">
+                &lt;h1>Shopping List for {this.props.name}&lt;/h1>
+                &lt;ul>
+                    &lt;li>Instagram&lt;/li>
+                    &lt;li>WhatsApp&lt;/li>
+                    &lt;li>Oculus&lt;/li>
+                &lt;/ul>
+            &lt;/div>
+            );
+        }
+    }
+        
+    // Example usage: &lt;ShoppingList name="Mark" />
+                            </code>
+                        </pre>
+                        <p>
+                            Hier sieht man ein Beispiel einer solchen Komponente ShoppingList. Diese ist in hier eine Subklasse von React.Component, aber es gibt noch andere.
+                        </p>
+                        <h2>Wie genau wird dieses Thema präsentiert?</h2>
+                        <p>
+                            Ich habe mir bis jetzt schonmal verschiedene Videos zum Thema angeschaut und auch ein Wenig in der Dokumentation von React selbst gelesen. Dabei kam ich zum Schluss, dass es wohl im Rahmen 
+                            dieser Vertiefung am Besten wäre etwas Praktisches zu machen. Hier bietet sich das offizielle Tutorial von React geradezu an und so werde ich im Laufe dieser Vertiefung eben jenes durcharbeiten und meine Erkenntnisse 
+                            mit dir/Ihnen (je nachdem wer das hier liest) teilen.<br>
+                            So habe ich mehr Spaß, ich kann mehr mit Bildern und Videos Arbeiten (d.h. es wird weniger langweiliger Fließtext) und am Ende kommt sogar etwas Interaktives dabei raus. Was genau das wird, dazu später mehr.
+                        </p>
+                        <h2>Wie entwickelt man nun React Apps?</h2>
+                        <p>
+                            React Apps sind im Vergleich zu JQuery basierten Webanwendungen ein Wenig komplizierter aufzusetzen. So genügt es nicht einfach eine JavaScript Datei einzubinden und loszulegen, man muss ein Projekt bauen. Glücklicherweise übernimmt 
+                            letzeres zu großen Teilen Node.js (eine JavaScript Runtime).<br>
+                            Aber genug von der Theorie, los geht's mit der Praxis...
+                        </p>
+                        <h2>Das Projekt</h2>
+                            <h3>Was entwickeln wir?</h3>
+                            <p>
+                                Wie bereits erwähnt, hangeln wir uns am offiziellen React Tutorial entlang und so entwickeln wir...
+                            </p>
+                            <p>
+                                Tic-Tac-Toe
+                            </p>
+                            <p>
+                                Nicht das spannendste Spiel der Welt, aber immerhin ein Spiel 😁.
+                            </p>
+                            <h3>Setup</h3>
+                            <p>
+                                Unter der Vorraussetzung, dass wir Node.js installiert haben (das habe ich natürlich schon im Vorhinein erledigt) können wir auch schon direkt loslegen. 
+                                Ich nutze Visual Studio Code (kurz: VS Code) für den gesammten Entwicklungsprozess, da es a) mittlerweile so ziemlich die beste kostenlose Entwicklungsumgebung ist und ich b) ohnehin schon damit arbeite. Selbst dieser Text wird gerade 
+                                darin geschrieben.
+                            </p>
+                            <p>
+                                Wir erstellen also einen neuen Ordner auf unserer Festplatte, öffnen VS Code, öffnen den Ordner darin und öffnen das Terminal (auf Windows mit strg+shift+ö). Dort schreiben wir "npx create-react-app my-app". Darufhin beginnt Node.js mit 
+                                der Erstellung unseres Projektes. Das kann einige Zeit dauern also mache ich mir jetzt mal einen Tee.
+                            </p>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
