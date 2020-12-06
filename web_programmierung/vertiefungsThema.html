@@ -102,9 +102,166 @@
                                 darin geschrieben.
                             </p>
                             <p>
-                                Wir erstellen also einen neuen Ordner auf unserer Festplatte, öffnen VS Code, öffnen den Ordner darin und öffnen das Terminal (auf Windows mit strg+shift+ö). Dort schreiben wir "npx create-react-app my-app". Darufhin beginnt Node.js mit 
+                                Wir erstellen also einen neuen Ordner auf unserer Festplatte (bei mir der unglaublich kreative Name "reactTutorial"), öffnen VS Code, öffnen den Ordner darin und öffnen das Terminal (auf Windows mit strg+shift+ö). Dort schreiben wir <i>"npx create-react-app reacttutorial"</i>. Darufhin beginnt Node.js mit 
                                 der Erstellung unseres Projektes. Das kann einige Zeit dauern also mache ich mir jetzt mal einen Tee.
                             </p>
+                            <p>
+                                Das Projekt wirde nun erfolgreich erstellt und wir finden die links im Bild gezeigte Ordnerstruktur vor. Wir löschen die Beispieldateien im <i>src</i> Ordner und ersetzen diese durch unsere eigene <i>index.css</i> für unsere Styles und durch eine <i>index.js</i> für unseren 
+                                JavaScript Code. Das orangene M neben den neu erstellten Dateien bedeutet im übrigen, dass die von React standardmäßig vorkonfiguerte Git Versionskontrolle funktioniert. VS Code erkennt diese automatisch und trackt Änderungen.
+                            </p>
+                            <img src="vertiefungsThema/ordnerstruktur.PNG">
+                            <p>
+                                In unsere <i>index.js</i> schreiben wir nun das folgende:
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import './index.css';
+                                </code>
+                            </pre>
+                            <p>
+                                Dieser Code importiert nun drei wichtige Abhängigkeiten. Die für React wichtigen sowie unserer gerade erst erstellten index.css. Außerdem kopieren wir dort hinein den JavaScript Teil des uns von React gegebenen <a href="https://codepen.io/gaearon/pen/oWWQNa" target="_blank">"Starter Codes" (hier klicken für den CodePen Link</a>. 
+                                Dieser beinhaltet aber nicht nur JavaScript Komponenten. Er beinhaltet auch einen vorgefertigten CSS Code und einen vorgefertigten HTML Code, sodass wir am Ende ein Tic-Tac-Toe Gitter erhalten.<br>
+                                Anbei, der HTML Code muss in die von uns bis jetzt noch nicht angerührte index.html im Ordner public. Diese Datei ist die, die von außen her erreichbar ist (wie der Ordner Name public bereits suggeriert). Weil es aber schwierig ist, denn kompletten Inhalt der einzelnen Dateien hier auf die Seite zu packen fasse ich ihn kurz zusammen (allerdings kann man sich den Code auf CodePen [siehe Link weiter oben] anschauen).
+                            </p>
+                            <ul>
+                                <li><b>src/index.js</b>: Unsere Ausgangsdatei für React. Der Starter Code enthält bereits die drei Klassen Game, Board (also das Spielbrett) und Square (also ein einzelnes Quadrat). Die Zugriffsreihenfolge sollte relativ selbsterklärend sein. So "erstellt" das Game ein Board und das Board "erstellt" 9 Squares. Zurückgegeben wird anschließend ein komplettes Tic-Tac-Toe Feld mit Hilfe der <i>render</i> Methoden der Klassen.</li>
+                                <li><b>src/index.css</b>: Diese Datei ist für das Styling zuständig und sorgt hier dafür, dass unser Spielbrett auch wie eines aussieht und nicht wie 9 wahrlos umhergeschmissene Buttons.</li>
+                                <li><b>public/index.html</b>: Diese Datei ist der öffentliche index und erhält durch den Starter Code einen <i>div</i>-Container für Fehlermeldungen, einen <i>div</i>-Container mit der ID root (der Ausgangspunkt für React) und einen <i>script</i>-Tag mit ein paar Event Listenern welche die Eingaben des Users erfassen und uns ermöglichen darauf zu reagieren.</i></li>
+                            </ul>
+                            <p>
+                                Nachdem wir nun den "Starter Code" erfolgreich in unser Projekt übernommen haben können wir mit <i>"npm start"</i> über das Terminal den Node.js Developement Server starten. Dieser öffnet dann unseren Standardbrowser und wir erhalten das folgende Bild:
+                            </p>
+                            <img src="vertiefungsThema/leeresSpielfeld.PNG">
+                            <p>
+                                Damit ist unser initiales Setup abgeschlossen und wir können nun mit dem eingentlichen Tutorial beginnen.
+                            </p>
+                            <!-- Los gehts -->
+                            <h3>Erste Erfahrungen mit props</h3>
+                            <p>
+                                Nun da wir unser Projekt "eingerichtet" haben können wir beginnen damit zu experimentieren. Wir beginnen mit dem Manipulieren von sogenannten props oder auch properties. Dies sind Eigenschaften, die wir in React mit Hilfe von JSX an andere Komponenten übergeben können. Ähnlich wie Parameter bei Methoden.<br>
+                                "Aber Moment mal... was ist JSX?" wird sich der ein oder andere fragen. Nun JSX steht für JavaScript Systax Extension und ist eine Erweiterung der üblichen JavaScript Grammatik für React. Genutzt wird dafür XML was dafür sorgt, dass der Code auch gewisse Ähnlichkeiten mit HTML aufweist. In gewisser Hinsicht wird hier 
+                                der Spieß umgedreht. "Normalerweise" wird ja JavaScript in HTML eingebaut. Nun wird HTML in JavaScript eingebaut.
+                            </p>
+                            <p>
+                                Um die Funktionsweise von Props nun zu veranschaulichen bauen wir unseren Code wie folgt um. Wir ändern die <i>renderSquare</i>-Methode der <i>Board</i>-Klasse und fügen ihr einen prop mit dem Namen "value" hinzu. Dieser übergibt den aktuellen Index eines Squares.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Board extends React.Component {
+        renderSquare(i) {
+            return &lt;Square value={i} />;
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                In der <i>Square</i>-Klasse widerrum nutzen wir nun dieses Value und zeigen es auf dem Button an.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Square extends React.Component {
+        render() {
+            return (
+            &lt;button className="square">
+                {this.props.value}
+            &lt;/button>
+            );
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Unsere Squares sind somit nicht mehr leer, sonder zeigen ihren jeweiligen Index an. Das Endresultat sieht dann so aus:
+                            </p>
+                            <img src="vertiefungsThema/zahlenSpielfeld.PNG">
+                            <p>
+                                Wir haben also erfolgreich ein Prop von einem Eltern Element zu einem Kind Element weitergegeben. In React werden so Informationen verteilt.
+                            </p>
+                            <h3>Interaktive Buttons</h3>
+                            <p>
+                                Jetzt können wir also Zahlen ausgeben. Super spannend...🙄<br>
+                                Wir wollen nun auch etwas anklicken können also beginnen wir doch mal damit, dass ein Square ein "X" erhält wenn wir es anklicken. Dazu fügen wir dem <i>button</i> in der <i>Square</i>-Klasse 
+                                erst mal einen OnClick Event Handler hinzu.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Square extends React.Component {
+        render() {
+            return (
+            &lt;button className="square" onClick={() => alert('click')}>
+                {this.props.value}
+            &lt;/button>
+            );
+        }
+        }
+                                </code>
+                            </pre>
+                            <p>
+                                Aber Moment mal, was macht der Pfeil da drin und wo ist unsere anonyme function? Nun um das kurz aufzuklären, hierbei handelt es sich um sogenannte "Arrow-Functions". Eingeführt wurden sie mit ES6 im Jahr 2015. 
+                                Diese gab es bereits davor schon in anderen Sprachen (wie beispielsweise C# - daher kenne ich sie). Es handelt sich hier um einen vereinfachten Syntax zum Schreiben von Funktionen. Aufgebaut sind sie dabei immer nach dem gleichen Schema. 
+                                Erst kommt eine runde Klammer welche die Parameter enthält, dann ein => und dann eine geschweifte Klammer, welche den Funktionscode enthält. Alternativ kann man diese auch benennen indem man ein <i>let funktionsName =</i> davor schreibt.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    // Beispiel mit Name
+    let addieren = (a,b) => {
+        return a+b
+    };
+    // Bei simplen Functions kann man die geschweiften Klammen und return auch weglassen
+    let addierenEinfach = (a,b) => a+b;
+                                </code>
+                            </pre>
+                            <p>
+                                Aber genug dazu, zurück zum eigentlichen Code. Wir können nun die Squares anklicken und ein <i>alert</i>-Fenster informiert uns darüber, dass das erfolgreich war. Wie aber speichern wir diesen Klick?<br>
+                                Die Antwort ist im <i>state</i> der Komponente, einer privaten Variable des Squares. Um diese nun zu setzen muss die Komponente erst einmal eine besitzen. Wir fügen also erst einmal einen Konstruktor hinzu der diese Variable für uns deklariert und initialisiert.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Square extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+            value: null,
+            };
+        }
+    // ...
+                                </code>
+                            </pre>
+                            <p>
+                                Der <i>super(props)</i> Aufruf meint hier den Konstruktor der Superklasse (hier React.Component). Er muss immer zu erst aufgerufen werden. Danach definieren wir unseren State in JSON. Zu Beginn ist sein Wert null.
+                                Abschließend müssen wir nur dafür sorgen, dass ein Klick auf ein Square den State ändert und dieser dann auch angezeigt wird. Dazu gehen wir in die <i>render</i>-Methode zutück und passen diese folgendermaßen an:
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Square extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {
+                value: null,
+            };
+        }
+    
+        render() {
+            return (
+            // OnClick setzt nun den State
+            // Der State wird anschließend ausgegeben
+            &lt;button className="square" onClick={() => this.setState({value: 'X'})}>
+                {this.state.value}
+            &lt;/button>
+            );
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Das Ergebnis kann sich schon sehen lassen:
+                            </p>
+                            <video controls="controls">
+                                <source src="vertiefungsThema/clickingXs.mp4" type="video/mp4">
+                                Ihr Browser unterstützt den HTML Video Tag nicht.
+                            </video>
                     </main>
                 </section>
             </main>

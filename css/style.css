@@ -309,6 +309,19 @@ div#contentWrapper > main#blog img{
     margin: 0 10% 0;
 }
 
+div#contentWrapper > main#blog img.right{
+    width:20%;
+    float: right;
+    height: auto;
+    margin-left: 5%;
+}
+
+div#contentWrapper > main#blog video{
+    width:80%;
+    height: auto;
+    margin: 0 10% 0;
+}
+
 div#contentWrapper > footer {
     grid-area: footer;
 
