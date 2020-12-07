@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 8</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="../js/jquery-3.5.1.js"></script>
+        <script src="vorlesung_8/vorlesung_8.js"></script>
+        <link rel="stylesheet" href="vorlesung_8/vorlesung_8.css">
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Web-Programmierung</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Web-Programmierung</a> > Vorlesung 8</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 8 - JS Events / Jquery Events</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 30.11.2020</p>
+                    </header>
+                    <main>
+                        <p>
+                            blabla
+                        </p>
+                        <h2>Erste Übung innerhalb der Vorlesung</h2>
+                        <p>
+                            Nun ging es um etwas praktisches. Gegeben war eine Tabelle, die wir mit JS etwas interaktiver gestalten sollten. Dazu belegen wir zwei Mouseevents mit einer eigenen Funktion 
+                            einmal das mouseover Event und einmal das mouseout Event. Mit deren Hilfe fügen wir Tabllenreihen für den Zeitraum in welchem sich die Maus über dem Element befindet eine Klasse 
+                            hervorheben hinzu, welche die Zeile orange einfärbt. Das würde natürlich mit CSS und :hover Pseudo Elementen deutlich einfacher gehen, allerdings geht es hier nicht darum was einfacher 
+                            und/oder praktischer ist, sondern es geht darum Events zu veranschaulichen.
+                        </p>
+                        <table width="98%" border="0" cellspacing="0" cellpadding="0" class="gestreift">
+                            <thead>
+                              <tr>
+                                <th scope="col">Produkt</th>
+                                <th scope="col">Preis</th>
+                                <th scope="col">Lagerstatus</th>
+                                <th scope="col">Gewicht (in Pfund)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Ultra-Leucht Haarspray</td>
+                                <td>20,00 €</td>
+                                <td>auf Lager</td>
+                                <td>0,5</td>
+                              </tr>
+                              <tr>
+                                <td>Anodyne 3000</td>
+                                <td>495,00 €</td>
+                                <td>auf Anfrage</td>
+                                <td>350</td>
+                              </tr>
+                              <tr>
+                                <td>Big Foot Fön</td>
+                                <td>55,00 €</td>
+                                <td>auf Lager</td>
+                                <td>2</td>
+                              </tr>
+                              <tr>
+                                <td>Katze aus dem Hut</td>
+                                <td>15,00 €</td>
+                                <td>auf Anfrage</td>
+                                <td>15</td>
+                              </tr>
+                              <tr>
+                                <td>Kitzel mich, Elmo</td>
+                                <td>67,00 €</td>
+                                <td>auf Lager</td>
+                                <td>3</td>
+                              </tr>
+                              <tr>
+                                <td>Herrenuhr</td>
+                                <td>350,00 €</td>
+                                <td>auf Lager</td>
+                                <td>0,5</td>
+                              </tr>
+                              <tr>
+                                <td>Lederkoffer</td>
+                                <td>150,00 €</td>
+                                <td>auf Lager</td>
+                                <td>7</td>
+                              </tr>
+                              <tr>
+                                <td>Lorem Ipsum</td>
+                                <td>5,00 €</td>
+                                <td>auf Lager</td>
+                                <td>0,5</td>
+                              </tr>
+                              <tr>
+                                <td>Dolor Sat</td>
+                                <td>7,50 €</td>
+                                <td>auf Anfrage</td>
+                                <td>0,5</td>
+                              </tr>
+                              <tr>
+                                <td>Chicken Gumbo</td>
+                                <td>15,00 €</td>
+                                <td>auf Lager</td>
+                                <td>3</td>
+                              </tr>
+                              <tr>
+                                <td>Noch ein Produkt</td>
+                                <td>3,00 €</td>
+                                <td>auf Lager</td>
+                                <td>25</td>
+                              </tr>
+                              <tr>
+                                <td>Hut für Katze</td>
+                                <td>5,00 €</td>
+                                <td>auf Anfrage</td>
+                                <td>0,75</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p>
+                              Anbei der Code:
+                          </p>
+                          <pre>
+                              <code class="JavaScript">
+    $(document).ready(function( ) {
+        // War vorgegeben (färbt jede zweite Zeile blau)
+        // Würde auch mit CSS gehen -> tr.nth-child(2n)
+        $('table.gestreift tr:even').addClass('gerade');
+        
+        // Wenn die Maus sich über der Zeile befindet
+        $('table.gestreift tbody tr').mouseover(function() {
+            $(this).addClass('hervorheben')
+        })
+        
+        // Wenn die Maus die Zeile "verlässt"
+        $('table.gestreift tbody tr').mouseout(function() {
+            $(this).removeClass('hervorheben')
+        })
+    });
+                              </code>
+                          </pre>
+                          <h2>Eine weitere Übung</h2>
+                          <p>
+                              Eine weitere Übung heute war das Erstellen eines interaktiven Akkordions. Auch hier waren ein HTML Gerüst und ein paar Styles gegeben.
+                          </p>
+                          <div id="akkordeon">
+                            <h2>Akkordeon 1</h2>
+                            <div>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt END.</p>
+                            </div>
+                            <h2>Akkordeon 2</h2>
+                            <div>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                            </div>
+                            <h2>Akkordeon 3</h2>
+                            <div>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt.</p>
+                              <p>Ut enim ad minim veniam, quis nostrud exercitation in reprehenderit in voluptate. Velit esse cillum dolore lorem ipsum dolor sit amet, sed do eiusmod tempor END.</p>
+                            </div>
+                          </div>
+                          <p>
+                              Der Code dazu sieht dann folgendermaßen aus:
+                          </p>
+                          <pre>
+                              <code class="JavaScript">
+    // Klick Event "abfangen"
+    $("#akkordeon h2").click(function() {
+        // Überprüfen, ob das Element schon sichtbar ist
+        if($(this).next().is(":visible")){
+            // Wenn ja, dann verstecken
+            $(this).next().hide();
+        } else {
+            // Wenn nein, dann zeigen
+            $(this).next().show();
+        }
+    })
+                              </code>
+                          </pre>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>

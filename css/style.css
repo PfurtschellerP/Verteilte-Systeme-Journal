@@ -6,6 +6,7 @@
 /* Variablen */
 :root {
     --font-color: #2f3640;
+    --link-color: #585a5e;
     --font-color-link-hover: #616e83;
 
     --footer-bgcolor:  #2c3e50;
@@ -24,7 +25,7 @@ h1,h2,h3,h4,h5,h6,p,li,td,label{
 
 a{
     text-decoration: none;
-    color: var(--font-color);
+    color: var(--link-color);
 }
 
 p{
@@ -32,7 +33,7 @@ p{
 }
 
 a:visited{
-    color: var(--font-color);
+    color: var(--link-color);
 }
 
 /* Listen */
@@ -271,6 +272,10 @@ main#blog > section h2 {
 
 main#blog > section h3 {
     margin-top: 0.2rem;
+}
+
+main#blog > section a {
+    text-decoration: underline;
 }
 
 .calenderIcon{
