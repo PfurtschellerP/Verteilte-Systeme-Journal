@@ -32,14 +32,36 @@
                     </header>
                     <main>
                         <p>
-                            blabla
+                            Heute war unsere letzte "richtige" Vorlesung vor den abschließenden Prüfungen nächste Woche. Und so ging es heute noch einmal um ein generelleres Thema welches nicht nur JQuery, 
+                            sondern auch JS betrifft - Events.
+                        </p>
+                        <h2>JS Events</h2>
+                        <h3>Wat isn ne Dampfmaschin ... Ähm n Event?</h3>
+                        <p>
+                          Erst einmal, falls die Anspielung ins leere glaufen sein sollte sie stammt passend zur Jahreszeit aus dem Film "Die Feuerzangenbowle". Aber nun weiter im Text.<br>
+                          Ein Event ist im Grunde genommen alles was auf der Website abläuft bzw. sich verändert. Wenn die Seite geladen ist ist das ein Event, wenn der Nutzer mit der Maus auf ein Element klickt ist das 
+                          ein Event, selbst das scrollen oder größenänderungen des Browserfensters sind "feuern" Events ab. Das Beispiel mit dem Mausklick feuert sogar gleich drei Events ab: Mousedown, Mouseup und Click 
+                          (praktisch für Drag-and-Drop Anwendungen).
+                        </p>
+                        <p>
+                          Um uns noch einmal genauer zu veranschaulichen, was alles Events abfeuert, haben wir uns nach dieser einführenden Erklärung eine weitere Seite des "Javascript Missing Manual"s angeschaut auf der 
+                          simultan zur Nutzaktion die entsprechenden Events angezeigt werden.
+                        </p>
+                        <img src="vorlesung_8/jsmissingmanual.PNG">
+                        <h3>Weitere Arten von Events</h3>
+                        <p>
+
+                        </p>
+                        <h3>Welche Möglichkeiten gibt es Events zu verwenden?</h3>
+                        <p>
+
                         </p>
                         <h2>Erste Übung innerhalb der Vorlesung</h2>
                         <p>
-                            Nun ging es um etwas praktisches. Gegeben war eine Tabelle, die wir mit JS etwas interaktiver gestalten sollten. Dazu belegen wir zwei Mouseevents mit einer eigenen Funktion 
-                            einmal das mouseover Event und einmal das mouseout Event. Mit deren Hilfe fügen wir Tabllenreihen für den Zeitraum in welchem sich die Maus über dem Element befindet eine Klasse 
-                            hervorheben hinzu, welche die Zeile orange einfärbt. Das würde natürlich mit CSS und :hover Pseudo Elementen deutlich einfacher gehen, allerdings geht es hier nicht darum was einfacher 
-                            und/oder praktischer ist, sondern es geht darum Events zu veranschaulichen.
+                          Nun ging es um etwas praktisches. Gegeben war eine Tabelle, die wir mit JS etwas interaktiver gestalten sollten. Dazu belegen wir zwei Mouseevents mit einer eigenen Funktion 
+                          einmal das mouseover Event und einmal das mouseout Event. Mit deren Hilfe fügen wir Tabllenreihen für den Zeitraum in welchem sich die Maus über dem Element befindet eine Klasse 
+                          hervorheben hinzu, welche die Zeile orange einfärbt. Das würde natürlich mit CSS und :hover Pseudo Elementen deutlich einfacher gehen, allerdings geht es hier nicht darum was einfacher 
+                          und/oder praktischer ist, sondern es geht darum Events zu veranschaulichen.
                         </p>
                         <table width="98%" border="0" cellspacing="0" cellpadding="0" class="gestreift">
                             <thead>
@@ -149,7 +171,8 @@
                           </pre>
                           <h2>Eine weitere Übung</h2>
                           <p>
-                              Eine weitere Übung heute war das Erstellen eines interaktiven Akkordions. Auch hier waren ein HTML Gerüst und ein paar Styles gegeben.
+                              Eine weitere Übung heute war das Erstellen eines interaktiven Akkordions. Auch hier waren ein HTML Gerüst und ein paar Styles gegeben. Ich habe sie allerdings noch ein Wenig angepasst, sodass 
+                              sie in diese Seite "passen".
                           </p>
                           <div id="akkordeon">
                             <h2>Akkordeon 1</h2>
@@ -190,6 +213,73 @@
         }
     })
                               </code>
+                          </pre>
+                          <p>
+                            Anbei, übrigends (nicht dass ich nerven wollen würde 😁😅), auch dieses Akkordeon lässt sich mit Hilfe von CSS umsetzen. Dazu bedient mann sich eines Tricks. Und zwar würde man dazu einen 
+                            <i>input</i>-Tag mit dem Typ Checkbox her nehmen und die Überschrift dann in ein diesen umschließendes Label packen. Dann kann man innerhalb von CSS die :checked Pseudo Klasse verwenden um zu überprüfen, 
+                            ob der Knopf gedrückt ist.
+                          </p>
+                          <form>
+                            <label>
+                              <div id="akkordeonCSSHeader">
+                                Akkordeon
+                              </div>
+                              <input type="checkbox" id="akkordeonCSSInput">
+                              <div id="akkordeonCSS">
+                                Lalalalalalalalalalalallalal
+                              </div>
+                            </label>
+                          </form>
+                          <p>
+                            Das sieht dann folgendermaßen im Code aus:
+                          </p>
+                          <pre>
+                            <code class="html">
+  &lt;form>
+    &lt;label>
+      &lt;!-- Div Container aus Styling Gründen -->
+      &lt;div id="akkordeonCSSHeader">
+        Akkordeon
+      &lt;/div>
+      &lt;!-- Checkbox -->
+      &lt;input type="checkbox" id="akkordeonCSSInput">
+      &lt;!-- Der Inhalt des Akkordions -->
+      &lt;div id="akkordeonCSS">
+        Lalalalalalalalalalalallalal
+        &lt;/div>
+    &lt;/label>
+    &lt;/form>
+                            </code>
+                          </pre>
+                          <pre>
+                            <code class="css">
+  #akkordeonCSSInput[type="checkbox"]{
+    display: none;
+  }
+  
+  /* Wenn die Checkbox angehakt ist, soll #akkordeonCSS wieder sichtbar sein */
+  #akkordeonCSSInput[type="checkbox"]:checked ~ #akkordeonCSS{
+    display: block;
+  }
+  
+  /* Zusätzliches Styling */
+  #akkordeonCSSHeader{
+    width: 100%;
+    padding: 0.2rem;
+    border: 1px solid black;
+    background-color: rgba(144,144,144,0.2);
+  }
+  
+  #akkordeonCSS {
+    width: 100%;
+    padding: 0.2rem;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    /* Ausblenden des Containers */
+    display: none;
+  }
+                            </code>
                           </pre>
                     </main>
                 </section>

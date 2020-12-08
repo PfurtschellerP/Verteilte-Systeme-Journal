@@ -59,7 +59,7 @@ code{
 
 form{
     width: 40vw;
-    margin: 2vh 15vw 0;
+    margin: 2vh 15vw 2vh;
     box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.5);
     padding: 1%;
 
