@@ -50,17 +50,88 @@
                         <img src="vorlesung_8/jsmissingmanual.PNG">
                         <h3>Weitere Arten von Events</h3>
                         <p>
-
+                          Wie bereits weiter oben erklärt ist im Grunde genommen alles was auf der Website abläuft ein Event. Ein paar weitere dieser Events möchte ich an dieser Stelle noch kurz vorstellen.
                         </p>
+                          <h4>Formular-Events</h4>
+                          <p>
+                            HTML Formulare bieten mehrere Events passend zur eigentlichen Funktion. So gibt es submit, reset, change, focus und blur Events. Ihre Funktion wird im folgenden kurz erklärt.
+                          </p>
+                          <ul>
+                            <li><b>Submit</b>: Wird ausgelöst, wenn das Formular abgesendet wird. So lassen sich noch Validierungen ausführen, bevor die Daten in Richtung Server verschickt werden.</li>
+                            <li><b>Reset</b>: Wird ausgelöst, wenn das Formular in seinen Ausgangszustand zurück versetzt wird bzw. der Reset Button gedrückt wird.</li>
+                            <li><b>Change</b>: Viele Form Elemente lösen ein Change Event aus, wenn sich ihr Inhalt ändert. Beispielsweise, wenn der Nutzer etwas in ein Textfeld schreibt.</li>
+                            <li><b>Focus und Blur</b>: Focus Events werden ausgelöst, wenn der Nutzer beispielsweise mit der Maus in ein Textfeld klickt, es also fokusiert. Blur ist das Gegenteil.</li>
+                          </ul>
+                          <h4>Tastatur-Events</h4>
+                          <p>
+                            Auch für die Tastatur gibt es Events. Diese sind analog zu den Mausevents keypress (wie click), keydown (wie mousedown) und keyup (wie mouseup).
+                          </p>
                         <h3>Welche Möglichkeiten gibt es Events zu verwenden?</h3>
                         <p>
-
+                          Jetzt haben wir also gelernt was Events sind und welche es gibt. Eine wichtige Frage verbleibt allerdings noch. Wie nuntzt man sie?
                         </p>
-                        <h2>Erste Übung innerhalb der Vorlesung</h2>
+                        <p>
+                          Nun, einen Weg haben wir schon an der ein oder anderen Stelle kennengelernt. Die sogenannten Inline-Events. Ein Beispiel wäre hier das <i>onClick</i>-Event. 
+                          Hier weisen wir dem Event direkt eine Anweisung zu.
+                        </p>
+                        <input type="button" value="Testknopf" onclick="alert('Test')">
+                        <pre>
+                          <code class="html">
+  &lt;input type="button" value="Testknopf" onclick="alert('Test')">
+                          </code>
+                        </pre>
+                        <p>
+                          Abgesehen davon gibt es noch etwas, dass Herrn Noll in seinem Skript als das "traditionellen Modell" betitelt hat. Bei diesem übergibt man dem Event Handler direkt eine Referenz auf eine selbst 
+                          geschriebene Funktion.
+                        </p>
+                        <pre>
+                          <code class="JavaScript">
+  function meldung() {
+    alert("Willkommen auf dieser Website");
+  }
+
+  window.onload = meldung;
+                          </code>
+                        </pre>
+                        <p>
+                          Das funktioniert soweit auch ganz gut. So lange bis man die Zuweisung mehrfach durchführt, weil man beispielsweise zwei verschiedene Funktionen mit dem gleichen Event auslösen 
+                          möchte. Dann "löscht" man unabsichtlich die erste Zuweisung.
+                        </p>
+                        <p>
+                          Jetzt haben wir also einen "inline-Weg" und das traditionelle Modell. Was hier noch fehlt ist klar - der moderne Weg. Dieser moderne Weg wären die "Event-Listener". Ich persönlich kenne 
+                          diese schon aus C# aber ich möchte nochmal kurz darauf eingehen, was diese genau sind.
+                        </p>
+                        <p>
+                          Wie der name bereits suggeriert horchen Event-Listener ab ihrer Erstellung auf bestimmte Events die vom an sie gebundenen Element ausgehen. So lassen sich Events gezielter nutzen und man vermeidet 
+                          unabsichtliche Überschreibungen. Im Code sieht das dann so aus.
+                        </p>
+                        <pre>
+                          <code class="JavaScript">
+                            function willkommen(){
+                              alert("Willkommen");
+                            }
+
+                            // JavaScript
+                            // Das false am Ende setzt das "use capture" Argument, also ob ich alle Website Events dieses Typs oder nur des button (in diesem Fall) erhalten will.
+                            button.addEventListener("click", willkommen, false)
+
+                            // JQuery
+                            $("button").click(willkommen);
+                          </code>
+                        </pre>
+                        <p>
+                          Innerhalb dieser Vorlesung haben wir dann noch Problematiken mit Browsern welche "ihr eigenes Ding" gemacht haben, wenn es um Events geht (*hust hust* Internet Explorer) behandelt. Aber da das Problem 
+                          sich Ende 2021 onehin erledigt hat lasse ich das an dieser Stelle aus.
+                        </p>
+                        <p>
+                          Jetzt habe ich im Code oben zwei Varianten gezeigt, mit der man Event-Listener erstellen kann. Den JavaScript Weg und den JQuery Weg. In der Vorlesung haben wir uns nur auf JQuery fokusiert, aber 
+                          ich wollte trotzdem mal beide gegenüber stellen.
+                        </p>
+                        <h3>Erste Übung innerhalb der Vorlesung</h3>
                         <p>
                           Nun ging es um etwas praktisches. Gegeben war eine Tabelle, die wir mit JS etwas interaktiver gestalten sollten. Dazu belegen wir zwei Mouseevents mit einer eigenen Funktion 
                           einmal das mouseover Event und einmal das mouseout Event. Mit deren Hilfe fügen wir Tabllenreihen für den Zeitraum in welchem sich die Maus über dem Element befindet eine Klasse 
-                          hervorheben hinzu, welche die Zeile orange einfärbt. Das würde natürlich mit CSS und :hover Pseudo Elementen deutlich einfacher gehen, allerdings geht es hier nicht darum was einfacher 
+                          hervorheben hinzu, welche die Zeile orange einfärbt. Das würde mit CSS und :hover Pseudo Elementen zwar deutlich einfacher gehen, allerdings geht es hier nicht darum was einfacher 
                           und/oder praktischer ist, sondern es geht darum Events zu veranschaulichen.
                         </p>
                         <table width="98%" border="0" cellspacing="0" cellpadding="0" class="gestreift">
@@ -154,7 +225,7 @@
                               <code class="JavaScript">
     $(document).ready(function( ) {
         // War vorgegeben (färbt jede zweite Zeile blau)
-        // Würde auch mit CSS gehen -> tr.nth-child(2n)
+        // Würde auch mit CSS gehen -> tr.nth-child(even)
         $('table.gestreift tr:even').addClass('gerade');
         
         // Wenn die Maus sich über der Zeile befindet
@@ -169,7 +240,7 @@
     });
                               </code>
                           </pre>
-                          <h2>Eine weitere Übung</h2>
+                          <h3>Eine weitere Übung</h3>
                           <p>
                               Eine weitere Übung heute war das Erstellen eines interaktiven Akkordions. Auch hier waren ein HTML Gerüst und ein paar Styles gegeben. Ich habe sie allerdings noch ein Wenig angepasst, sodass 
                               sie in diese Seite "passen".
@@ -281,6 +352,67 @@
   }
                             </code>
                           </pre>
+                          <h3>Weitere Jquery Konzepte</h3>
+                          <p>
+                            Neben den in den Übungen veranschaulichten Befehlen und Events haben wir gegen Ende der Vorlesung aber auch noch weitere kurz angeschnitten. Diese sind das hover und toggle Event, 
+                            das Event Objekt sowie die Unterbrechung des normalen Event Verhaltens.
+                          </p>
+                          <h4>hover() und toggle()</h4>
+                          <p>
+                            Einfach ausgedrückt sind diese beiden Kurzschreibweisen für die in den Übungen oben verwendeten Events mouseover und mouseout bzw. zwei nacheinander erfolgende click Events.<br>
+                            Diese akzeptieren zwei Parameter jeweils für das zu erst eintreffende Event und für das daraud folgende.
+                          </p>
+                          <h4>Event Objekt</h4>
+                          <p>
+                            Ein Event Objekt wird immer erzeugt, wenn ein Event abgefeuert wird. Es enthält je nach Event zusätzliche Infos. So enthält das Objekt für Click-Events beispielsweise die aktuelle Maus 
+                            Position.
+                          </p>
+                          <input type="button" value="Klick!" id="eventButton">
+                          <pre>
+                            <code class="JavaScript">
+  $("#eventButton").click(function(evt){
+    var xPos = evt.pageX;
+    var yPos = evt.pageY;
+    alert("X: " + xPos + " Y: " + yPos);
+})
+                            </code>
+                          </pre>
+                          <h4>Unterbrechung des normalen Event Verhaltens</h4>
+                          <p>
+                            Last but not least, haben wir noch besprochen, dass man (mit Hilfe des Event Objekts) das normale Verhalten eines Events unterbrechen kann. Auch wenn sich mir der praktische Nutzen nicht völlig 
+                            erschlossen hat (zumindest am innerhalb der Vorlesung besprochenen Besipiel) kann man so unter Anderem das Verhalten von Links überschreiben.
+                          </p>
+                          <p>
+                            <a id="eventVerhalten" href="https://google.com" target="_blank">Google</a><br>
+                            <label>
+                              Verhalten überschreiben
+                              <input id="eventVerhaltenCheck" type="checkbox">
+                            </label><br>
+                            Realisiert ist das gnaz schnell, wie man hier sehen kann:
+                          </p>
+                          <pre>
+                            <code class="JavaScript">
+  // Erstellen des Event Listeners
+  $("#eventVerhalten").click(function(evt){
+    // Überprüfen, ob die Checkbox angehakt ist
+    if ($("#eventVerhaltenCheck").is(":checked")){
+        alert("Mutter: Wir haben noch Google zu Hause");
+        alert("Google zu Hause:");
+        window.open("https://bing.com");
+        // Reguläres Verhalten unterdrücken
+        evt.preventDefault();
+    }
+})
+                            </code>
+                          </pre>
+                          <h2>Fazit</h2>
+                          <p>
+                            Das war das letzte, dass wir in dieser Vorlesung noch behandelt haben. Somit sind nun alle regulären Vorlesungen vorbei und es bleibt lediglich die Prüfung am Montag der nächsten Woche. 
+                            Zeit ein kurzes Fazit zu ziehen. Die Vorlesung war definitiv interessant und ich habe einiges Neues im Zusammenhang mit JavaScript kennengelernt. Auch JQuery kannte ich vorher zwar schon vom 
+                            Namen her, das war es aber auch. Der HTML wie auch CSS Teil war mir allerdings schon vollkommen bekannt und so konnte ich hier nichts Neues mitnehmen. Alles in Allem lässt sich hier also eine positive 
+                            Bilanz ziehen und ich bin schon jetzt gespannt auf die zweite Vorlesung zu verteilte Systeme. Das Journal Format finde ich nebenbei gesagt sehr gut, da es zwar (zumindest aus meiner Sicht) nervtötendes Schreiben 
+                            beinhaltet, ich aber dazu noch etwas Praktisches (diese Website) machen kann und mir hier und da einen Scherz erlauben kann (zumindest hoffe ich das).
+                          </p>
                     </main>
                 </section>
             </main>
