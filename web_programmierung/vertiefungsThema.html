@@ -263,6 +263,168 @@
                                 <source src="vertiefungsThema/clickingXs.mp4" type="video/mp4">
                                 Ihr Browser unterstützt den HTML Video Tag nicht.
                             </video>
+                            <p>
+                                So cool das jetzt schon ist, so schnell muss die Euphorie auch schon wieder weichen. Denn unser Ziel ist ja nicht eine "Zeichenfläche" für Xe sondern ein Tic-Tac-Toe Spiel. Also weiter im Text.
+                            </p>
+                            <h3>Den Spielstatus zwischenspeichern</h3>
+                            <p>
+                                Wir wollen jetzt also den aktuellen Status des Spielbrettes irgendwo zwischenspeichern. Dabei haben wir gerade noch ein Problem. Und zwar speichert aktuell jedes Square seinen eigenen Status. 
+                                Das ist zwar naheliegend, aber nicht wirklich hilfreich wenn wir darauf später weitere Logik aufsetzen lassen wollen. Eine Lösung wäre nun, den Status des Brettes in der Board Klasse zu speichern 
+                                und diesen durch die Squares updaten zu lassen. Daraufhin würde dann das Board das Square neu rendern.
+                            </p>
+                            <p>
+                                Wir beginnen nun mit dem Konstruktor des Boards. Wir müssen uns bei Erstelleung des Boards ein Array mit 9 Plätzen erzeugen lassen, dass die Stati speichern kann. Dieses füllen wir anfangs mit nulls.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Board extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+            squares: Array(9).fill(null),
+        };
+    }
+    // ...
+                                </code>
+                            </pre>
+                            <p>
+                                Das Array mit 9 Plätzen kann man sich später wie ein "ausgerolltes" 3x3 Feld vorstellen.<br>
+                                Als nächstes müssen wir dafür sorgen, dass das Square auch weiß welchen Status es hat. Wir müssen also bei der Erstellung des Squares den Status mit übergeben. 
+                                Das machen wir in der render Methode des Boards (das i ist der index des Squares -> 0 bis 8).
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    renderSquare(i) {
+        return &lt;Square value={this.state.squares[i]} />;
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Jetzt bekommt also jedes Square entweder ein "X", ein "O" oder null (für leere Felder). Eine Sache fehlt allerdings noch. Unser Square weiß jetzt zwar welchen Status es hat, kann daran aber nichts ändern.<br>
+                                Jetzt wird es tricky. Der State des Boards ist privat, weswegen wir vom Square aus keinen Zugriff darauf haben. Auch eine Vererbungsstruktur à la Java mit der Eigenschaft protected lässt sich nicht umsetzen.
+                                Wir übergeben nun deshalb dem Square neben dem Value noch eine Referenz auf eine Funktion handleClick der Board Klasse über den onClick Event Handler. So kann das Square diese ausführen und das Board ändert den State.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    // renderSqare Methode des Boards
+    renderSquare(i) {
+        return (
+            &lt;Square
+            value={this.state.squares[i]}
+            onClick={() => this.handleClick(i)} // Hier übergeben wir die Referenz 
+            />
+        );
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Innerhalb der Square Klasse müssen wir dann nur dafür sorgen, dass der übergebene Wert angezeigt und der Event Handler an den Button weitergegeben wird.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Square extends React.Component {
+        render() {
+            return (
+            &lt;button
+                className="square"
+                onClick={() => this.props.onClick()}
+            >
+                {this.props.value}
+            &lt,/button>
+            );
+        }
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Nachdem wir das alles gemacht haben können wir ja schonmal draufklicken oder? ... Nein.
+                            </p>
+                            <video controls="controls">
+                                <source src="vertiefungsThema/clickHandleError.mp4" type="video/mp4">
+                                Ihr Browser unterstützt den HTML Video Tag nicht.
+                            </video>
+                            <p>
+                                Einen wichtigen Schritt haben wir noch nicht erledigt. Wir müssen die handleClick Funktion noch anlegen. Diese sieht folgendermaßen aus:
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({squares: squares});
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Diese Funktion erstellt eine Kopie (mit der Slice Methode) des aktuellen Board Status, ändert das gewünschte Square zu einem X und setzt den State mit dem modifizierten Status neu.
+                            </p>
+                            <p>
+                                "Aber Moment mal, warum ändern wir nicht einfach den Status direkt sondern legen eine Kopie an?" fragt man sich bestimmt hier. Die Antwort ist relativ simpel. Wenn man die Objekte, die man ändern 
+                                will mit einem direkten Zugriff ändert ist das einerseits unübersichtlicher. Andererseits ist es auch schwerer Änderungen zu erkennen, da man nicht ermitteln kann wie das Objekt vorher aussah. 
+                                Ein weiterer Grund (im Kontext dieses Tutorials) ist auch, dass wir später noch ein weiteres Feature einbauen. Und zwar werden wir später zu vorherigen Zügen zurückspringen können. Dabei hilft uns diese 
+                                Herangehensweise.
+                            </p>
+                            <h3>Funktions Komponenten</h3>
+                            <p>
+                                Zur Zeit haben wir drei Klassen: Game, Board und Square. Allerdings macht unser Square nicht vielmehr als das Ausgeben von HTML unter Einbeziehung von props. Es besitzt keinen eigenen State. Wir können dafür 
+                                nun ein Funktions Komponente nehmen. Sie erbt nicht von React.Component, sondern besitzt nur eine return Methode. Das sieht dann folgendermaßen aus.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    function Square(props) {
+        return (
+            &lt;button className="square" onClick={props.onClick}>
+            {props.value}
+            &lt;/button>
+        );
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Neben der Platzerspaarnis, ist die Funktion auch nicht mehr so kompliziert zu nutzen wie die Klasse. So fällt das this. überall weg und auch das onClick Event ist simpler geworden.
+                            </p>
+                            <h3>Verschiedene "Spieler"</h3>
+                            <p>
+                                Jetzt geht es aber endlich los mit etwas Spannenderem: Abwechselndes Spielen. Zur Zeit kann man nur Xe setzen. Es wird Zeit für Os. Um das zu verwirklichen brauchen wir zwei Dinge:
+                            </p>
+                            <ol>
+                                <li>Die Möglichkeit zu tracken wer dran ist und</li>
+                                <li>die Möglichkeit die Züge entsprechend einzutragen.</li>
+                            </ol>
+                            <p>
+                                Ersteres lässt sich einfach bewerkstelligen. Wir fügen unserem Board State über den Konstruktor einfach eine Varaiable xIsNext hinzu um festzustellen wer dran ist.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Board extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                squares: Array(9).fill(null),
+                xIsNext: true,
+            };
+        }
+                                </code>
+                            </pre>
+                            <p>
+                                Daraufhin müssen wir in der Handle Click Methode berücksichtigen wer dran ist, wenn ein Klick registriert wird. das tun wir hier mit einem Bedingungsoperator, der den Statuswert des 
+                                Squares abhängig von der Variable xIsNext setzt. Anschließend wird die Variable beim Status setzen negiert.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Ob das funktioniert sehen wir gleich. Davor würde ich gerne noch angezeigt bekommen, wer als nächstes dran ist.
+                            </p>
                     </main>
                 </section>
             </main>
