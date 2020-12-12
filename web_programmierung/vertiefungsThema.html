@@ -423,8 +423,136 @@
                                 </code>
                             </pre>
                             <p>
-                                Ob das funktioniert sehen wir gleich. Davor würde ich gerne noch angezeigt bekommen, wer als nächstes dran ist.
+                                Ob das funktioniert sehen wir gleich. Davor würde ich gerne noch angezeigt bekommen, wer als nächstes dran ist. Dazu bearbeiten wir die die render Methode des Boards. In dieser 
+                                befindet sich schon eine Konstante mit dem Namen Status. Sie soll nun anzeigen wer als nächstes dran ist. Dazu recyclen wir den Bedingungsoperator von oben und verketten ihn mit dem String 
+                                "Next Player: " sodass die fertige Methode anschließend so aussieht:
                             </p>
+                            <pre>
+                                <code class="JavaScript">
+    render() {
+        const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+
+        return (
+            &lt;div>
+            &lt;div className="status">{status}&lt;/div>
+            &lt;div className="board-row">
+                {this.renderSquare(0)}
+                {this.renderSquare(1)}
+                {this.renderSquare(2)}
+            &lt;/div>
+            &lt;div className="board-row">
+                {this.renderSquare(3)}
+                {this.renderSquare(4)}
+                {this.renderSquare(5)}
+            &lt;/div>
+            &lt;div className="board-row">
+                {this.renderSquare(6)}
+                {this.renderSquare(7)}
+                {this.renderSquare(8)}
+            &lt;/div>
+            &lt;/div>
+        );
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Jetzt können wir doch mal testen, ob bis jetzt alles funktioniert.
+                            </p>
+                            <video controls="controls">
+                                <source src="vertiefungsThema/takingTurnsklappt.mp4" type="video/mp4">
+                                Ihr Browser unterstützt den HTML Video Tag nicht.
+                            </video>
+                            <p>
+                                Das sieht doch gut aus. Nun fehlt für einen wirklichen Spieldurchlauf nur noch eine Sache: Wir müssen den Gewinner feststellen.
+                            </p>
+                            <p>
+                                Dazu erstllen wir eine neue "Hilfsfunktion" am Ende unserer JavaScriptt Datei mit dem Namen calculateWinner. Diese beinhaltet ein Array, dass wiederrum alle möglichen Linien zum Gewinnen enthält. 
+                                Hier sind das 8 - 3 horizontale, 3 vertikale und 2 diagonale. Wir prüfen anschließend mit Hilfe einer for Schleife alle 8 möglichen Linien durch und "schauen" ob es dort nur Symbole eines Typs 
+                                gibt bzw. ob es dort überhaupt ein Symbol gibt (das machen wir widerrum mit einer if Verzweigung). Diese gibt, falls eine der Möglichkeiten passt, das Symbol des Gewinners zurück.
+                            </p>
+                            <p>
+                                In Code sieht das folgendermaßen aus:
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    function calculateWinner(squares) {
+        const lines = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        for (let i = 0; i &lt; lines.length; i++) {
+            // hier weisen wir die Lösungsmöglichkeit einer lokalen Konstante innerhalb der Schleife zu
+            const [a, b, c] = lines[i];
+            // Wenn Square a nicht null ist und Square a = Square b und Square a = Square c ist, dann sind sie alle gleich und nicht null
+            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            // Das Symbol des Gewinners zurückgeben
+            return squares[a];
+            }
+        }
+        // Noch keiner hat gewonnen
+        return null;
+        }
+                                </code>
+                            </pre>
+                            <p>
+                                Wir haben nun die Möglichkeit einen Gewinner zu bestimmen. Wir müssen sie nur noch einbauen. Das tun wir indem wir in der render Methode des Boards den "aktuellen Gewinner" errechnen lassen 
+                                und eine if Abfrage einbauen, welche das Ergebnis dieser "Rechnung" auswertet.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    render() {
+        const winner = calculateWinner(this.state.squares);
+        let status;
+        if (winner) {
+            status = 'Winner: ' + winner;
+        } else {
+            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        }
+    // ...
+                                </code>
+                            </pre>
+                            <p>
+                                <b>Anbei:</b> Ich bin mir gerade nicht mehr ganz sicher, ob wir das innerhalb dieser Vorlesung mal angesprochen haben. Zumindest finde im Skript gerade nichts dazu, aber der Grund warum ich hier einfach 
+                                if (winner) schreiben kann ist, dass in JavaScript alle Variablen mit dem Wert null (oder leere Strings) als false behandelt werden.
+                            </p>
+                            <p>
+                                Bevor ich nun das finale Spiel zeige muss ich allerdings eine entscheidende Sache noch in Angriff nehmen. So kann ich zur Zeit noch Felder meines Gegners einfach überschreiben und wenn der Gewinner 
+                                feststeht einfach weiterspielen. Um das zu ändern müssen wir die handleClick Methode noch einmal überarbeiten. Sie soll Klicks nun ignorieren, wenn schon jemand gewonnen hat oder das Feld "schon nicht mehr 
+                                null ist".
+                            </p>
+                            <p>
+                                Auch das lässt sich mit einer kleinen if Abfrage bewerkstelligen.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        // Hier ist unsere if Abfrage
+        if (calculateWinner(squares) || squares[i]) {
+            return;
+        }
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                <b>Wir haben es geschafft! Das grundlegende Spiel ist fertig!</b><br>
+                                Und so sieht es nun aus:
+                            </p>
+                            <video controls="controls">
+                                <source src="vertiefungsThema/fertigesSpiel.mp4" type="video/mp4">
+                                Ihr Browser unterstützt den HTML Video Tag nicht.
+                            </video>
                     </main>
                 </section>
             </main>

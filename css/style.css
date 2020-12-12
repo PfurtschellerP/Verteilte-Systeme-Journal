@@ -6,6 +6,7 @@
 /* Variablen */
 :root {
     --font-color: #2f3640;
+    --fonr-color-deactivated:  #2f36407c;
     --link-color: #585a5e;
     --font-color-link-hover: #616e83;
 
@@ -306,6 +307,28 @@ div#contentWrapper > main > article > a > div {
     display: flex;
     flex-flow: row wrap;
     justify-content: end;
+}
+
+div#contentWrapper > main > article.empty {
+    transition: none;
+}
+
+div#contentWrapper > main > article.empty:hover {
+    box-shadow: 0px 0px 10px 0px rgba(158,158,158,0.5);
+    transform: scale(1);
+}
+
+div#contentWrapper > main > article.empty h2 {
+    width: 100%;
+    color: var(--fonr-color-deactivated);
+}
+
+div#contentWrapper > main > article.empty p {
+    color: var(--fonr-color-deactivated);
+}
+
+div#contentWrapper > main > article.empty img {
+    filter: grayscale(1);
 }
 
 div#contentWrapper > main#blog img{

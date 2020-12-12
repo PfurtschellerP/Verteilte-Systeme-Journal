@@ -19,7 +19,7 @@ function zahlenRaten(){
         } else{
             if (eingabe == zahl){
                 alert('Gewonnen!');
-                alert('Es wurden ' + fehler + " gemacht")
+                alert('Es wurden ' + fehler + " Fehler gemacht")
                 fertig = true; //Zahl wurde erraten
             } else{
                 fehler++;
