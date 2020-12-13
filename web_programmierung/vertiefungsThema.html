@@ -465,8 +465,9 @@
                             <p>
                                 Das sieht doch gut aus. Nun fehlt für einen wirklichen Spieldurchlauf nur noch eine Sache: Wir müssen den Gewinner feststellen.
                             </p>
+                            <h3>Den Gewinner feststellen</h3>
                             <p>
-                                Dazu erstllen wir eine neue "Hilfsfunktion" am Ende unserer JavaScriptt Datei mit dem Namen calculateWinner. Diese beinhaltet ein Array, dass wiederrum alle möglichen Linien zum Gewinnen enthält. 
+                                Dazu erstellen wir eine neue "Hilfsfunktion" am Ende unserer JavaScriptt Datei mit dem Namen calculateWinner. Diese beinhaltet ein Array, dass wiederrum alle möglichen Linien zum Gewinnen enthält. 
                                 Hier sind das 8 - 3 horizontale, 3 vertikale und 2 diagonale. Wir prüfen anschließend mit Hilfe einer for Schleife alle 8 möglichen Linien durch und "schauen" ob es dort nur Symbole eines Typs 
                                 gibt bzw. ob es dort überhaupt ein Symbol gibt (das machen wir widerrum mit einer if Verzweigung). Diese gibt, falls eine der Möglichkeiten passt, das Symbol des Gewinners zurück.
                             </p>
@@ -546,13 +547,322 @@
                                 </code>
                             </pre>
                             <p>
-                                <b>Wir haben es geschafft! Das grundlegende Spiel ist fertig!</b><br>
+                            <h3>Wir haben es geschafft! Das grundlegende Spiel ist fertig!</h3>
+                            <p>
                                 Und so sieht es nun aus:
+                            </p>
                             </p>
                             <video controls="controls">
                                 <source src="vertiefungsThema/fertigesSpiel.mp4" type="video/mp4">
                                 Ihr Browser unterstützt den HTML Video Tag nicht.
                             </video>
+                            <h3>Bonusfunktion</h3>
+                            <p>
+                                Die Grundfunktionlaität des Spiels läuft nun also. Zeit um sich auszuruhen oder? Naja fast. Zur Zeit muss mann, wenn man ein neues Spiel beginnen will die Seite neu laden. Außerdem kann 
+                                man sich die vorangegangenen Züge nicht anschauen bzw. kann man dahin nicht zurückspringen.
+                            </p>
+                            <p>
+                                Eben das wollen wir jetzt möglich machen. Dazu müssen wir unseren Code aber noch einmal sehr stark umstrukturieren. Also fangen wir lieber mal an...
+                            </p>
+                            <h4>Vorherige Schritte zwischenspeichern</h4>
+                            <p>
+                                Wie bereits oben kurz angeschnitten haben wir unser Squares Array nie direkt manipuliert. Das bietet uns jetzt den Vorteil, dass wir alle vorangegangenen Spielfelder in einem weiteren Array mit 
+                                dem Namen history ablegen können.
+                            </p>
+                            <h4>Das mit dem State (schon wieder)</h4>
+                            <p>
+                                Das mit der History ist schön und gut, nur wollen wir diese (wenn möglich) nicht innerhalb unseres Spielbrettes, sondern über die Game Komponente ausgeben. Dabei haben wir allerdings ein Problem. 
+                                Der Status des Spielbrettes ist im Board gespeichert. Wir brauchen also mal wieder ein wenig "Refactoring", wie es im Englischen so schön heißt.
+                            </p>
+                            <p>
+                                First things first, unsere Game Komponente braucht ein history Array (und dazu natürlich dann auch einen eigenen Konstruktor).
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    class Game extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+            history: [{
+                squares: Array(9).fill(null),
+            }],
+            xIsNext: true,
+        };
+    }
+
+    //...
+                                </code>
+                            </pre>
+                            <p>
+                                Wie man sehen kann füllen wir dieses schon einmal mit einem ersten "Backup" unseres State Objekts. Deswegen sind zu den eckigen Klammern zusätzlich noch runde Klammern hier dabei. Es handelt sich um ein 
+                                Array, welches ein JSON Objekt beinhaltet. Auch beinhaltet der Status hier schon unsere xIsNext Variable, welche wir schon aus der Board Komponente kennen und auch schon einmal signalisiert wo der Weg hingehen wird.
+                            </p>
+                            <p>
+                                Wir verlagern nun einen Großteil der Logik aus der Board Komponente in die Game Komponente. Dazu ...
+                            </p>
+                            <ol>
+                                <li>... löschen wir den Konstruktor des Boards, ...</li>
+                                <li>... ersetzen this.state.squares[i] mit this.props.square[i] in der renderSquare Methode des Boards und ...</li>
+                                <li>... ersetzen dort auch this.handelClick(i) durch this.props.onClick(i).</li>
+                            </ol>
+                            <p>
+                                Wir verweisen so also nicht mehr auf im Board vorhandene Eigenschaften, sonder auf übergebene props.
+                            </p>
+                            <p>
+                                Diese props müssen nun aber auch erst mal existieren und so verschieben wir die handleClick Funktion erst einmal von der Board zur Game Klasse. Würden wir die App nun versuchen zu öffnen würden wir mit Fehlermeldungen 
+                                bombadiert werden (habs probiert, sieht nicht schön aus 😅). Ist aber auch nur logisch, unsere alte handleClick Funktion sucht nach einem squares Array, dass es jetzt natürlich nicht mehr gibt. 
+                                Wir müssen sie also modifizierten um immer das aktuellste/letzte Element der history als aktuellen Status zu "verstehen".
+                            </p>
+                            <p>
+                                Dazu holen wir uns das letzte Element des history Arrays als Konstante current und packen mit der slice Funktion eine Kopie in unsere lokale Variable squares, mit welcher handle Click arbeiten kann.
+                            </p>
+                            <p>
+                                Abschließend müssen wir nur noch dafür sorgen, dass der Status "richtig" neu gesetzt wird. Wir verwenden hier die concat Funktion und füge unseren neuen Status an das ursprüngliche history Array an. 
+                                Das Ergebnis setzen wir als neues history Array fest.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    handleClick(i) {
+        // Unsere Aktuelle History
+        const history = this.state.history;
+        // Das letzte Element des Arrays
+        const current = history[history.length - 1];
+        // Wir legen eine Kopie des letzten Elementes an und nennen es squares
+        const squares = current.squares.slice();
+        if (calculateWinner(squares) || squares[i]) {
+            return;
+        }
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            // Anfügen des neuen Status an die History
+            history: history.concat([{
+            squares: squares,
+            }]),
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Als letztes in unserer großen "Funktionen Wanderschafft" wird nun auch das Anzeigen des Status ins Game hochgezogen und die Übergabe der neu erstellten Funktionen an das Board geregelt.
+                            </p>
+                            <p>
+                                All das machen wir (große Überraschung) in der render Methode der Game Komponente. Dort implementieren wir eine ähnliche Selektion des aktuellen Spielbrettes wie in der handleClick Methode. 
+                                Die anschließende Bestimmung, ob es einen Sieger gibt bleibt nahezu gleich.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    render() {
+        const history = this.state.history;
+        const current = history[history.length - 1];
+        const winner = calculateWinner(current.squares);
+
+        let status;
+        if (winner) {
+            status = 'Winner: ' + winner;
+        } else {
+            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        }
+    
+        return (
+            &lt;div className="game">
+            &lt;div className="game-board">
+                &lt;Board
+                squares={current.squares}
+                onClick={(i) => this.handleClick(i)}
+                />
+            &lt;/div>
+            &lt;div className="game-info">
+                &lt;div>{status}&lt;/div>
+                &lt;ol>{/* TODO */}&lt;/ol>
+            &lt;/div>
+            &lt;/div>
+        );
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Wie man sehen kann, übergeben wir nun auch das aktuelle Spielbrett und die handleClick Methode der Game Komponente an das Board.
+                            </p>
+                            <p>
+                                Zum "Aufräumen" können wir abschließend noch den Code zum Anzeigen des Status aus der render Methode des Boards entfernen. Dieser wird ja nun über die render Methode des 
+                                Games ausgegeben.
+                            </p>
+                            <h4>Die vergangenen Züge auch anzeigen</h4>
+                            <p>
+                                Das Spiel funktioniert nun äußerlich wieder wie vorher. Das ist zwar schön und gut, aber nicht unser Ziel. Wir speichern nun im Hintergrund jeden Zug in unserem history Array ab.
+                                Der nächste Schritt ist es diese Züge auch sichtbar zu machen.
+                            </p>
+                            <p>
+                                Wir müssen uns also eine Liste aller vorangegangenen Züge ausgeben lassen und diese Klickbar gestalten. Dazu nutzen wir die map Methode auf unserem history Array.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    const moves = history.map((step, move) => {
+        const desc = move ?
+            'Go to move #' + move :
+            'Go to game start';
+        return (
+            &lt;li>
+                &lt;button onClick={() => this.jumpTo(move)}>{desc}&lt;/button>
+            &lt;/li>
+        );
+    });
+                                </code>
+                            </pre>
+                            <p>
+                                Die Erstellung der Listen Elemente ist eigentlich ziemlich selbsterklärend. Die Verwendung der Map Methode allerdings erschloss sich mir anfangs nicht. Ein kurzer Ausflug zu Google später 
+                                hat die Verwirrung jedoch beheben können. Und zwar wird die Map Methode auf Arrays aufgerufen und kann diese beliebig verändern um so ein neues Array auszugeben. Dazu akzeptiert sie, wie bei uns, Funktionen. 
+                                In diesem Fall unsere Arrow Funktion, die aus jedem Element ein Listen Element erstellt. Als Übergabe Parameter an diese Funktion werden außerdem "currentValue", "index" und "arr" (das Array auf dem wir arbeiten) angeboten. 
+                                Wir nutzen davon zwei. Wir übergeben den Inhalt des Elementes (also unsere Squares) als step und den Index des Schrittes als move.
+                            </p>
+                            <p>
+                                Nachdem ich mir das bewusst gemacht hatte, sah das plötzlich alles auch nicht mehr so kompliziert aus. Wir fügen nun noch {moves} in die geordnete Liste in den return der render Methode ein um unsere Liste auch für den Nutzer 
+                                sichtbar zu machen.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    return (
+      &lt;div className="game">
+        &lt;div className="game-board">
+            &lt;Board
+                squares={current.squares}
+                onClick={(i) => this.handleClick(i)}
+            />
+        &lt;/div>
+        &lt;div className="game-info">
+            &lt;div>{status}&lt;/div>
+            &lt;ol>{moves}&lt;/ol>
+        &lt;/div>
+      &lt;/div>
+    );
+                                </code>
+                            </pre>
+                            <p>
+                                Wie vielleicht dem ein oder anderen aufegfallen ist, rufen wir mit den Buttons die Funktion jumpTo auf. Da wir diese Funktion in der Game Komponente noch nicht haben sollte das unser nächster Schritt sein oder?<br>
+                                Und wie immer wenn ich so frage ist die Antwort nein.<br>
+                                Wir müssen uns erst einem anderen "Problem" annehmen.
+                            </p>
+                            <img src="vertiefungsThema/warnungKeyprop.PNG">
+                            <p>
+                                Listenelemente innerhalb von React benötigen immer einen eindeutigen Schlüssel. Das hat vor allem den Grund, dass React für uns automatisch das aktualisieren von Komponenten übernimmt (deswegen mussten wir bis jetzt auch keine Update Funktionen 
+                                oder ähnliches schreiben). Damit es aber Änderungen effizient und richtig erkennen kann braucht es eindeutige Schlüssel. Hierzu gibt es zwar auch Plugins für Ract (beispielsweise UUID) aber in unserem Beispiel machen wir uns das ganze etwas einfacher. 
+                                Wir weisen dem Listenelement einfach den Array Index als Schlüssel zu.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    const moves = history.map((step, move) => {
+        const desc = move ?
+            'Go to move #' + move :
+            'Go to game start';
+        return (
+            // Hier kommt unser Schlüssel dazu
+            &lt;li key={move}>
+                &lt;button onClick={() => this.jumpTo(move)}>{desc}&lt;/button>
+            &lt;/li>
+        );
+    });
+                                </code>
+                            </pre>
+                            <p>
+                                Jetzt da das aus dem Weg ist können wir das Springen zu verschiedenen Schritten implementieren.
+                            </p>
+                            <p>
+                                Dazu brauchen wir folgendes:
+                            </p>
+                            <ol>
+                                <li>Wir müssen wissen, bei welchem Schritt wir gerade sind, ...</li>
+                                <li>... wir brauchen unsere jumpTo Methode, ...</li>
+                                <li>... ein Weiterspielen "in der Vergangenheit" löscht die alte Zukunft und ...</li>
+                                <li>... die render Methode des Game muss uns immer den Status des Bretts beim aktuellen Schritt anzeigen.</li>
+                            </ol>
+                            <p>
+                                Wir fangen also mit 1. an. Dazu fügen wir dem state im Konstruktor der Game Komponente die Varible stepNumber hinzu und setzen sie dort auf 0 (wir haben ja am Anfang noch keinen Zug gemacht).<br>
+                                Nummer 1 - check.
+                            </p>
+                            <p>
+                                Danach erstellen wir die jumpTo Methode. Diese akzeptiert den Parameter step und setzt den Status des Spiels auf den aktuellen Step. Außerdem nutzen wir Modulo 2 um zu überprüfen, ob der Schritt zu dem wir 
+                                springen wollen gerade ist. Wenn ja, ergibt die Auswertung true. Diesen Wert schreiben wir dann in xIsNext. Das macht deshalb Sinn, da X anfängt und somit immer bei geraden Schritten dran ist.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    jumpTo(step) {
+        this.setState({
+            stepNumber: step,
+            xIsNext: (step % 2) === 0,
+        });
+    }
+                                </code>
+                            </pre>
+                            <p>
+                                Nummer 2 - check.
+                            </p>
+                            <p>
+                                Jetzt wollen wir, dass ein Klick innerhalb der Vergangenheit die alte Zukunft löscht. Wir verlieren also alle nach dem ausgewählten Schritt gemachte Züge, wenn wir von dort aus auf die Squares klicken. 
+                                Das geht relativ einfach indem wir uns noch einmal an die handleClick Methode setzen.
+                            </p>
+                            <p>
+                                Diese greift sich in der aktuellen Version einfach das history Array und wählt das letzte Element als aktuelles aus. Was wir nun machen müssen ist dafür zu sorgen, dass das History Array nur bis zum aktuell 
+                                betrachtetem Schritt ausgewählt und in die Konstante history geschrieben wird.
+                            </p>
+                            <p>
+                                Das erreichen wir mit der slice Methode. Diese akzeptiert in einer ihrer Abwandlungen zwei Parameter - den Start und End Index. Der Befehl sieht also anschließend so aus:
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+                                </code>
+                            </pre>
+                            <p>
+                                Natürlich müssen wir den neuen Schritt am Ende der handleClick Methode auch wieder an den Status zurückgeben.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    this.setState({
+        history: history.concat([{
+            squares: squares
+        }]),
+        // Wir nutzen hier die Länge des history Arrays
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext,
+        });
+                                </code>
+                            </pre>
+                            <p>
+                                Nummer 3 - check.
+                            </p>
+                            <p>
+                                Die Hintergrundarbeiten sind nun abgeschlossen. Jetzt muss uns das Brett aber auch den aktuell ausgewählten Schritt anzeigen. Das passiert in der render Methode der Game Komponente wenn 
+                                wir das aktuelle Spielbrett auswählen. Wir tauschen hier history.length-1 gegen this.state.stepNumber aus.
+                            </p>
+                            <pre>
+                                <code class="JavaScript">
+    render() {
+        const history = this.state.history;
+        // Aktuellen Schritt anzeigen
+        const current = history[this.state.stepNumber];
+        const winner = calculateWinner(current.squares);
+    // ...
+                                </code>
+                            </pre>
+                            <p>
+                                Nummer 4 - check.
+                            </p>
+                            <h4>Die Bonusfunktion ist fertig</h4>
+                            <p>
+                                Nun ist das "Zeitreisen" fertig implementiert und wir können es testen.
+                            </p>
+                            <video controls="controls">
+                                <source src="vertiefungsThema/komplettFertigShowcase.mp4" type="video/mp4">
+                                Ihr Browser unterstützt den HTML Video Tag nicht.
+                            </video>
+                            <h2>Fazit</h2>
+                            <p>
+                                Alles in allem ist React eine vielseitige wenn auch am Anfang etwas verwirrende Bibliothek. Eines ist klar. Es ist nich so einfach einzubauen wie JQuery. Man benötigt einen Node.js Server 
+                                und muss ein Projekt erstellen. Wenn man sich aber einmal dort hindurch gekämpft hat, ist es relativ verständlich und lässt sich ähnlich zu JQurey noch mit weiteren Modulen (in JQuery Plugins) ergänzen. 
+                                Ich habe allerding bis jetzt erst einen ungefähren Eindruck von dem erhalten, was man mit React umsetzen kann (so zumindest mein Gefühl). Nur gut, dass ich im neuen Jahr noch Resturlaub abbauen muss. 
+                                Dann kann man sich das noch einmal genauer anschauen 😅.
+                            </p>
                     </main>
                 </section>
             </main>
