@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 1</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_2.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Verteilte Systeme</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Verteilte Systeme</a> > Vorlesung 1</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 1 - Einführung</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 29.03.2021</p>
+                    </header>
+                    <main>
+                        <h3>Wiederholung</h3>
+                        <p>
+                            Wie jede Vorlesung ging es auch dieses mal wieder mit einer kleinen Wiederholung los. Diesmal zum Thema Streams. Zusätzlich dazu 
+                            hatten sich nur wenige die Aufgabe aus der letzten Vorlesung (eigentliche Hausaufgabe) angesehen und so wurde festgelegt, dass es dafür 
+                            später noch einmal Zeit geben würde 🙄.
+                        </p>
+                        <h3>Java.IO.File</h3>
+                        <p>
+                            Danach ging es aber los mit etwas Neuem - der Klasse Java.IO.File.<br>
+                            Diese repräsentiert dabei nicht den Inhalt der verwendetetn Dateien, sondern den Verweis auf die Datei im Dateisystem - also im Endeffekt den Pfad der Datei.
+                        </p>
+                        <p>
+                            Diese File Objekte lassen sich nun genau so verwenden, wie dir String Dateipfade aus der letzten Vorlesung.
+                        </p>
+                        <h3>Puffer</h3>
+                        <p>
+                            Jetzt haben wir also Files, Streamreader/-writer und Objectreader/-writer. Wir holen uns eine Datei als File und können dann beliebige Objekte und andere Daten in diese 
+                            schreiben bzw. aus dieser lesen. <br>
+                            Was jetzt noch fehlte waren die Filereader/-writer. Diese lesen/schreiben Zeilenweise (je nachdem was man braucht) Strings, Integer, etc. . Wirklich viel Zeit haben wir 
+                            mit diesen jedoch nicht verbracht, da wir uns nahezu direkt mit den "Buffered-Versionen" der beiden Klassen beschäftigt haben. Diese Puffern ihre Ein-/Ausgaben. Auf die 
+                            Funktionsweise und die Vor-/Nachteile eines Puffers gehe ich an dieser Stelle nicht näher ein, da diese lediglich eine Wiederholung der Vorlesung Betriebssysteme aus dem vorletzten 
+                            Semester darstellen würden.
+                        </p>
+                        <p>
+                            Daraufhin haben wir uns dann einem kleinen Quiz gewidmet, in welchem man feststellen sollte welche Code Beispiele korrekt sind und welche nicht.
+                        </p>
+                        <img src="vorlesung_2/wasIstErlaubt.PNG">
+                        <p>
+                            Beispiel 3 haben wir in der Vorlesung als richtig angesehen. Persönlich finde ich das Beipiel allerdings nicht ganz optimal, da der Code wie er dort steht nicht funktionert, sondern nur unter der Annahme, 
+                            dass es
+                            <ol>
+                                <li>eine Variable file vom Typ File gibt und</li>     
+                                <li>karteErzeugen() eine zuvor definierte Methode ist.</li>                           
+                            </ol>
+                        </p>
+                        <h3>Praxis</h3>
+                        <p>
+                            Ansschließend ging es in den Praxis-Teil der Vorlesung. Der Teil, der bis jetzt nichts gemacht hat bekam Zeit die Übung der letzten Woche zu erledigen und es gab eine weitere Aufgabe.
+                        </p>
+                        <img src="vorlesung_2/aufgabe.PNG">
+                        <p>
+                            Den Quellcode zu dieser Aufgabe kann man hier sehen:
+                        </p>
+                        <pre>
+                            <code class="Java">
+    import java.io.BufferedReader;
+    import java.io.BufferedWriter;
+    import java.io.FileReader;
+    import java.io.FileWriter;
+    import java.io.IOException;
+
+    public class texteLesen {
+        public static void main(String[] args){
+
+            try {
+                // Reader/Writer deklarieren
+                BufferedReader reader = new BufferedReader(new FileReader("name.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("name_kopie.txt"));
+
+                // Variable zum Zwischenspeichern
+                String text;
+
+                //Schleife, die über die Textzeilen läuft
+                while((text = reader.readLine()) != null){
+                    // Gelesene Zeilen direkt wieder schreiben
+                    writer.write(text);
+                    writer.newLine();
+
+                }
+                reader.close();
+                writer.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Ausgeführt ergibt sich dieses Bild:
+                        </p>
+                        <video controls="controls">
+                            <source src="vorlesung_2/Verteilte Systeme - Aufgabe Dateien kopieren.mp4" type="video/mp4">
+                            Ihr Browser unterstützt den HTML Video Tag nicht.
+                        </video>
+                        <h3>Der letzte Teil der Vorlesungen aka. Doku lesen</h3>
+                        <p>
+                            Nachdem nun die Aufgaben abgeschlossen waren kamen wir gegen Ende noch zu einem - wie Herr Noll es selbst ausdrückte - sehr langweiligen Teil, in welchem es um die verschiedenen Arten von 
+                            Reader und Writern und die verschiedenen zur Verfügung stehenden Methoden ging.
+                        </p>
+                        <p>
+                            Ich muss ehrlich sagen, dass ich den Sinn dahinter nicht ganz verstanden habe. Es ging nur um die Java spezifische Implementierung dieser Klassen. Das schaut man sich in der Praxis (zumindest nach 
+                            meinem Dafürhalten) nur an wenn man es braucht bzw. wenn ich etwas ähnliches in C# versuchen würde, würde ich mir dann anschauen wie ich Dateien/Streams/etc. dort lese und schreibe.
+                        </p>
+                        <p>
+                            Damit endete die heutige Vorlesung.
+                        </p>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
