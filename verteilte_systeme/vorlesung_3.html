@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 3</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_2.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Verteilte Systeme</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Verteilte Systeme</a> > Vorlesung 3</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 3 - Netzwerke</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 19.04.2021</p>
+                    </header>
+                    <main>
+                        <h3>Von Sockets und Threads</h3>
+                        <p>
+                            Eine neue Woche, eine neue Vorlesung. Die Themen heute waren:
+                            <ul>
+                                <li>Grundlagen Wiederholung: Client Server, Sockets und Port Mapping</li>
+                                <li>Mit Buffered Reader bzw. Print Writer Daten vom/zum Socket und somit von/zu einem Client empfangen/senden</li>
+                                <li>Aufgabe - Client und Server</li>
+                                <li>Mehr Dokumentation (ServerSocket und Socket Klasse) 🙄</li>
+                                <li>Wiederholung zum Thema Multithreading</li>
+                                <li>Aufgabe - Threading</li>
+                            </ul>
+                        </p>
+                        <p>
+                            Alles in Allem sehr viel schon bekanntes, aber auch ein paar neue Inhalte.
+                        </p>
+                        <h3>Grundlagen Wiederholung: Client Server, Sockets und Port Mapping</h3>
+                        <p>
+                            Angefangen haben wir mit einer Wiederholung zum Thema Client Server Kommunikation und der angrenzenden Themenbereiche Sockets und Ports.
+                        </p>
+                        <p>
+                            Da diese Inhalte jedoch bereits in vorangegangenen Vorlesungen (Kommunikationssysteme und Programmierung II) ausführlicher besprochen wurden verzichte ich 
+                            an dieser Stelle darauf ins Detail zu gehen.<br>
+                            Zusammengefasst komunizieren Computer über das Netzwerk mit sogenannten Sockets. Diese lauschen oder senden Daten durch sogenannte Ports, die man gut mit Türen 
+                            von/zum Netzwerk vergleichen kann.
+                        </p>
+                        <h3>Mit Buffered Reader bzw. Print Writer Daten vom/zum Socket und somit von/zu einem Client empfangen/senden</h3>
+                        <p>
+                            Um nun Daten über einen Socket zu lesen/senden haben wir in der Vorlesung einen Buffered Reader bzw. Print Writer verwendet, den wir bereits aus der letzten Woche kannten. 
+                            Diesen können wir analog zu letzter Woche verwenden mit dem kleinen aber feinen Unterschied, dass wir beispielsweise nicht eine Datei sondern einen socket Input/Output Stream an diesen übergeben.
+                        </p>
+                        <h3>Aufgabe - Client und Server</h3>
+                        <p>
+                            Das haben wir im Anschluss direkt genutzt um einen "Tipp des Tages"-Server und einen entsprechenden Client zu schreiben.
+                        </p>
+                        <p>
+                            Fangen wir mit dem Server an. Der Aufbau ist relativ simpel. Unsere Tipps befinden sich in einem String Array <i>tippListe</i>.<br>
+                            In der main Methode erstellen wir eine neue Instanz unseres Servers und rufen dessen los Methode auf. Diese erstellt einen neuen ServerSocket am Port 
+                            4242 und wechselt dann in eine unendliche while Schleife. Dort wird bei jedem neuen Verbindungsversuch eines Client erst dieser Akzeptiert, dann ein PrintWriter 
+                            erstellt dessen Output der Socket Output Stream ist und dann eine zufällige Anzahl von Tipps gesendet.
+                        </p>
+                        <p>
+                            Das "+ 3" bei der Generierung der zufallszahl (in der los Methode) soll ledigich dafür sorgen, dass mindestens 3 Tipps gesendet werden.
+                        </p>
+                        <pre>
+                            <code class="Java">
+    package TippDesTages;
+
+    import java.io.IOException;
+    import java.io.PrintWriter;
+    import java.net.ServerSocket;
+    import java.net.Socket;
+
+    public class TippDesTagesServer {
+        String[] tippListe = {"Essen Sie weniger Gummibärchen", "Mehr Sport machen", "Mehr raus gehen", "Mehr für die Uni lernen"};
+
+        public static void main(String[] args){
+            TippDesTagesServer server = new TippDesTagesServer();
+            server.los();
+        }
+
+        public void los() {
+            try {
+                ServerSocket serverSock = new ServerSocket(4242);
+
+                while(true) {
+                    Socket sock = serverSock.accept();
+
+                    PrintWriter writer = new PrintWriter(sock.getOutputStream());
+
+                    int zufallszahl = (int) ((Math.random() * 10) + 3);
+                    for(int i = zufallszahl; i > 0; i--){
+                        String tipp = getTipp();
+                        writer.println(tipp);
+                        writer.flush();
+                    }
+                    
+                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } // los() schließen
+        
+        private String getTipp() {
+            int zufallszahl = (int) (Math.random() * tippListe.length);
+            return tippListe[zufallszahl];
+        }
+    }
+
+                            </code>
+                        </pre>
+                        <p>
+                            Wir haben nun einen Server. Jetzt fehlt nur noch ein Gegenstück - der Client. Dieser ist - genau wie der Server - sehr simpel aufgebaut.
+                        </p>
+                        <p>
+                            Wir erzeugen in der Main Methode erst eine neue Client Instanz und starten die los Methode dieser. Dort wird ein neuer Socket erstellt der ebenfalls den Port 
+                            4242 verwendet. Außerdem wird ein InputStreamReader und ein "darauf aufbauender" BufferedReader erzeugt welche mit dem InputStream des Sockets "verbunden" werden.
+                        </p>
+                        <p>
+                            Abschließend wir auch hier eine unendliche while Schleife gestartet. Hier werden allerdings die erhaltene Nachrichten direkt in die Konsole geschrieben.
+                        </p>
+                        <pre>
+                            <code class="Java">
+    package TippDesTages;
+
+    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStreamReader;
+    import java.net.Socket;
+
+    public class TippDesTagesClient {
+        public static void main(String[] args){
+            TippDesTagesClient client = new TippDesTagesClient();
+            client.los();
+        }
+
+        
+        public void los(){
+            try{
+                Socket s = new Socket("127.0.0.1", 4242);
+                
+                InputStreamReader streamReader = new InputStreamReader(s.getInputStream());
+
+                BufferedReader reader = new BufferedReader(streamReader);
+                
+                while(true){
+                    String tipp = reader.readLine();
+                    System.out.println("Tipp des Tages: " + tipp);
+                }
+            } catch(IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Wenn wir nun zuerst den Server und danach den Client starten ergibt sich das folgende Bild:
+                        </p>
+                        <video controls="controls">
+                            <source src="vorlesung_3/ServerClient.mp4" type="video/mp4">
+                            Ihr Browser unterstützt den HTML Video Tag nicht.
+                        </video>
+                        <h3>Mehr Dokumentation (ServerSocket und Socket Klasse) 🙄</h3>
+                        <p>
+                            Nun folgte eine weitere Episode von "wir lesen eine Liste von verfügbaren Methoden". Für wie sinnvoll ich dies halte habe ich letzte Woche bereits geschildert. 
+                            Für Interessierte packe ich dieses Mal allerdings den Link zur offiziellen Java Dokumentation dazu.
+                        </p>
+                        <p>
+                            <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/ServerSocket.html" target="_blank">ServerSocket</a> & <a href="https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/net/Socket.html" target="_blank">Socket</a><br>
+                        </p>
+                        <h3>Wiederholung zum Thema Multithreading</h3>
+                        <p>
+                            So ungern ich es immer wieder schreibe, aber auch dieses Thema stellt leider lediglich eine Wiederholung bereits vorangegangener Vorlesungen dar (Betriebssysteme und Programmierung II). 
+                            In beiden Vorlesungen haben wir zudem mit Java Beispielen gearbeitet 😬.
+                        </p>
+                        <p>
+                            Das einzig erfrischend Neue war das kurze Praxisbeispiel am Ende der Vorlesung.
+                        </p>
+                        <h3>Aufgabe - Threading</h3>
+                        <p>
+                            Nun konnte man noch einmal etwas schreiben. Und zwar sollten zwei Klassen geschrieben werden. Eine "ausführende" und eine die das Interface Runnable implementiert. 
+                            Die erstgenannte sollte nun die zweite als Thread ausführen. Beide schrieben Texte in die Konsole und beobachtet werden sollte die Reihenfolge der Ausführung, also wie der 
+                            Scheduler die Ausführung priorisiert.
+                        </p>
+                        <img src="vorlesung_3/Aufgabe2.PNG">
+                        <p>
+                            Anschließend sollten wir einen kurzen Delay einbauen, der dafür sorgen sollte, dass sich die Reihenfolge der Ausführung umkehrt. Das Ergebnis sieht man unten.
+                        </p>
+                        <pre>
+                            <code class="Java">
+    package Threading;
+
+    public class MeinRunnable implements Runnable {
+        public void run() {
+            los();
+        }
+
+        public void los() {
+            tuNochMehr();
+        }
+
+        public void tuNochMehr(){
+            System.out.println("oben auf dem Stack");
+        }
+    }
+
+    class ThreadTestlauf {
+        public static void main(String[] args) {
+            Runnable threadJob  = new MeinRunnable();
+            Thread meinThread = new Thread(threadJob);
+
+            meinThread.start();
+
+            /*
+            try{
+                Thread.sleep(100);
+            } catch(Exception ex){
+                ex.printStackTrace();
+            }
+            */
+            
+
+            System.out.println("zurück in main");
+        }
+    }
+                            </code>
+                        </pre>
+                        <video controls="controls">
+                            <source src="vorlesung_3/Threading.mp4" type="video/mp4">
+                            Ihr Browser unterstützt den HTML Video Tag nicht.
+                        </video>
+                        <p>
+                            Und damit endete diese Vorlesung. Dann bis nächste Woche.
+                        </p>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
