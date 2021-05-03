@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 5</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_2.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Verteilte Systeme</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Verteilte Systeme</a> > Vorlesung 5</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 5 - Ajax</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 03.05.2021</p>
+                    </header>
+                    <main>
+                        <h3>Dynamische Inhalte</h3>
+                        <p>
+                            Heute haben wir uns mit dynamischen Inhalten auf Websites beschäftigt. Dazu haben wir uns als erstes, am Beispiel eines Verkaufsberichtes, angeschaut wie das Ganze vor über 10 Jahren 
+                            ablief. Wenn man damals eine dynamische Site umsetzen wollte konnte man dafür PHP verwenden und über ein HTML Formular und einen Button einen GET-Request senden. 
+                            Die Nachteile dieser Herangehensweise werden offensichtlich, wenn man sich einmal mit dem Ablauf auseinandersetzt.
+                        </p>
+                        <img src="vorlesung_5/dateienVorher.png">
+                        <img src="vorlesung_5/alterWeg.PNG">
+                        <p>
+                            Wir müssen die Seite bei jeder Abfrage aktualisieren und der Server sendet und jedes Mal den vollständigen HTML Code. Außerdem ist die alte Seite "eingefroren" bis 
+                            die neue Seite vollständig geladen ist.
+                        </p>
+                        <h3>AJAX - ein neuer Weg</h3>
+                        <p>
+                            Nun haben wir einen neuen Weg kennengelernt dieses Problem anzugehen - asynchrones Javascript. Anstelle, dass wir jedes mal eine neue Seite über HTTP-GET anfordern, nutzen wir nun 
+                            Javascript um diesen GET Befehl auszuführen und die neuen Daten direkt in die schon bestehende Seite einzubinden.
+                        </p>
+                        <p>
+                            Dazu modifizieren wir den von Herrn Noll bereitegestellten Code.
+                        </p>
+                        <h4>Javascript</h4>
+                        <p>
+                            Als erstes fügen wir zu unserer board.html zwei script Tags hinzu. Der eine verweist auf die Hilfsdatei "util.js", der andere wird von uns direkt in der html Datei gefüllt. 
+                            dort erstellen wir eine globale Variable anfrage und 3 neue Functions (erzeugeAnfrage, getVerkaufteBoards und updateSeite).
+                        </p>
+                        <p>
+                            In der ersten Funktion versuchen wir einen neuen XMLHttpRequest zu erstellen und weisen diesen der globalen Variable "anfrage" zu.
+                        </p>
+                        <pre>
+                            <code class="Javascript">
+    function erzeugeAnfrage() {
+        try {
+            anfrage = new XMLHttpRequest()
+        } catch (fehlschlag) {
+            anfrage = null
+            alert('Fehler beim erstellen des Anfrage-Objekts!')
+        }
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            In der "getVerkaufteBoards" Funktion führen wir erst die erst genannte aus und setzen dann eine lokale Variable url auf "aktuelleBoardVerkaeufeAJAX.php" (dazu kommen wir gleich). 
+                            Danach packen wir diese url mit anfrage.open("GET", url, true) noch in unsere Anfrage und senden diese mit anfrage.send(null). Da wir hier nur Daten empfangen können schicken wir ein null mit. 
+                            Als letztes setzen wir noch die "onreadystatechange" Funktion der Anfrage auf unsere dritte Funktion (updateSeite). Das sorgt dafür, dass bei einer Statusänderung diese ausgeführt wird und unsere Werte auch 
+                            auf der Seite erscheinen. Eine solche Funktion nennt man Callback-Funktion.
+                        </p>
+                        <pre>
+                            <code class="Javascript">
+    function getVerkaufteBoards() {
+        erzeugeAnfrage()
+        var url = "aktuelleBoardVerkaeufeAJAX.php"
+        anfrage.open("GET", url, true)
+        anfrage.onreadystatechange = updateSeite
+        anfrage.send(null)
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Nun haben wir zwar unsere Abfrage gebastelt, müssen damit aber auch etwas machen. Dafür haben wir die Funktion updateSeite. Diese überüft erst mit einer if-Abfrage, ob der "readyState" 4 ist, es sich bei 
+                            dem ready-Event also um "fertig empfangene Daten" handelt. Wenn das zutrifft holen wir uns die Antwort mit anfrage.responseText.
+                        </p>
+                        <p>
+                            Dann holen wir uns die Referenzen auf unsere Objekte im DOM, die wir mit den Daten aktualisieren wollen uns berechnen dann unseren Gewinn. Die Funktion ersetzeText kommt hierbei aus der uns vorgegebenen "text-utils.js".
+                        </p>
+                        <pre>
+                            <code class="Javascript">
+    function updateSeite() {
+        if(anfrage.readyState == 4) {
+            // Anfragetext erhalten
+            var neueSumme = anfrage.responseText
+    
+            // Referenzen auf die Objekte im DOM setzen
+            var verkaufteBoardsE1 = document.getElementById("verkaufte-boards")
+            var preisE1 = document.getElementById("preis")
+            var gewinnE1 = document.getElementById("gewinn")
+            var kostenE1 = document.getElementById("kosten")
+    
+            // Preis und Kosten aus dem DOM abfragen
+            var preis = getText(preisE1)
+            var kosten = getText(kostenE1)
+    
+            // Summer der verkauften Boards ersetzen
+            ersetzeText(verkaufteBoardsE1, neueSumme)
+    
+            // Gewinn errechnen
+            var gewinnProBoard = preis - kosten
+            var gewinn = Math.round(gewinnProBoard * neueSumme * 100) / 100
+    
+            // Neuen Gewinn schreiben
+            ersetzeText(gewinnE1, gewinn)
+        }
+    }
+                            </code>
+                        </pre>
+                        <h4>HTML</h4>
+                        <p>
+                            Nun müssen wir das uns vorgegebene HTML Formular anpassen. Wir entfernen die form-action und den Pfad auf den es verweisen würde und ändern den input vom Typ submit zum Typ button. 
+                            Das letztere müssen wir zwingend machen, da das Forular sonst versuchen würde die Seite neu zu laden. Zum Schluss bekommt unser Button noch einen onclick Listener, der auf unsere "getVerkaufteBoards" Funktion verweist.
+                        </p>
+                        <pre>
+                            <code class="HTML">
+    &lt;form>
+        &lt;input value="Ich will Geld sehen" type="button" onclick="getVerkaufteBoards()"/>
+    &lt;/form> 
+                            </code>
+                        </pre>
+                        <h4>Last but not least - PHP</h4>
+                        <p>
+                            Nachdem unsere HTML-Datei nun vollständig umgestaltet ist müssen wir uns der ominösen "aktuelleBoardVerkaeufeAJAX.php" zuwenden. Diese hatte in der ursprünglichen Version, neben dem neuen Wert, auch den kompletten DOM noch 
+                            einmal mitgeschickt. Jetzt brauchen wir allerdings nur noch die Anzahl verkaufter Artikel, also fliegt der HTML-Teil raus und übrig bleibt ein echo, dass den Wert ausgibt.
+                        </p>
+                        <pre>
+                            <code class="PHP">
+    &lt;?php
+
+    // Mit beliebiger Anzahl verkaufter Boards starten
+    $gesamtVerkauft = 1012;
+
+    // Neue Verkäufe nachbilden
+    srand((double)microtime() * 1000000);
+    $gesamtVerkauft = $gesamtVerkauft + rand(0,1000);
+
+    echo $gesamtVerkauft;
+
+    ?>
+                            </code>
+                        </pre>
+                        <h4>Der Code in Aktion</h4>
+                        <p>
+                            Nun sind wir bereit für die Demo. Da der restliche Code im Video gezeigt wird binde ich ihn hier nicht noch einmal komplett ein.
+                        </p>
+                        <video controls="controls">
+                            <source src="vorlesung_5/Aufgabe_AJAX.mp4" type="video/mp4">
+                            Ihr Browser unterstützt den HTML Video Tag nicht.
+                        </video>
+                    </main>
+                </section>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
