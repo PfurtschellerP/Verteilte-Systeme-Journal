@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 6</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_2.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Verteilte Systeme</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Verteilte Systeme</a> > Vorlesung 6</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 6 - PHP</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 10.05.2021</p>
+                    </header>
+                    <main>
+                        <h3>PHP</h3>
+                        <p>
+                            In der heutigen Vorlesung haben wir uns mit PHP auseinandersetzt. Dazu haben wir zuerst eine Statistik aus dem Jahre 2011 und eine aktuelle zum Thema 
+                            "Verwendete Serverseitige Programmiersprachen" angeschaut. Hier beispielsweise die aktuellste Statistik aus dem aktuellen Monat (Mai 2021).
+                        </p>
+                        <img src="vorlesung_6/Statistik.PNG">
+                        <p>
+                            Man erkennt ganz klar, dass PHP diese Statistik anführt. Gefolgt von ASP.NET (Microsofts Web Technologie) und Ruby.
+                        </p>
+                        <p>
+                            Wir haben uns nun anhand einer Beispielaufgabe angesehen, wie PHP arbeitet.
+                        </p>
+                        <h4>Von Aliens entführt</h4>
+                        <p>
+                            Dazu haben wir eine vorgefertigte Seite mit einem Formular erhalten. Dort kann man Sichtungen von Aliens melden. Realisiert wird das mit einem HTML Formular. 
+                            Meine Version weicht noch etwas davon ab, da ich ein Wenig mit dem CSS gespielt habe.
+                        </p>
+                        <img src="vorlesung_6/Formular.PNG">
+                        <pre>
+                            <code class="HTML">
+    &lt;!DOCTYPE html>
+    &lt;html lang="de">
+    &lt;head>
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    &lt;title>Von Aliens entführt - eine Entführung melden&lt;/title>
+    &lt;link rel="stylesheet" type="text/css" href="style.css" />
+    &lt;/head>
+    &lt;body>
+    &lt;div id="center">
+        &lt;h2>Von Aliens entführt &ndash; eine Entführung melden&lt;/h2>
+        &lt;p>Die Geschichte Ihrer Alienentführung:&lt;/p>
+        &lt;img src="fang.jpg" alt="Mein entführter Hund Fang." />
+        &lt;form method="post" action="../meldung.php">
+        &lt;label>
+            Vorname:
+            &lt;input type="text" id="vorname" name="vorname" />
+        &lt;/label>
+        &lt;label>
+            Nachname:
+            &lt;input type="text" id="nachname" name="nachname" />
+        &lt;/label> 
+        &lt;label>
+            Wie lautet Ihre E-Mail-Adresse?
+            &lt;input type="text" id="email" name="email" />
+        &lt;/label>
+        &lt;label>
+            Wann geschah es?
+            &lt;input type="text" id="wanngeschahes" name="wanngeschahes" />
+        &lt;/label>
+        &lt;label>
+            Wie lange waren Sie unterwegs?
+            &lt;input type="text" id="wielange" name="wielange" />
+        &lt;/label>
+        &lt;label>
+            Wie viele haben Sie gesehen?
+            &lt;input type="text" id="wieviele" name="wieviele" />
+        &lt;/label>
+        &lt;label>
+            Wie sahen die Aliens aus:
+            &lt;input type="text" id="alienbeschreibung" name="alienbeschreibung" size="32" />
+        &lt;/label>
+        &lt;label>
+            Was wurde mit Ihnen gemacht?
+            &lt;input type="text" id="wassietaten" name="wassietaten" size="32" />
+        &lt;/label>
+        &lt;label>
+            Haben Sie Fang gesehen?
+            Ja &lt;input id="fanggesehen" name="fanggesehen" type="radio" value="Ja" checked="checked"/>
+            Nein &lt;input id="fanggesehen" name="fanggesehen" type="radio" value="Nein" />
+        &lt;/label>
+        &lt;label>
+            Weitere Bemerkungen:
+            &lt;textarea id="weiteres" name="weiteres">&lt;/textarea>
+        &lt;/label>
+        &lt;input type="submit" value="Entführung melden" name="submit" />
+        &lt;/form>
+    &lt;/div>
+
+    &lt;/body>
+    &lt;/html>
+                            </code>
+                        </pre>
+                        <p>
+                            Abgeschickt wird dieses Formulat mit dem "Entführung melden"-Button am Ende des Formulars. Da dieser vom Typ "submit" ist, löst er die im Form Tag hinterlagte action 
+                            aus. Diese ist in diesem Fall unsere meldung.php. Die verwendete Methode ist in diesem Fall Post. Wir starten nun also mit der HTML Seite unseres Formulares. 
+                            Dann schicken wir mit Post unsere Formulardaten an meldung.php. Aber was passiert dann? Dazu haben wir uns diese Datei auch noch einmal genauer angesehen.
+                        </p>
+                        <pre>
+                            <code class="PHP">
+    &lt;!DOCTYPE html>
+    &lt;html lang="de">
+    &lt;head>
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    &lt;title>Von Aliens entführt – eine Entführung melden&lt;/title>
+    &lt;link rel="stylesheet" type="text/css" href="aliens/style.css" />
+    &lt;/head>
+    &lt;body>
+    &lt;div id="center">
+        &lt;h2>Von Aliens entführt – eine Entführung melden&lt;/h2>
+
+        &lt;?php
+        $wann_geschah_es = $_POST['wanngeschahes'];
+        $wie_lange = $_POST['wielange'];
+        $alien_beschreibung = $_POST['alienbeschreibung'];
+        $was_sie_taten = $_POST['wassietaten'];
+        $fang_gesehen = $_POST['fanggesehen'];
+        $email = $_POST['email'];
+        
+
+        
+        echo 'Vielen Dank für den Bericht.&lt;br />'; 
+        echo 'Sie wurden ' . $wann_geschah_es;
+        echo ' entführt und waren ' . $wie_lange . ' weg&lt;br />';
+        echo 'Beschreiben Sie sie: ' . $alien_beschreibung . '&lt;br />';
+        echo 'Was die Aliens machten: ' . $was_sie_taten . '&lt;br />';
+        echo 'War Fang da? ' . $fang_gesehen . '&lt;br />';
+        echo 'Ihre E-Mail-Adresse: ' . $email . '&lt;br />';
+        ?>
+        
+        &lt;a href="aliens/meldung.html">&lt;button>Neue Sichtung melden&lt;/button>&lt;/a>
+    &lt;/div>
+
+
+    &lt;/body>
+    &lt;/html>
+                            </code>
+                        </pre>
+                        <p>
+                            Hier, im PHP-Teil (zwischen &lt;?php und ?>) holen wir uns über $_POST['name des Formularfeldes'] unsere Formulardaten und speichern diese in Variablen. 
+                            Variablen in PHP beginnen dazu immer mit $.
+                        </p>
+                        <p>
+                            Weiter unten nutzen wir dann echo um vorgegebene Strings mit unseren neu gesetzten Variablen zu kombinieren und in den HTML Code einzubinden.
+                            Dieses Kominieren passiert auf dem Server. Wenn das abgeschlossen ist, erhält der Web-Browser des Client lediglich die fertige HTML-Seite.
+                        </p>
+                        <h4>MySQL Anbindung</h4>
+                        <p>
+                            Nun können wir also Formulardaten engegennehmen und diese in PHP auf dem Server verarbeiten. Im ursprünglichen Beispiel war dann angedacht, diese Daten anschließend per 
+                            Mail zu versenden.
+                        </p>
+                        <p>
+                            Da das aber nicht wirklich praktikabel ist (irgendwann "läuft das eigene Postfach über") wollen wir nun mit einer MySQL Datenbank arbeiten um die Daten zu speichern.
+                        </p>
+                        <p>
+                            Glücklicherweise nutzen wir bereits XAMPP. Dort ist ein MySQL Server integriert und die Weboberfläche PHPMyAdmin ist vorinstalliert. Dort können wir nun unsere Datenbanktabelle erstellen.
+                        </p>
+                        <p>
+                            Wir erstellen also erst unsere Datenbank "aliendatenbank"
+                        </p>
+                        <img src="vorlesung_6/Datenbank.PNG">
+                        <p>
+                            Anschließend nutzen wir den SQL Tab um unsere Tabelle zu erstellen. An dieser Stelle konnte man auch wunderbar das in der Datenbank Vorlesung Gelernte anwenden.
+                        </p>
+                        <img src="vorlesung_6/Querry.PNG">
+                        <p>
+                            Nachdem wir nun eine Datenbank und eine Tabelle hatten haben wir über SQL mit INSERT INTO alien_entfuehrung VALUES (&lt;Werte durch Kommata getrennt>)auch probiert erste Einträge einzufügen. Das 
+                            hat auch gut funktioniert, sodass wir nun zum eigentlichen PHP Teil kamen. Wir haben nun unseren Webserver von dem unser Web-Browser das HTML Formular bekommt. Wenn wir als User auf Senden klicken sollte 
+                            nun der PHP Server eine Verbindung zum MySQL Server aufbauen um die Formulardaten in unsere Tabelle zu schreiben.
+                        </p>
+                        <img src="vorlesung_6/modellMitSQL.PNG">
+                        <p>
+                            Dazu verändern wir unsere meldung.php wie folgt.
+                        </p>
+                        <pre>
+                            <code class="PHP">
+    &lt;!DOCTYPE html>
+    &lt;html lang="de">
+    &lt;head>
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    &lt;title>Von Aliens entführt – eine Entführung melden&lt;/title>
+    &lt;link rel="stylesheet" type="text/css" href="aliens/style.css" />
+    &lt;/head>
+    &lt;body>
+    &lt;div id="center">
+        &lt;h2>Von Aliens entführt – eine Entführung melden&lt;/h2>
+
+        &lt;?php
+        $vorname = $_POST['vorname'];
+        $nachname = $_POST['nachname'];
+        $wann_geschah_es = $_POST['wanngeschahes'];
+        $wie_lange = $_POST['wielange'];
+        $wie_viele = $_POST['wieviele'];
+        $alien_beschreibung = $_POST['alienbeschreibung'];
+        $was_sie_taten = $_POST['wassietaten'];
+        $fang_gesehen = $_POST['fanggesehen'];
+        $weiteres = $_POST['weiteres'];
+        $email = $_POST['email'];
+
+        $db = mysqli_connect('localhost', 'root', '', 'aliendatenbank') or die('Fehler beim Verbinden mit dem SQL-Server');
+
+        $sql = "INSERT INTO alien_entfuehrung " .
+                "VALUES ('$vorname', '$nachname', '$wann_geschah_es', '$wie_lange', '$wie_viele', '$alien_beschreibung', '$was_sie_taten', '$fang_gesehen', '$weiteres', '$email')";
+
+        $ergebnis = mysqli_query( $db, $sql) or die("Fehler bei der Datenbankabfrage");
+        
+        echo 'Vielen Dank für den Bericht.&lt;br />'; 
+        echo 'Sie wurden ' . $wann_geschah_es;
+        echo ' entführt und waren ' . $wie_lange . ' weg&lt;br />';
+        echo 'Beschreiben Sie sie: ' . $alien_beschreibung . '&lt;br />';
+        echo 'Was die Aliens machten: ' . $was_sie_taten . '&lt;br />';
+        echo 'War Fang da? ' . $fang_gesehen . '&lt;br />';
+        echo 'Ihre E-Mail-Adresse: ' . $email . '&lt;br />';
+
+        mysqli_close($db);
+        ?>
+
+    &lt;/div>
+
+
+    &lt;/body>
+    &lt;/html>
+                            </code>
+                        </pre>
+                        <p>
+                            Wir stellen mit mysqli_connect eine Verbindung zu unserer Datenbank her. Daraufhin bauen wir uns mit Hilfe der Stringverkettung unsere SQL Query zusammen, die wir dann mit mysqli_query "laufen lassen".
+                        </p>
+                        <p>
+                            Um zu überprüfen, ob alles reibungsfrei funktioniert haben wir nun Testdaten in unser Formular eingetragen und dieses abgeschickt. Anschließend riefen wir nun unsere Datenbank über PHPMyAdmin auf und siehe da, 
+                            die neuen Daten waren in der Tabelle vorhanden.
+                        </p>
+                        <img src="vorlesung_6/resultatDatenbank.PNG">
+                        <p>
+                            Auch das konnte man wieder als Video sehen.
+                        </p>
+                        <video controls="controls">
+                            <source src="vorlesung_6/Aufgabe - Aliens.mp4" type="video/mp4">
+                            Ihr Browser unterstützt den HTML Video Tag nicht.
+                        </video>
+                        <p>
+                            Damit endete die heutige Vorlesung.
+                        </p>
+                    </main>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
