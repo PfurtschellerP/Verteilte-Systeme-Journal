@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vorlesung 7</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_2.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Verteilte Systeme</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Verteilte Systeme</a> > Vorlesung 7</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vorlesung 7 - PHP</h2>
+                        <p><img class="calenderIcon" src="../img/icons/calender.png"/> 17.05.2021</p>
+                    </header>
+                    <main>
+                        <h3>Node.js und PWAs</h3>
+                        <h4>Node</h4>
+                        <p>
+                            Die heutige Vorlesung startete mit einer kurzen Einführung in Node.js. Kurz zusammengefasst handelt es sich dabei um eine Laufzeitumgbung für serverseitiges JavaScript. 
+                            Dieses benötigt dazu keinen Web-Browser (obwohl es die JavaScript Engine des Chrome Browsers verwendet). Zusätzlich besitzt es auch einen Paketmanager - <a href="https://www.npmjs.com/" target="_blank">npm</a> - um Erweiterungen hinzuzuladen.
+                        </p>
+                        <h4>PWAs</h4>
+                        <p>
+                            Danach haben wir uns noch einmal angeschaut wie sich Anwendungen auf mobilen Geräten über die Zeit hinweg entwickelt haben. Angefangen mit den nativen Apps, also den Apps die in einer 
+                            "lokalen Programmiersprache" geschrieben wurden (auf iOS zum Beispiel Objective C oder Swift). Gegen 2010 kamen dann noch die hybriden Apps dazu. Diese stellen eine Verschmelzung aus Web App und nativer App dar 
+                            und sind, wie im Skript beschrieben "mobile-only". Das bedeutet, dass man für weitere Gerätetypen (z.B. Desktops) nochmal eigene Apps braucht. Wie Herr Noll in der Vorlesung sagte, macht es Sinn diesen Weg zu gehen, falls man ohnehin schon 
+                            eine Desktopanwendung hat (oder keine braucht). Ansonsten könnte der dritte Weg interessant sein. Denn seit 2015 gesellten sich noch die PWAs (Progressive Web Apps) dazu. Diese sind im Endeffekt eine installierbare responsive Web Anwendung, die jedoch 
+                            auch Zugriff auf die lokalen Geräte APIs hat (und in teilen auf dem Gerät liegt). Das klingt im ersten Moment verwirrend, aber das Schaubild aus den Folien zeigt es ganz gut.
+                        </p>
+                        <img src="vorlesung_7/PWA.PNG">
+                        <p>
+                            Wir haben also unsere PWA, die auf dem Endgerät läuft und einen Service Worker. Der Service Worker (im Hintergrund ausgeführter JavaScript Code) regelt die Kommunikation mit dem Webserver und sorgt dafür, dass wir beispielsweise Push Benachrichtigungen erhalten können oder die 
+                            Anwendung offline nutzen können. Für letzteres besitzt er einen eigenen Cache, sodass nicht für alle Anfragen eine Internetverbindung benötigt wird.
+                        </p>
+                        <h4>Wie erstellt man PWAs?</h4>
+                        <p>
+                            Als nächstes haben wir uns mit dem wie beschäftigt. Als Beispiel haben wir hier einen MERN Stack betrachtet. Dieser besteht aus <b>M</b>ongoDB, <b>E</b>xpress.js, <b>R</b>eact.js und <b>N</b>ode.js. 
+                            Dieser sogenannte Full-Stack deckt alles ab, was man für eine Web Anwendung braucht:
+                            <ul>
+                                <li>MongoDB als Datenbank</li>
+                                <li>Express als Backend</li>
+                                <li>React als Frontend</li>
+                                <li>Node als Laufzeitumgbung</li>
+                            </ul>
+                        </p>
+                        <p>
+                            Mit diesem Stack kann man sogenannte Single-Page-Applications erstellen. Dabei gibt es nur eine HTML Seite als "Mounting Point", die restlichen Seiten generiert man durch JavaScript.
+                        </p>
+                        <p>
+                            Eine solche habe ich tatsächlich für mein Vertiefungsthema gebaut, allerdings mit einem MEVN Stack (V steht für Vue.js).
+                        </p>
+                        <h3>ES6 2015 Änderungen</h3>
+                        <p>
+                            Nachdem wir uns nun mit dem beschäftigt haben was man JavaScript machen kann ging es nun um die Sprache selbst. In diesem Abschnitt der Vorlesung habe ich leider nicht wirklich viel Neues 
+                            mitgenommen, da ich mich einerseits für mein Vertiefungsthema aber auch "privat" schon vorher viel mit Vue, Node und Express beschäftigt habe und in diesen Frameworks/Laufzeitumgebungen Dinge wie Arrow-Functions, let 
+                            und JSON Objekte essentielle Bestandteile sind.
+                        </p>
+                        <p>
+                            Ein Thema, dass neu für mich war, waren die Klassen in JavaScript. Diese funktionieren tatsächlich ähnlich wie in Java. Einziger größerer (sichtbarer) Unterschied ist, dass der Konstruktor "constructor" heißt und nicht so wie 
+                            die Klasse. Die restlichen Folien zu diesem Thema haben wir aus Zeitmangel übersprungen.
+                        </p>
+                        <h3>Asynchrone Programmierung</h3>
+                        <p>
+                            Abschließend haben wir uns noch einmal mit asynchroner Programmierung beschäftigt. Diese unterscheidet sich ein Wenig von der uns bereits bekannten parallelisierten Programmierung mit mehreren Threads. Eine 
+                            gute Illustration bietet eine Folie aus der Vorlesung.
+                        </p>
+                        <img src="vorlesung_7/Asynchron.PNG">
+                        <p>
+                            Bei den synchronen Herangehensweisen warten wir implizit darauf, dass alles (das gerade läuft) fertig ist um fortzufahren. Bei der asynchronen Herangehensweise allerdings haben wir die Fäden in der Hand und haben die explizite Kontrolle über 
+                            den Ablauf. So könnten wir beispielsweise bestimmte Anwendungsdaten asynchron laden und währenddessen schon mit dem Aufbau der restlichen Seite fortfahren.
+                        </p>
+                        <h3>Kleinere Neuerungen</h3>
+                        <p>
+                            Gegen Ende der Vorlesung sind wir dann sehr schnell über noch zwei weitere Neuerungen gesprungen. Diese waren promises und imports. Erstere sind, wie der Name suggeriert, Versprechen die aufgestellt werden können. Diese werden 
+                            entweder erfüllt oder nicht und auf Basis dieser Entscheidung können verschiedene weitere Aktionen ausgeführt werden.
+                            Imports ermöglichen es uns Code aus anderen Dateien wiederzuverwenden.
+                        </p>
+                        <h3>Das Ende - *dam* *dam* *dam* *daaaaaam*</h3>
+                        <p>
+                            Anschließend gab es noch eine kurze Fragestunde für die anstehende Prüfung. Danach ging auch unsere letzte Vorlesung zu Ende.
+                        </p>
+                        <p>
+                            Es war auf jeden Fall eine der besten/interessantesten Vorlesungen der letzten beiden Semester, allerdings hätte ich mir tatsächlich mehr Neues gewünscht. Es scheint zwar immer wieder durch, aber gerade die zu Beginn der Vorlesung behandelten Themen glichen sich 
+                            vom Inhalt her leider sehr mit Themen vorangegangener Veranstaltungen. Eine wirklich kurze Wiederholung hätte an diesen Stellen voll ausgereicht. So blieb leider gegen Ende nicht genug Zeit für die - zumindest meiner Meinung nach - interessanteren Themen wie Node, ES6, React, Vue, Express.
+                        </p>            
+                    </main>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Journal | Vertiefungsthema</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="icon" href="../img/favicon.ico"  type="image/icon type">
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/site.js"></script>
+        <script src="vorlesung_2.js"></script>
+        <link rel="stylesheet" href="../css/vs2015.min.css">
+        <script src="../js/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <button onclick="topFunction()" id="goToTopButton" title="Go to top">Top</button>
+        <div id="contentWrapper">
+            <a id="goBack" href="index.html"><img src="../img/icons/left-arrow.svg"/></a>
+            <header>
+                <h1>Verteilte Systeme</h1>
+            </header>
+            <section id="breadcrumbs">
+                <p><a href="../index.html">Home</a> > <a href="index.html">Verteilte Systeme</a> > Vertiefungsthema</p>
+            </section>
+            <main id="blog">
+                <section>
+                    <header>
+                        <h2>Vertiefungsthema</h2>
+                        <!--<p><img class="calenderIcon" src="../img/icons/calender.png"/> 10.05.2021</p>-->
+                    </header>
+                    <main>
+                        <p>
+                            Wie auch im letzten Semester muss auch dieses mal wieder ein Vertiefungsthema erarbeitet werden. Dieses muss zwar nicht zwingend zum Fokus der Vorlesung (Serverseite Einwiklung) 
+                            passen, sollte aber zumindest mit Webentwicklung zu tun haben.
+                        </p>
+                        <p>
+                            Im letzten Semester habe ich mir das JS-Framework React näher angeschaut. In der Zwischenzeit bin ich jedoch auf Vue.js umgestiegen. Es ist meiner Meinung nach einfacher zu verwenden und 
+                            bietet eine noch bessere Dokumentation als React. Jetzt möchte ich allerdings nicht noch ein weiteres Frontend Framework vorstellen, weswegen ich mir überlegt habe mir etwas "Greifbareres" 
+                            anzuschauen aka. viel zu viel Aufwand betreiben und anstelle eines kleinen Projektes ein eigentlich viel zu großes starten 😁.
+                        </p>
+                        <p>
+                            Privat habe ich mich bereits etwas mit Vue.js und (zwingendermaßen) Node beschäftigt. In unserer Datenbankvorlesung haben wir uns MongoDB angesehen. Jetzt fehlt eigentlich nur noch ein Puzzelteil 
+                            zum Full-Stack und das ist Express.
+                        </p>
+                        <p>
+                            Das Restultat ist ein <b>MEVN Stack</b>.
+                        </p>
+                        <img src="vertiefungsthema/MEVN.jpg">
+                        <h3>Okay, und was bauen wir jetzt genau?</h3>
+                        <p>
+                            Gute Frage. Ich habe mich entschlossen diesmal einen Klassiker zu bauen - eine Todo Liste. Diese soll aus den Folgenden Komponenten bestehen.
+                            <ul>
+                                <li>Ein Vue.js Frontend, dass Einträge ausgeben, erstellen und löschen kann.</li>
+                                <li>Ein Express Backend, dass die Kommunikation mit unserer Datenbank übernimmt.</li>
+                                <li>Eine MongoDB Datenbank, die unsere ToDo Einträge speichert.</li>
+                            </ul>
+                        </p>
+                        <h3>Let's go - Projekterstellung</h3>
+                        <p>
+                            Wir starten mit der Projekterstellung. Node und Vue-CLI (Command-Line-Interface) habe ich bereits auf meinem Computer installiert. Ich erstelle nun einen Ordner "Vertiefungsthema". 
+                            Hier werden unsere Client und Server Projekte leben.
+                        </p>
+                        <h4>Client-Projekt</h4>
+                        <p>
+                            Als erstes erstellen wir unser Client Projekt. Wir nutzen für alles Visual Studio Code und schreiben folgendes in das integrierte Terminal:
+                        </p>
+                        <pre>
+                            <code class="shell">
+    vue create todo-app-client
+                            </code>
+                        </pre>
+                        <img style="width: 13vw; height: auto; float: right" src="vertiefungsthema/Vue3ProjektStruktur.PNG">
+                        <p>
+                            Wir erstellen hier ein neues Vue 3 Projekt mit dem Namen "todo-app-client". Vue-CLI erstellt das Projekt und wir können in den neu erstellten Projektordner wechseln.
+                        </p>
+                        <p>
+                            Ein Vue Projekt besteht immer aus den folgenden Komponenten:
+                            <ul>
+                                <li>Einem Public Ordner mit einer index.html (der Einstiegspunkt für unsere Anwendung) und</li>
+                                <li>einem src Ordner mit dem eigentlichen Anwendungscode (Komponenten, Bilder, JavaScript Code, etc.).</li>
+                            </ul>
+                        </p>
+                        <p>
+                            Wie man anhand der Ordnerstruktur erahnen kann ist auch Vue (ähnlich wie React) komponentenbasiert. Um dieses Vertiefungsthema jedoch so simpel wie möglich zu halten lösche ich die im nebenstehenden Bild 
+                            enthaltenen Ordner assets und components. Unsere App wird nur eine Seite enthalten und dort (um es möglichst einfach zu halten und sich nicht mit dem Emiten von Events etc. auseinander setzen zu müssen) auch erst einmal keine Komponenten enthalten.
+                        </p>
+                        <p>
+                            Nun überarbeiten wir die App.vue Datei sodass diese keines der soeben gelöschten Bilder und Kompnenten mehr verwendet. Die resultierende Datei sieht folgendermaßen aus.
+                        </p>
+                        <pre>
+                            <code class="vue">
+    &lt;template>
+        Test
+    &lt;/template>
+        
+    &lt;script>
+        export default{
+            setup(){
+            
+            }
+        }
+    
+    &lt;/script>
+    
+    &lt;style>
+    
+    &lt;/style>
+                            </code>
+                        </pre>
+                        <p>
+                            Kurz zur erklärung des Aufbaus: .vue Dateien bestehen aus drei Teilen:
+                            <ul>
+                                <li>Dem template Teil, welcher den HTML Code beinhaltet,</li>
+                                <li>dem skript Teil, welcher den JavaScript bzw. Vue Code beinhaltet und </li>
+                                <li>Dem style Teil, der das CSS beinhaltet.</li>
+                            </ul>
+                        </p>
+                        <p>
+                            Im Skript Teil befindet sich hier außerdem noch eine setup Methode, die zur <a href="https://v3.vuejs.org/api/composition-api.html#setup" target="_blank">Vue Composition API</a> gehört - eine 
+                            neuere Art Vue Komponenten zu schreiben.
+                        </p>
+                        <p>
+                            Wir können nun unsere App mit <i>npm run serve</i> starten und tada - eine wunderschöne Website <b>*Sarkasmus aus*</b>.
+                        </p>
+                        <img src="vertiefungsthema/FrontendInitial.PNG">
+                        <h4>Server-Projekt</h4>
+                        <p>
+                            Unser Client-Projekt ist erstellt. Nun geht es an das Express Backend. Dazu wechseln wir zurück zum Ordner "Vertiefungsthema" und erstellen dort den Ordner "todo-app-server".
+                        </p>
+                        <p>
+                            Auch hier öffnen wir wieder ein Terminal. Dort schreiben wir <i>npm init</i> um den Package Manager von Node zu initialisieren und durchlaufen das Setup mit ein paar Mal Enter (dadurch werden die Standardeinstellungen übernommen). 
+                            Nun machen wir uns noch das Leben ein Wenig leichter indem wir mit <i>npm install --save nodemon</i> nodemon installieren. Dieses Paket startet den Node Server immer neu, sobald wie eine Datei speichern. Damit wir diesen jedoch nicht jedes Mal 
+                            kompliziert aufrufen müssen fügen wir das Tool zum Startskript unserer (durch den ersten Schritt erhaltenen) package.json unter der Sektion "scripts" hinzu. Außerdem fügen wir den Punkt "type" hinzu und setzen ihn auf module, sodass 
+                            wir die (aus meiner Sicht) schöneren ES6 import Funktionen verwenden verwenden können und nicht mit require arbeiten müssen.
+                        </p>
+                        <img src="vertiefungsthema/BackendInitial.PNG">
+                        <p>
+                            Nachdem wir nun unser Node Projekt haben, installieren wir Express und drei weitere Dependencies in unser Projekt. Im Bild oben sind diese bereits enthalten, da es ein Wenig gedauert hat 
+                            sie zum Laufen zu bekommen und es unnötig kompliziert gewesen wäre wieder alles zu deinstallieren, nur um einen schöneren Screenshot hinzubekommen.
+                        </p>
+                        <pre>
+                            <code class="shell">
+    npm install --save express body-parser cors morgan
+                            </code>
+                        </pre>
+                        <p>
+                            Wie im letzten Bild zusehen war starten wir mit dem Startskript eine app.js im Ordner src. Diese müssen wir nun anlegen.
+                        </p>
+                        <pre>
+                            <code class="JavaScript">
+    // Dependencies importieren
+    import express from 'express'
+    import bodyparser from 'body-parser'
+    import cors from 'cors'
+    import morgan from 'morgan'
+    
+    // Express App erstellen
+    const app = express() 
+    
+    // Dependencies einbinden
+    app.use(morgan('dev'))
+    app.use(bodyparser.json())
+    app.use(cors())
+    
+    // Server soll auf 8081 lauschen (Client läuft auf 8080)
+    app.listen(process.env.PORT || 8081)
+                            </code>
+                        </pre>
+                        <p>
+                            Hier importieren wir die Dependencies, erstellen eine neue Express App, binden die vorher installierten Dependencies ein und lassen den Server auf Port 8081 lauschen. 
+                            Das funktioniert auch super, jedoch gibt uns der Server in der aktuellen Form nichts zurück, sollten wir uns mit einem Browser verbinden.
+                        </p>
+                        <p>
+                            Wir stellen nun also etwas über HTTP GET zur Verfügung. Das tuen wir mit app.get.
+                        </p>
+                        <pre>
+                            <code class="JavaScript">
+    app.get('/', (req, res) => {
+        res.send([
+            'Todo 1',
+            'Todo 2'
+        ])
+    })
+                            </code>
+                        </pre>
+                        <p>
+                            Diese Methode akzeptiert (zumindest in unserem Beispiel - es gibt weitere Überladungen) zwei Parameter. Den Pfad (hier '/') und eine Callback Funktion. Hier stehen die 
+                            zwei Objekte req (Request - das was erhalten wurde) und res (Response - das was wir zurück senden) zur Verfügung.
+                        </p>
+                        <p>
+                            In unserem Beispiel senden wir ein Array mit Todo 1 und Todo 2 zurück, falls ein HTTP GET auf localhost:8081/ gesendet wird.
+                        </p>
+                        <img src="vertiefungsthema/BackendTest.PNG">
+                        <p>
+                            Wir haben nun einen Server, der uns 2 Todo Einträge zurücksendet. Somit können wir wieder zurück zum Client und dort weiter machen.
+                        </p>
+                        <h3>Eine Verbindung vom Client zum Server Aufbauen</h3>
+                        <p>
+                            Wir haben nun einen sehr rudimentären Server. Unser Client muss sich nun mit diesem verbinden um an Daten zu gelangen. Dafür nutzen wir das npm Paket Axios.
+                        </p>
+                        <pre>
+                            <code class="shell">
+        npm install --save axios
+                            </code>
+                        </pre>
+                        <p>
+                            Wir erstellen also einen Ordner mit dem namen "services" im src Ordner unseres Client Projektes. Dort erstellen wir nun die Datei "ToDoAPI.js". 
+                            Sie importiert Axios, stellt die URL ein und exportiert eine Methode um auf die ToDos zugreifen zu können.
+                        </p>
+                        <pre>
+                            <code class="JavaScript">
+    import axios from 'axios'
+
+    api = axios.create({
+        baseURL: 'http://localhost:8081/'
+    })
+
+    export default {
+        getToDos() {
+            return api.get('')
+        }
+    }
+                            </code>
+                        </pre>
+                        <p>
+                            Nachdem wir nun unsere API haben, müssen wir diese in unsere App importieren und die Antwort verwerten. Dazu ändern wir unsere App.vue folgendermaßen ab:
+                        </p>
+                        <img src="vertiefungsthema/FrontendBasicLoad.PNG">
+                        <p>
+                            In der Template Sektion erstellen wir simple HTML Liste mit einem Listenelement. Dieses bekommt die Attribute v-for und :key. Beide sind aus Vue. Ersteres iteriert über ein vorgegebenes Array und 
+                            erzeugt so viele Elemente wie Array Elemente vorliegen. Der Syntax erinnert tatsächlich etwas an die JS Funktion foreach. Damit die erzeugten Elemente allerdings eindeutig identifizierbar sind und von Vue dynamisch aktualisiert werden 
+                            können müssen wir mit :key noch einen Schlüssel vergeben. Der Doppelpunkt ist hier die Kurzschreibweise für v-bind und bindet, wie der Name es schon suggeriert ein Attribut an eine Variable. Vorläufig können wir hier den Array Index verwenden, jedoch 
+                            wird der auf Dauer nicht eindeutig sein bzw. sich verschieben. Aber dazu später mehr.
+                            Die Geschweiften Klammern im darunterstehenden span Tag ermöglichen es uns auf die Variable todo (der aktuelle Eintrag) zuzugreifen. Sie werden auch Mustache Syntax genannt.
+                        </p>
+                        <p>
+                            Im Skript Teil wird es nun interessant. Wir importieren erst die Methoden onMounted und ref aus Vue. Ersteres ist ein sogenannter <a href="https://v3.vuejs.org/api/options-lifecycle-hooks.html" target="_blank">Lifecycle Hook (Link führt zu allgemeinen Doku - In der Composition API sehen sie etwas anders aus)</a>. Dieser wird, in diesem Fall, 
+                            ausgeführt sobald die Anwendung gemounted bzw. in den DOM eingehongen wird. Ref ist eine Wrapper Klasse die sich um die Reaktivität der von uns verwendeten Daten kümmert.
+                            Außerdem finden wir hier unsere ToDoAPI wieder. Das @ steht hier für unseren src Ordner.
+                        </p>
+                        <p>
+                            Wir erstellen nun eine Konstante für unsere todos welche ein Ref Objekt beinhaltet. Dieses beinhaltet initial ein leeres Array. Wenn nun die Anwendung gemounted wird, laden wir unsere Todos. Diese Funktion ist asynchron. 
+                            In ihr warten wir auf die Antwort unserer API und setzen danach unsere todos auf die Daten der Antwort.
+                        </p>
+                        <p>
+                            Am Ende geben wir unsere todos nach außen weiter, sodass wir im Template Teil darauf zugreifen können.
+                        </p>
+                        <p>
+                            Das Ergebnis kann sich schon sehen lassen. Unser Frontend kommuniziert mit dem Backend und stellt die Antwort als Liste dar.
+                        </p>
+                        <img src="vertiefungsthema/FrontendBasicLoadErgbnis.PNG">
+                        <h3>Die Datenbank</h3>
+                        <h4>Aufsetzen der Datenbank</h4>
+                        <p>
+                            Front- und Backend steht, allerdings arbeiten wir noch mit einem "gehardcodeten" Array des Backends. Was fehlt ist unsere Datenbank in der wir die Daten ablegen können. Glücklicherweise bietet MongoDB einen kostenlosen 
+                            Datenbankservice an, sodass wir diese nicht lokal aufsetzen müssen. Wir erstellen also erst unseren Testcluster.
+                        </p>
+                        <img src="vertiefungsthema/Testcluster.PNG">
+                        <p>
+                            Anschließend können wir unsere Datenbank und unseren Datenbank Nutzer erstellen und unsere IP zu einer Whitelist hinzufügen.
+                        </p>
+                        <img style="width: 49%; padding-right: 1%; float: left; margin: 0" src="vertiefungsthema/DatabaseCollection.PNG">
+                        <img style="width: 49%; margin: 0" src="vertiefungsthema/DatabaseUser.PNG">
+                        <img src="vertiefungsthema/DatabaseIP.PNG">
+                        <h4>Das Backend mit der Datenbank verbinden</h4>
+                        <p>
+                            Die Datenbank ist live, einen User haben wir auch. Es ist an der Zeit, das Backend zu verbinden. Dazu installieren wir erst einmal mongodb in das Backend Projekt.
+                        </p>
+                        <pre>
+                            <code class="shell">
+    npm install —-save mongodb
+                            </code>
+                        </pre>
+                        <p>
+                            Jetzt importieren wir MongoDB noch in unsere app.js und schreiben eine Methode für den Verbinsungsaufbau. Glücklicherweise gibt es diese schon fertig auf der MongoDB Website. 
+                            Wir ändern lediglich unser Passwort, den Namen der Datenbank (test) und übergeben "unsere herrgestellte Verbindung" zur Datenbank in eine globale Variable mongoClient.
+                        </p>
+                        <p>
+                            Anschließend ändern wir unsere app.get Methode insofern ab, als das wir jetzt eine Abfrage auf unsere Collection starten und das Ergebnis dieser Abfrage zurückgeben.
+                        </p>
+                        <img src="vertiefungsthema/BackendMongoDB.PNG">
+                        <p>
+                            Bevor ich den Server nun wieder starte füge ich über das MongoDB noch einen Testeintrag hinzu. Et voilá, wir haben einen Eintrag aus der MongoDB im Frontend.
+                        </p>
+                        <img src="vertiefungsthema/FrontendMongoLoad.PNG">
+                        <p>
+                            Nun sollte auch klar sein, was wir wohl als Key für die Liste im Frontend nehmen werden.
+                        </p>
+                        <img src="vertiefungsthema/FrontendKeyAttribut.PNG">
+                        <h3>Daten in die Datenbank schreiben</h3>
+                        <p>
+                            Nun können wir aus der Datenbank lesen. Was noch fehlt ist das schreiben.
+                        </p>
+                        <h4>Frontend</h4>
+                        <p>
+                            Dazu beginnen wir im Frontend. Wir erstellen ein HTML Formular mit einer Textbox und einem Button und eine weitere asynchrone Methode die mit unserer API kominiziert.
+                        </p>
+                        <img src="vertiefungsthema/FrontendAddTodoForm.PNG">
+                        <img src="vertiefungsthema/FrontendAddTodoJavaScript.PNG">
+                        <p>
+                            Auch hier kommen wieder ein paar Vue spezifische Dinge zum Einsatz. Als Erstes <a href="https://v3.vuejs.org/guide/events.html" target="_blank">@submit, die Kurzform für v-on:submit</a>. Hiermit lassen sich Events abfangen und direkt mit Methoden verbinden. 
+                            Außerdem kommt hier noch <a href="https://v3.vuejs.org/guide/forms.html" target="_blank">v-model</a> zum Einsatz. Dies funktionert ähnlich wie v-bind, jedoch in beide Richtungen. 
+                            Perfekt also für Formulare.
+                        </p>
+                        <p>
+                            Im Skript Teil müssen wir nun die Variable newTodo und die Methode addTodo bereitstellen. Da wir im Formular auch das Event als Parameter übergeben haben können wir hier auch direkt 
+                            preventDefault() ausführen um ein "Versenden" des Formulars zu unterbinden. Anscließend stellen wir eine Anfrage an unsere API und übergeben den aktuellen Wert von newTodo. 
+                            Wenn nun die Antwort zurück kommt aktualieren wir unser lokales todos Array und setzen den Wert von newTodo auf einen leeren String.
+                        </p>
+                        <p>
+                            Anschließend überarbeiten wir noch kurz unsere API.
+                        </p>
+                        <img src="vertiefungsthema/FrontendAPIAdd.PNG"/>
+                        <h4>Backend</h4>
+                        <p>
+                            Damit unser Backend nun etwas mit unserem neuen API Call anfangen kann müssen wir eine post Methode hinzufügen.
+                        </p>
+                        <img src="vertiefungsthema/BackendAdd.PNG">
+                        <p>
+                            Hier horcht unser Server am den Pfad "/addTodo". Wenn Daten empfangen werden, wird der Todo aus dem Request in eine lokale Varible geschrieben und mit collection.insertOne in die 
+                            Datenbank geschrieben. Der JavaScript Syntax ist tatsächlich dem Systax der MongoShell (eigene Shell der Datenbank) sehr ähnlich, was es uns hier sehr einfach macht. Dazu, dass die MongoDB einen 
+                            relativ einfachen/sprechenden Syntax hat. In der Callback Methode schicken wir nun den neu eingefügten Eintrag zurück zum Frontend - nun als Document aus der Datenbank.
+                        </p>
+                        <img src="vertiefungsthema/FrontendHinzufuegenTest.PNG">
+                        <p>
+                            Es funktioniert.
+                        </p>
+                        <h3>Todos abschließen</h3>
+                        <p>
+                            Wir können nun Todos hinzufügen und anzeigen. Das Einzige, dass noch (zumindes funktionell) fehlt ist eine Möglichkeit sie abzuschließen.
+                        </p>
+                        <h4>Frontend</h4>
+                        <p>
+                            Dazu überarbeiten wir unser Frontend ein weiteres Mal und fügen Checkboxen hinzu.
+                        </p>
+                        <img src="vertiefungsthema/FrontendListeCheckbox.PNG">
+                        <p>
+                            Diese Checkboxen erhalten außerdem ein @click mit dem wir eine deleteTodo Methode ausführen die die ID des Eintrags als Parameter bekommt. Außerdem ändern wir noch todo zu todo.title in den geeschwungenen Klammern, 
+                            da das einfach schöner aussieht (und kein User des Frontend etwas mit der ID anfangen kann).
+                        </p>
+                        <p>
+                            Natürlich muss auch hier wieder eine entsprechende Methode im Skript Teil und unserer der API geschrieben werden.
+                        </p>
+                        <p>App.vue</p>
+                        <img src="vertiefungsthema/FrontendDeleteMethod.PNG">
+                        <p>ToDoAPI.js</p>
+                        <img src="vertiefungsthema/FrontendAPIDelete.PNG">
+                        <h4>Backend</h4>
+                        <p>
+                            Last but not least müssen wir natürlich auch unserem Backend die Möglichkeit geben auf die Anfrage zu reagieren.
+                        </p>
+                        <img src="vertiefungsthema/BackendRemove.PNG">
+                        <p>
+                            Hier nutzen wir analog zur add Methode collection.removeOne um ein document aus der Datenbank zu löschen.
+                        </p>
+                        <h3>Der finale Test</h3>
+                        <p>
+                            Jetzt ist unsere Todo Anwendung funktional fertig. Wir können sie nun testen.
+                        </p>
+                        <video controls="controls">
+                            <source src="vertiefungsthema/fertig.mp4" type="video/mp4">
+                            Ihr Browser unterstützt den HTML Video Tag nicht.
+                        </video>
+                    </main>
+            </main>
+            <footer>
+                <p>Diese Seite wurde im Kontext eines Kurses an der <a href="https://dhbw-mannheim.de" target="_blank"><img src="../img/dhbw_logo.svg" alt="DHBW Mannheim" height="20px"></a> zu 99% selbst erstellt.</p>
+                <p>&copy2020 Patrick Pfurtscheller</p>
+            </footer>
+        </div>
+    </body>
+</html>
