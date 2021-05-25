@@ -32,13 +32,13 @@
                         <h3>Dynamische Inhalte</h3>
                         <p>
                             Heute haben wir uns mit dynamischen Inhalten auf Websites beschäftigt. Dazu haben wir uns als erstes, am Beispiel eines Verkaufsberichtes, angeschaut wie das Ganze vor über 10 Jahren 
-                            ablief. Wenn man damals eine dynamische Site umsetzen wollte konnte man dafür PHP verwenden und über ein HTML Formular und einen Button einen GET-Request senden. 
+                            ablief. Wenn man damals eine dynamische Site umsetzen wollte, konnte man dafür PHP verwenden und über ein HTML Formular und einen Button einen GET-Request senden. 
                             Die Nachteile dieser Herangehensweise werden offensichtlich, wenn man sich einmal mit dem Ablauf auseinandersetzt.
                         </p>
                         <img src="vorlesung_5/dateienVorher.png">
                         <img src="vorlesung_5/alterWeg.PNG">
                         <p>
-                            Wir müssen die Seite bei jeder Abfrage aktualisieren und der Server sendet und jedes Mal den vollständigen HTML Code. Außerdem ist die alte Seite "eingefroren" bis 
+                            Wir müssen die Seite bei jeder Abfrage aktualisieren und der Server sendet und jedes Mal den vollständigen HTML Code. Außerdem ist die alte Seite "eingefroren", bis 
                             die neue Seite vollständig geladen ist.
                         </p>
                         <h3>AJAX - ein neuer Weg</h3>
@@ -47,7 +47,7 @@
                             Javascript um diesen GET Befehl auszuführen und die neuen Daten direkt in die schon bestehende Seite einzubinden.
                         </p>
                         <p>
-                            Dazu modifizieren wir den von Herrn Noll bereitegestellten Code.
+                            Dazu modifizieren wir den von Herrn Noll bereitgestellten Code.
                         </p>
                         <h4>Javascript</h4>
                         <p>
@@ -126,7 +126,7 @@
                         <h4>HTML</h4>
                         <p>
                             Nun müssen wir das uns vorgegebene HTML Formular anpassen. Wir entfernen die form-action und den Pfad auf den es verweisen würde und ändern den input vom Typ submit zum Typ button. 
-                            Das letztere müssen wir zwingend machen, da das Forular sonst versuchen würde die Seite neu zu laden. Zum Schluss bekommt unser Button noch einen onclick Listener, der auf unsere "getVerkaufteBoards" Funktion verweist.
+                            Das letztere müssen wir zwingend machen, da das Formular sonst versuchen würde die Seite neu zu laden. Zum Schluss bekommt unser Button noch einen onclick Listener, der auf unsere "getVerkaufteBoards" Funktion verweist.
                         </p>
                         <pre>
                             <code class="HTML">

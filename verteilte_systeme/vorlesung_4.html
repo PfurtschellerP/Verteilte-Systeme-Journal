@@ -40,13 +40,13 @@
                         </p>
                         <h4>Nebenläufigkeitsprobleme</h4>
                         <p>
-                            Wie der Titel es schon anzeigt kann es bei Threads zu Nebenläufigkeitsproblemen kommen. Diese treten auf, wenn zwei oder mehr Threads mit den gleichen Heap-Objekten arbeiten und 
-                            führen im schlimmsten Fall zu verfäschten Daten. Im Skript wird dieses Phänomen auch als "Die-linke-Hand-weiß-nicht-was-die-rechte-tut-Geschichte" bezeichnet. Und nicht nur das. Auch ein Thread 
+                            Wie der Titel es schon anzeigt, kann es bei Threads zu Nebenläufigkeitsproblemen kommen. Diese treten auf, wenn zwei oder mehr Threads mit den gleichen Heap-Objekten arbeiten und 
+                            führen im schlimmsten Fall zu verfälschten Daten. Im Skript wird dieses Phänomen auch als "Die-linke-Hand-weiß-nicht-was-die-rechte-tut-Geschichte" bezeichnet. Und nicht nur das. Auch ein Thread 
                             selbst weiß nicht, ob er zwischen verschiedenen Statements nicht mal kurz blockiert war und sich in der Zwischenzeit Daten geändert haben.
                         </p>
                         <p>
                             In der Vorlesung wurde uns dazu das "Bank-Problem" erläutert. Dabei geht es um ein Ehepaar, welches das gemeinsame Konto nicht überziehen will. Der Ehemann, Reiner, überprüft also zuerst den Kontostand. Auf dem Konto sind noch 
-                            100€. Er braucht lediglich 50€. Bevor er das Geld nun aber abheben geht, schläft er kurz ein. Seine Frau Monika überprüft nun auch den Kontostand. Sie sieht, dass noch 100€ darauf sind und hebt diese ab. Nun wacht Reiner auf, ohne bewusst warzunehmen, 
+                            100€. Er braucht lediglich 50€. Bevor er das Geld nun aber abheben geht, schläft er kurz ein. Seine Frau Monika überprüft nun auch den Kontostand. Sie sieht, dass noch 100€ darauf sind, und hebt diese ab. Nun wacht Reiner auf, ohne bewusst war zunehmen, 
                             dass er geschlafen hat und hebt 50€ vom Konto ab. Er hatte ja aus seiner Sicht gerade erst überprüft wie viel Geld sich darauf befindet. <br>
                             Und schon ist es geschehen, das Konto ist überzogen.
                         </p>
@@ -57,7 +57,7 @@
                             arbeiten.
                         </p>
                         <p>
-                            Anschließend haben wir noch kurz über das "Problem der verlorenen Aktualisierung" gesprochen welches eine Spezialform des bereitserwähnten Problems darstellt. Es entsteht, wenn Änderungen an Objekten nicht atomar sind, sondern beispielsweise 
+                            Anschließend haben wir noch kurz über das "Problem der verlorenen Aktualisierung" gesprochen welches eine Spezialform des bereits erwähnten Problems darstellt. Es entsteht, wenn Änderungen an Objekten nicht atomar sind, sondern beispielsweise 
                             in Etappen geschehen. Das Beispiel aus der Vorlesung war eine Variable, die erhöht werden sollte indem sie erst in einer lokalen Variable zwischengespeichert wurde und anschließend diese Variable der Ursprungsvariable als Wert + 1 zugewiesen wurde.
                         </p>
                         <pre>
@@ -69,16 +69,16 @@
                             </code>
                         </pre>
                         <p>
-                            Wenn auf diese Methode nun unterschiedliche Threads zu unterschiedlichen Zeiten zugreifen ist das Chaos vorprogrammiert.
+                            Wenn auf diese Methode nun unterschiedliche Threads zu unterschiedlichen Zeiten zugreifen, ist das Chaos vorprogrammiert.
                         </p>
                         <h4>Thread Deadlocks</h4>
                         <p>
-                            Ein weiteres Problem bei Multithreading sind sogenannte Deadlocks. Dabei blockieren sich synchronisierte Methoden gegenseitig bei der Ausführung. Diesen Vorgang kann man am Besten im untenstehenden Bild nachvollziehen.
+                            Ein weiteres Problem bei Multithreading sind sogenannte Deadlocks. Dabei blockieren sich synchronisierte Methoden gegenseitig bei der Ausführung. Diesen Vorgang kann man am besten im untenstehenden Bild nachvollziehen.
                         </p>
                         <img src="vorlesung_4/Deadlock.PNG">
                         <h4>Erzeuger/Verbraucher-Problem</h4>
                         <p>
-                            Das letzte der betrachteten Probleme mit Threads war das Erzeuger/Verbraucher-Problem. Dieses entsteht wenn zwei oder mehr Threads Daten über einen Puffer-Speicher austauschen. So kann es vorkommen, dass Verbraucher schon versuchen 
+                            Das letzte der betrachteten Probleme mit Threads war das Erzeuger/Verbraucher-Problem. Dieses entsteht, wenn zwei oder mehr Threads Daten über einen Puffer-Speicher austauschen. So kann es vorkommen, dass Verbraucher schon versuchen 
                             auf neue Daten zuzugreifen, obwohl diese noch nicht oder noch ältere Werte vorliegen. Auch hier führt dies wieder zu verfälschten bzw. unvollständigen Daten.
                         </p>
                         <p>

@@ -32,7 +32,7 @@
                         <h3>PHP</h3>
                         <p>
                             In der heutigen Vorlesung haben wir uns mit PHP auseinandersetzt. Dazu haben wir zuerst eine Statistik aus dem Jahre 2011 und eine aktuelle zum Thema 
-                            "Verwendete Serverseitige Programmiersprachen" angeschaut. Hier beispielsweise die aktuellste Statistik aus dem aktuellen Monat (Mai 2021).
+                            "Verwendete Serverseitige Programmiersprachen" angeschaut. Hier beispielsweise die aktuelle Statistik aus diesem Monat (Mai 2021).
                         </p>
                         <img src="vorlesung_6/Statistik.PNG">
                         <p>
@@ -112,8 +112,8 @@
                             </code>
                         </pre>
                         <p>
-                            Abgeschickt wird dieses Formulat mit dem "Entführung melden"-Button am Ende des Formulars. Da dieser vom Typ "submit" ist, löst er die im Form Tag hinterlagte action 
-                            aus. Diese ist in diesem Fall unsere meldung.php. Die verwendete Methode ist in diesem Fall Post. Wir starten nun also mit der HTML Seite unseres Formulares. 
+                            Abgeschickt wird dieses Formular mit dem "Entführung melden"-Button am Ende des Formulars. Da dieser vom Typ "submit" ist, löst er die im Form Tag hinterlegte action 
+                            aus. Diese ist in diesem Fall unsere meldung.php. Die verwendete Methode ist in diesem Fall Post. Wir starten nun also mit der HTML Seite unseres Formulars. 
                             Dann schicken wir mit Post unsere Formulardaten an meldung.php. Aber was passiert dann? Dazu haben wir uns diese Datei auch noch einmal genauer angesehen.
                         </p>
                         <pre>
@@ -162,15 +162,15 @@
                         </p>
                         <p>
                             Weiter unten nutzen wir dann echo um vorgegebene Strings mit unseren neu gesetzten Variablen zu kombinieren und in den HTML Code einzubinden.
-                            Dieses Kominieren passiert auf dem Server. Wenn das abgeschlossen ist, erhält der Web-Browser des Client lediglich die fertige HTML-Seite.
+                            Dieses Kombinieren passiert auf dem Server. Wenn das abgeschlossen ist, erhält der Web-Browser des Client lediglich die fertige HTML-Seite.
                         </p>
                         <h4>MySQL Anbindung</h4>
                         <p>
-                            Nun können wir also Formulardaten engegennehmen und diese in PHP auf dem Server verarbeiten. Im ursprünglichen Beispiel war dann angedacht, diese Daten anschließend per 
+                            Nun können wir also Formulardaten entgegennehmen und diese in PHP auf dem Server verarbeiten. Im ursprünglichen Beispiel war dann angedacht, diese Daten anschließend per 
                             Mail zu versenden.
                         </p>
                         <p>
-                            Da das aber nicht wirklich praktikabel ist (irgendwann "läuft das eigene Postfach über") wollen wir nun mit einer MySQL Datenbank arbeiten um die Daten zu speichern.
+                            Da das aber nicht wirklich praktikabel ist (irgendwann "läuft das eigene Postfach über") wollen wir nun mit einer MySQL Datenbank arbeiten, um die Daten zu speichern.
                         </p>
                         <p>
                             Glücklicherweise nutzen wir bereits XAMPP. Dort ist ein MySQL Server integriert und die Weboberfläche PHPMyAdmin ist vorinstalliert. Dort können wir nun unsere Datenbanktabelle erstellen.
@@ -185,7 +185,7 @@
                         <img src="vorlesung_6/Querry.PNG">
                         <p>
                             Nachdem wir nun eine Datenbank und eine Tabelle hatten haben wir über SQL mit INSERT INTO alien_entfuehrung VALUES (&lt;Werte durch Kommata getrennt>)auch probiert erste Einträge einzufügen. Das 
-                            hat auch gut funktioniert, sodass wir nun zum eigentlichen PHP Teil kamen. Wir haben nun unseren Webserver von dem unser Web-Browser das HTML Formular bekommt. Wenn wir als User auf Senden klicken sollte 
+                            hat auch gut funktioniert, sodass wir nun zum eigentlichen PHP Teil kamen. Wir haben nun unseren Webserver von dem unser Web-Browser das HTML Formular bekommt. Wenn wir als User auf Senden klicken, sollte 
                             nun der PHP Server eine Verbindung zum MySQL Server aufbauen um die Formulardaten in unsere Tabelle zu schreiben.
                         </p>
                         <img src="vorlesung_6/modellMitSQL.PNG">
@@ -246,7 +246,7 @@
                             Wir stellen mit mysqli_connect eine Verbindung zu unserer Datenbank her. Daraufhin bauen wir uns mit Hilfe der Stringverkettung unsere SQL Query zusammen, die wir dann mit mysqli_query "laufen lassen".
                         </p>
                         <p>
-                            Um zu überprüfen, ob alles reibungsfrei funktioniert haben wir nun Testdaten in unser Formular eingetragen und dieses abgeschickt. Anschließend riefen wir nun unsere Datenbank über PHPMyAdmin auf und siehe da, 
+                            Um zu überprüfen, ob alles reibungsfrei funktioniert, haben wir nun Testdaten in unser Formular eingetragen und dieses abgeschickt. Anschließend riefen wir nun unsere Datenbank über PHPMyAdmin auf und siehe da, 
                             die neuen Daten waren in der Tabelle vorhanden.
                         </p>
                         <img src="vorlesung_6/resultatDatenbank.PNG">

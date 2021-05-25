@@ -30,7 +30,7 @@
                     </header>
                     <main>
                         <p>
-                            Wie auch im letzten Semester muss auch dieses mal wieder ein Vertiefungsthema erarbeitet werden. Dieses muss zwar nicht zwingend zum Fokus der Vorlesung (Serverseite Einwiklung) 
+                            Wie auch im letzten Semester muss auch dieses Mal wieder ein Vertiefungsthema erarbeitet werden. Dieses muss zwar nicht zwingend zum Fokus der Vorlesung (Serverseite Einwicklung) 
                             passen, sollte aber zumindest mit Webentwicklung zu tun haben.
                         </p>
                         <p>
@@ -43,7 +43,7 @@
                             zum Full-Stack und das ist Express.
                         </p>
                         <p>
-                            Das Restultat ist ein <b>MEVN Stack</b>.
+                            Das Resultat ist ein <b>MEVN Stack</b>.
                         </p>
                         <img src="vertiefungsthema/MEVN.jpg">
                         <h3>Okay, und was bauen wir jetzt genau?</h3>
@@ -85,7 +85,7 @@
                             enthaltenen Ordner assets und components. Unsere App wird nur eine Seite enthalten und dort (um es möglichst einfach zu halten und sich nicht mit dem Emiten von Events etc. auseinander setzen zu müssen) auch erst einmal keine Komponenten enthalten.
                         </p>
                         <p>
-                            Nun überarbeiten wir die App.vue Datei sodass diese keines der soeben gelöschten Bilder und Kompnenten mehr verwendet. Die resultierende Datei sieht folgendermaßen aus.
+                            Nun überarbeiten wir die App.vue Datei sodass diese keines der soeben gelöschten Bilder und Komponenten mehr verwendet. Die resultierende Datei sieht folgendermaßen aus.
                         </p>
                         <pre>
                             <code class="vue">
@@ -108,7 +108,7 @@
                             </code>
                         </pre>
                         <p>
-                            Kurz zur erklärung des Aufbaus: .vue Dateien bestehen aus drei Teilen:
+                            Kurz zur Erklärung des Aufbaus: .vue Dateien bestehen aus drei Teilen:
                             <ul>
                                 <li>Dem template Teil, welcher den HTML Code beinhaltet,</li>
                                 <li>dem skript Teil, welcher den JavaScript bzw. Vue Code beinhaltet und </li>
@@ -129,9 +129,9 @@
                         </p>
                         <p>
                             Auch hier öffnen wir wieder ein Terminal. Dort schreiben wir <i>npm init</i> um den Package Manager von Node zu initialisieren und durchlaufen das Setup mit ein paar Mal Enter (dadurch werden die Standardeinstellungen übernommen). 
-                            Nun machen wir uns noch das Leben ein Wenig leichter indem wir mit <i>npm install --save nodemon</i> nodemon installieren. Dieses Paket startet den Node Server immer neu, sobald wie eine Datei speichern. Damit wir diesen jedoch nicht jedes Mal 
+                            Nun machen wir uns noch das Leben ein Wenig leichter, indem wir mit <i>npm install --save nodemon</i> nodemon installieren. Dieses Paket startet den Node Server immer neu, sobald wie eine Datei speichern. Damit wir diesen jedoch nicht jedes Mal 
                             kompliziert aufrufen müssen fügen wir das Tool zum Startskript unserer (durch den ersten Schritt erhaltenen) package.json unter der Sektion "scripts" hinzu. Außerdem fügen wir den Punkt "type" hinzu und setzen ihn auf module, sodass 
-                            wir die (aus meiner Sicht) schöneren ES6 import Funktionen verwenden verwenden können und nicht mit require arbeiten müssen.
+                            wir die (aus meiner Sicht) schöneren ES6 import Funktionen verwenden können und nicht mit require arbeiten müssen.
                         </p>
                         <img src="vertiefungsthema/BackendInitial.PNG">
                         <p>
@@ -171,7 +171,7 @@
                             Das funktioniert auch super, jedoch gibt uns der Server in der aktuellen Form nichts zurück, sollten wir uns mit einem Browser verbinden.
                         </p>
                         <p>
-                            Wir stellen nun also etwas über HTTP GET zur Verfügung. Das tuen wir mit app.get.
+                            Wir stellen nun also etwas über HTTP GET zur Verfügung. Das tun wir mit app.get.
                         </p>
                         <pre>
                             <code class="JavaScript">
@@ -185,7 +185,7 @@
                         </pre>
                         <p>
                             Diese Methode akzeptiert (zumindest in unserem Beispiel - es gibt weitere Überladungen) zwei Parameter. Den Pfad (hier '/') und eine Callback Funktion. Hier stehen die 
-                            zwei Objekte req (Request - das was erhalten wurde) und res (Response - das was wir zurück senden) zur Verfügung.
+                            zwei Objekte req (Request - das was erhalten wurde) und res (Response - das was wir zurücksenden) zur Verfügung.
                         </p>
                         <p>
                             In unserem Beispiel senden wir ein Array mit Todo 1 und Todo 2 zurück, falls ein HTTP GET auf localhost:8081/ gesendet wird.
@@ -196,7 +196,7 @@
                         </p>
                         <h3>Eine Verbindung vom Client zum Server Aufbauen</h3>
                         <p>
-                            Wir haben nun einen sehr rudimentären Server. Unser Client muss sich nun mit diesem verbinden um an Daten zu gelangen. Dafür nutzen wir das npm Paket Axios.
+                            Wir haben nun einen sehr rudimentären Server. Unser Client muss sich nun mit diesem verbinden, um an Daten zu gelangen. Dafür nutzen wir das npm Paket Axios.
                         </p>
                         <pre>
                             <code class="shell">
@@ -205,7 +205,7 @@
                         </pre>
                         <p>
                             Wir erstellen also einen Ordner mit dem namen "services" im src Ordner unseres Client Projektes. Dort erstellen wir nun die Datei "ToDoAPI.js". 
-                            Sie importiert Axios, stellt die URL ein und exportiert eine Methode um auf die ToDos zugreifen zu können.
+                            Sie importiert Axios, stellt die URL ein und exportiert eine Methode, um auf die ToDos zugreifen zu können.
                         </p>
                         <pre>
                             <code class="JavaScript">
@@ -231,7 +231,7 @@
                             erzeugt so viele Elemente wie Array Elemente vorliegen. Der Syntax erinnert tatsächlich etwas an die JS Funktion foreach. Damit die erzeugten Elemente allerdings eindeutig identifizierbar sind und von Vue dynamisch aktualisiert werden 
                             können müssen wir mit :key noch einen Schlüssel vergeben. Der Doppelpunkt ist hier die Kurzschreibweise für v-bind und bindet, wie der Name es schon suggeriert ein Attribut an eine Variable. Vorläufig können wir hier den Array Index verwenden, jedoch 
                             wird der auf Dauer nicht eindeutig sein bzw. sich verschieben. Aber dazu später mehr.
-                            Die Geschweiften Klammern im darunterstehenden span Tag ermöglichen es uns auf die Variable todo (der aktuelle Eintrag) zuzugreifen. Sie werden auch Mustache Syntax genannt.
+                            Die Geschweiften Klammern im darunter stehenden span Tag ermöglichen es uns auf die Variable todo (der aktuelle Eintrag) zuzugreifen. Sie werden auch Mustache Syntax genannt.
                         </p>
                         <p>
                             Im Skript Teil wird es nun interessant. Wir importieren erst die Methoden onMounted und ref aus Vue. Ersteres ist ein sogenannter <a href="https://v3.vuejs.org/api/options-lifecycle-hooks.html" target="_blank">Lifecycle Hook (Link führt zu allgemeinen Doku - In der Composition API sehen sie etwas anders aus)</a>. Dieser wird, in diesem Fall, 
@@ -272,15 +272,15 @@
                             </code>
                         </pre>
                         <p>
-                            Jetzt importieren wir MongoDB noch in unsere app.js und schreiben eine Methode für den Verbinsungsaufbau. Glücklicherweise gibt es diese schon fertig auf der MongoDB Website. 
-                            Wir ändern lediglich unser Passwort, den Namen der Datenbank (test) und übergeben "unsere herrgestellte Verbindung" zur Datenbank in eine globale Variable mongoClient.
+                            Jetzt importieren wir MongoDB noch in unsere app.js und schreiben eine Methode für den Verbindungsaufbau. Glücklicherweise gibt es diese schon fertig auf der MongoDB Website. 
+                            Wir ändern lediglich unser Passwort, den Namen der Datenbank (test) und übergeben "unsere hergestellte Verbindung" zur Datenbank in eine globale Variable mongoClient.
                         </p>
                         <p>
                             Anschließend ändern wir unsere app.get Methode insofern ab, als das wir jetzt eine Abfrage auf unsere Collection starten und das Ergebnis dieser Abfrage zurückgeben.
                         </p>
                         <img src="vertiefungsthema/BackendMongoDB.PNG">
                         <p>
-                            Bevor ich den Server nun wieder starte füge ich über das MongoDB noch einen Testeintrag hinzu. Et voilá, wir haben einen Eintrag aus der MongoDB im Frontend.
+                            Bevor ich den Server nun wieder starte, füge ich über das MongoDB noch einen Testeintrag hinzu. Et voilá, wir haben einen Eintrag aus der MongoDB im Frontend.
                         </p>
                         <img src="vertiefungsthema/FrontendMongoLoad.PNG">
                         <p>
@@ -293,19 +293,19 @@
                         </p>
                         <h4>Frontend</h4>
                         <p>
-                            Dazu beginnen wir im Frontend. Wir erstellen ein HTML Formular mit einer Textbox und einem Button und eine weitere asynchrone Methode die mit unserer API kominiziert.
+                            Dazu beginnen wir im Frontend. Wir erstellen ein HTML Formular mit einer Textbox und einem Button und eine weitere asynchrone Methode die mit unserer API kommuniziert.
                         </p>
                         <img src="vertiefungsthema/FrontendAddTodoForm.PNG">
                         <img src="vertiefungsthema/FrontendAddTodoJavaScript.PNG">
                         <p>
                             Auch hier kommen wieder ein paar Vue spezifische Dinge zum Einsatz. Als Erstes <a href="https://v3.vuejs.org/guide/events.html" target="_blank">@submit, die Kurzform für v-on:submit</a>. Hiermit lassen sich Events abfangen und direkt mit Methoden verbinden. 
-                            Außerdem kommt hier noch <a href="https://v3.vuejs.org/guide/forms.html" target="_blank">v-model</a> zum Einsatz. Dies funktionert ähnlich wie v-bind, jedoch in beide Richtungen. 
+                            Außerdem kommt hier noch <a href="https://v3.vuejs.org/guide/forms.html" target="_blank">v-model</a> zum Einsatz. Dies funktioniert ähnlich wie v-bind, jedoch in beide Richtungen. 
                             Perfekt also für Formulare.
                         </p>
                         <p>
                             Im Skript Teil müssen wir nun die Variable newTodo und die Methode addTodo bereitstellen. Da wir im Formular auch das Event als Parameter übergeben haben können wir hier auch direkt 
-                            preventDefault() ausführen um ein "Versenden" des Formulars zu unterbinden. Anscließend stellen wir eine Anfrage an unsere API und übergeben den aktuellen Wert von newTodo. 
-                            Wenn nun die Antwort zurück kommt aktualieren wir unser lokales todos Array und setzen den Wert von newTodo auf einen leeren String.
+                            preventDefault() ausführen um ein "Versenden" des Formulars zu unterbinden. Anschließend stellen wir eine Anfrage an unsere API und übergeben den aktuellen Wert von newTodo. 
+                            Wenn nun die Antwort zurück kommt, aktualisieren wir unser lokales todos Array und setzen den Wert von newTodo auf einen leeren String.
                         </p>
                         <p>
                             Anschließend überarbeiten wir noch kurz unsere API.
@@ -317,9 +317,9 @@
                         </p>
                         <img src="vertiefungsthema/BackendAdd.PNG">
                         <p>
-                            Hier horcht unser Server am den Pfad "/addTodo". Wenn Daten empfangen werden, wird der Todo aus dem Request in eine lokale Varible geschrieben und mit collection.insertOne in die 
+                            Hier horcht unser Server am Pfad "/addTodo". Wenn Daten empfangen werden, wird der Todo aus dem Request in eine lokale Variable geschrieben und mit collection.insertOne in die 
                             Datenbank geschrieben. Der JavaScript Syntax ist tatsächlich dem Systax der MongoShell (eigene Shell der Datenbank) sehr ähnlich, was es uns hier sehr einfach macht. Dazu, dass die MongoDB einen 
-                            relativ einfachen/sprechenden Syntax hat. In der Callback Methode schicken wir nun den neu eingefügten Eintrag zurück zum Frontend - nun als Document aus der Datenbank.
+                            relativ einfachen/sprechenden Syntax hat. In der Callback Methode schicken wir nun den neu eingefügten Eintrag zurück zum Frontend - nun als Dokument aus der Datenbank.
                         </p>
                         <img src="vertiefungsthema/FrontendHinzufuegenTest.PNG">
                         <p>
@@ -327,7 +327,7 @@
                         </p>
                         <h3>Todos abschließen</h3>
                         <p>
-                            Wir können nun Todos hinzufügen und anzeigen. Das Einzige, dass noch (zumindes funktionell) fehlt ist eine Möglichkeit sie abzuschließen.
+                            Wir können nun Todos hinzufügen und anzeigen. Das Einzige, dass noch (zumindest funktionell) fehlt ist eine Möglichkeit sie abzuschließen.
                         </p>
                         <h4>Frontend</h4>
                         <p>
@@ -335,7 +335,7 @@
                         </p>
                         <img src="vertiefungsthema/FrontendListeCheckbox.PNG">
                         <p>
-                            Diese Checkboxen erhalten außerdem ein @click mit dem wir eine deleteTodo Methode ausführen die die ID des Eintrags als Parameter bekommt. Außerdem ändern wir noch todo zu todo.title in den geeschwungenen Klammern, 
+                            Diese Checkboxen erhalten außerdem ein @click mit dem wir eine deleteTodo Methode ausführen die die ID des Eintrags als Parameter bekommt. Außerdem ändern wir noch todo zu todo.title in den geschwungenen Klammern, 
                             da das einfach schöner aussieht (und kein User des Frontend etwas mit der ID anfangen kann).
                         </p>
                         <p>
@@ -351,7 +351,7 @@
                         </p>
                         <img src="vertiefungsthema/BackendRemove.PNG">
                         <p>
-                            Hier nutzen wir analog zur add Methode collection.removeOne um ein document aus der Datenbank zu löschen.
+                            Hier nutzen wir analog zur add Methode collection.removeOne um ein Dokument aus der Datenbank zu löschen.
                         </p>
                         <h3>Der finale Test</h3>
                         <p>
